@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities.Product;
+using Domain.Entities.System;
 
 namespace Infrastructure.Context;
 
@@ -14,6 +15,7 @@ public class SqlServerContext : DbContext
 
     public DbSet<ProductEntity> products { get; set; }
     public DbSet<CategoryEntity> Categories { get; set; }
+    public DbSet<QuestionEntity> Questions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
