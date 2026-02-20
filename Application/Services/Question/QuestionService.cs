@@ -1,34 +1,34 @@
-﻿using Application.DataTransferObject;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Contract;
+using Application.DataTransferObject;
 
-namespace Application.Services.Question
+namespace Application.Services.Question;
+
+public class QuestionService : IQuestionService
 {
-    public class QuestionService : IQuestionService
+    readonly IQuestionRepository _questionRepository;
+    public QuestionService(IQuestionRepository questionRepository)
     {
-       
-        public Task DeleteQuestionAsync(Guid QuestionId)
-        {
-            throw new NotImplementedException();
-        }
+        _questionRepository = questionRepository;
+    }
 
-        public Task<QuestionDto> GetQuestionByIdAsync(Guid QuestionId)
-        {
-            throw new NotImplementedException();
-        }
+    public Task DeleteQuestionAsync(Guid QuestionId)
+    {
+        
+        throw new NotImplementedException();
+    }
 
-        public Task InsertQuestionAsync(QuestionDto Question)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<QuestionDto> GetQuestionByIdAsync(Guid QuestionId)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Task UpdateQuestionAsync(QuestionDto Question)
-        {
-            throw new NotImplementedException();
-        }
+    public Task InsertQuestionAsync(QuestionDto Question)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateQuestionAsync(QuestionDto Question)
+    {
+        throw new NotImplementedException();
     }
 }

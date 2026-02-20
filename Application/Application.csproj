@@ -5,12 +5,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.1.35" />
+		<PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="8.1.0" />
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.15" />
-  </ItemGroup>
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
+		<PackageReference Include="EPPlus" Version="7.0.5" />
+		<PackageReference Include="ExcelDataReader" Version="3.6.0" />
+		<PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
