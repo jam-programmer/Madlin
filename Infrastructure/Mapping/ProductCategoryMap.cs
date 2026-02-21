@@ -24,10 +24,6 @@ internal sealed class ProductCategoryMap :
         builder.Property(p => p.TitleFa).HasMaxLength(500);
         builder.Property(p => p.DescriptionEn).HasMaxLength(6000);
         builder.Property(p => p.DescriptionFa).HasMaxLength(6000);
-        builder.HasOne(x => x.ParentCategory)
-              .WithMany(x => x.SubCategories)
-              .HasForeignKey(x => x.ParentProductCategoryId)
-              .IsRequired(false)
-              .OnDelete(DeleteBehavior.Restrict);
+        
     }
 }

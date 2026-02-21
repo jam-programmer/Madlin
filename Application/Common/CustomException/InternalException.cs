@@ -8,7 +8,7 @@ public class InternalException : Exception
   
 
    readonly static string ExceptionMessage
-        = Application.Common.Resource.CustomMessage.InternalError;
+        = "خطای داخلی رخ داده است";
 
     public InternalException() : base(ExceptionMessage)
     {

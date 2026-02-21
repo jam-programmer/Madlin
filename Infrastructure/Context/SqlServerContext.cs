@@ -17,6 +17,8 @@ public class SqlServerContext : IdentityDbContext<UserEntity, RoleEntity, Guid>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<UserEntity>().HasQueryFilter(f=>f.IsDeleted==false);
+        builder.Entity<RoleEntity>().HasQueryFilter(f=>f.IsDeleted==false);
         builder.AppendDbSetOfEntity();
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);

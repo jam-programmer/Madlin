@@ -17,7 +17,7 @@ public static class Configuration
         service.AddDbContext<SqlServerContext>(option =>
         {
             option.UseSqlServer(configuration.
-                GetConnectionString("ProfitLossConnectionUi"),
+                GetConnectionString("SqlServerConnection"),
                 sqlServerOptionsAction: sqlConfig =>
                 {
                     sqlConfig.EnableRetryOnFailure(
