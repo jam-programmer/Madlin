@@ -1,29 +1,46 @@
 ﻿
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Domain.Entities;
+using Domain.Entities.Identity;
+using Infrastructure.Extension;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities.Product;
-using Domain.Entities.System;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Reflection;
 
 namespace Infrastructure.Context;
 
-public class SqlServerContext : DbContext
+public class SqlServerContext : IdentityDbContext<UserEntity, RoleEntity, Guid>
 {
     public SqlServerContext(DbContextOptions<SqlServerContext> options)
         : base(options)
     { }
 
-    public DbSet<ProductEntity> products { get; set; }
-    public DbSet<CategoryEntity> Categories { get; set; }
-    public DbSet<QuestionEntity> Questions { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfigurationsFromAssembly(typeof(SqlServerContext).Assembly);
+        builder.AppendDbSetOfEntity();
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
+    }
+    public override int SaveChanges()
+    {
+        IEnumerable<EntityEntry> entries = ChangeTracker
+            .Entries()
+            .Where(e => e.State == EntityState.Modified);
+
+        DateTime updateTime = DateTime.UtcNow;
+
+        foreach (var entry in entries)
+        {
+            if (entry.Entity is IUpdate entity)
+            {
+                entity.UpdatedAt = updateTime;
+            }
+        }
+
+        return base.SaveChanges();
     }
 }
 
-    
+
 
 

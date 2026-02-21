@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>پیشخوان - @ViewData["Title"]</title>
+	<partial name="Partial/_AdminHeadTags.cshtml"/>
+	@await RenderSectionAsync("Style", false)
+</head>
+
+<body>
+
+	<!-- begin::page loader-->
+	<div class="page-loader">
+		<div class="spinner-border"></div>
+	</div>
+	<!-- end::page loader -->
+
+	<!-- begin::sidebar user profile -->
+	<partial name="Partial/_AdminSidebarUserProfile.cshtml" />
+	<!-- end::sidebar user profile -->
+
+	<!-- begin::sidebar settings -->
+	<partial name="Partial/_AdminSidebarSetting.cshtml" />
+	<!-- end::sidebar settings -->
+
+	<!-- begin::navigation -->
+	<partial name="Partial/_AdminNavigation.cshtml" />
+	<!-- end::navigation -->
+
+	<!-- begin::header -->
+	<partial name="Partial/_AdminHeader.cshtml" />
+	<!-- end::header -->
+
+	<!-- begin::main content -->
+	<main class="main-content">
+
+		@RenderBody()
+
+	</main>
+	<!-- end::main content -->
+
+	<partial name="Partial/_AdminScript.cshtml" />
+	@await RenderSectionAsync("Script", false)
+</body>
+
+</html>

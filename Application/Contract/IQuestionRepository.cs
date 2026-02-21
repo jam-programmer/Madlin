@@ -1,0 +1,11 @@
+﻿using Domain.Entities.System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Contract;
+public interface IQuestionRepository : IRepository<QuestionEntity>
+{
+}

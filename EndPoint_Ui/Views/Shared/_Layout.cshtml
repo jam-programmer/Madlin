@@ -1,49 +1,1360 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<!doctype html>
+<!--[if IE 8]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <!
+[endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EndPoint_Ui</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/EndPoint_Ui.styles.css" asp-append-version="true" />
+    <partial name="Partial/_HeadTags.cshtml"/>
+    @await RenderSectionAsync("Style", false)
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EndPoint_Ui</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+<body class="preload-wrapper">
+    <!-- RTL -->
+    <!-- <a class="btn-style-2 radius-3" href="javascript:void(0);" id="toggle-rtl"><span>RTL</span></a> -->
+    <!-- /RTL  -->
+    <!-- Scroll Top -->
+    <button id="scroll-top">
+        <svg fill="none"
+             height="25"
+             viewbox="0 0 24 25"
+             width="24"
+             xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_15741_24194)">
+                <path d="M3 11.9175L12 2.91748L21 11.9175H16.5V20.1675C16.5 20.3664 16.421 20.5572 16.2803 20.6978C16.1397 20.8385 15.9489 20.9175 15.75 20.9175H8.25C8.05109 20.9175 7.86032 20.8385 7.71967 20.6978C7.57902 20.5572 7.5 20.3664 7.5 20.1675V11.9175H3Z"
+                      stroke="white"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"></path>
+            </g>
+            <defs>
+                <clippath id="clip0_15741_24194">
+                    <rect fill="white"
+                          height="24"
+                          transform="translate(0 0.66748)"
+                          width="24"></rect>
+                </clippath>
+            </defs>
+        </svg>
+    </button>
+    <!-- preload -->
+    <div class="preload preload-container">
+        <div class="preload-logo">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <!-- /preload -->
+    <div id="wrapper">
+        <!-- TopBar-->
+        <partial name="Partial/_TopBar.cshtml" />
+
+        <!-- /TopBar -->
+        <!-- Header -->
+        <partial name="Partial/_Header.cshtml" />
+        <!-- /Header -->
+
+        @RenderBody()
+        <!-- Slider -->
+        <section class="">
+            <div class="container">
+                <div class="swiper tf-sw-mobile"
+                     data-preview="1"
+                     data-screen="767"
+                     data-space="15"
+                     dir="ltr">
+                    <div class="swiper-wrapper grid-cls-v2">
+                        <div class="swiper-slide item1">
+                            <div class="banner-cls hover-img">
+                                <div class="img-style">
+                                    <img alt="banner-cls"
+                                         data-src="~/images/collections/banner-collection/banner-cls23.webp"
+                                         src="~/images/collections/banner-collection/banner-cls23.webp" />
+                                </div>
+                                <div class="cls-content">
+                                    <div class="box-title-cls wow fadeInUp">
+                                        <h3>
+                                            <a class="text-white link" href="shop-default-grid.html">پوستی صاف و شفاف   </a>
+                                        </h3>
+                                        <p class="text-white">
+                                            حاوی حداقل 100 ٪ مواد بازیافت شده
+                                        </p>
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                                        <a class="tf-btn btn-fill btn-white radius-4"
+                                           href="shop-default-grid.html">
+                                            <span class="text">اکنون خرید کنید</span><i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide item2">
+                            <div class="banner-cls hover-img">
+                                <div class="img-style">
+                                    <img alt="banner-cls"
+                                         data-src="~/images/collections/banner-collection/banner-cls24.jpg"
+                                         src="~/images/collections/banner-collection/banner-cls24.jpg" />
+                                </div>
+                                <div class="cls-content">
+                                    <div class="box-title-cls wow fadeInUp">
+                                        <h3>
+                                            <a class="text-white link" href="shop-default-grid.html">نرم کننده و مرطوب کننده</a>
+                                        </h3>
+                                        <p class="text-white">
+                                            اتصال گل میخ مطبوعات فلزی.جزئیات مهرهفصل جشنواره.
+                                        </p>
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                                        <a class="tf-btn btn-fill btn-white radius-4"
+                                           href="shop-default-grid.html">
+                                            <span class="text">اکنون خرید کنید</span><i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide item3">
+                            <div class="banner-cls hover-img">
+                                <div class="img-style">
+                                    <img alt="banner-cls"
+                                         data-src="~/images/collections/banner-collection/banner-cls25.jpg"
+                                         src="~/images/collections/banner-collection/banner-cls25.jpg" />
+                                </div>
+                                <div class="cls-content">
+                                    <div class="box-title-cls wow fadeInUp">
+                                        <h3>
+                                            <a class="text-white link" href="shop-default-grid.html">حس زیبای جوانی</a>
+                                        </h3>
+                                        <p class="text-white">
+                                            حاوی حداقل 100 ٪ مواد بازیافت شده
+                                        </p>
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                                        <a class="tf-btn btn-fill btn-white radius-4"
+                                           href="shop-default-grid.html">
+                                            <span class="text">اکنون خرید کنید</span><i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sw-pagination-mb sw-dots type-circle justify-content-center d-md-none d-flex"></div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </section>
+        <!-- Slider -->
+        <!-- Categories -->
+        <section class="flat-spacing">
+            <div class="container">
+                <div class="heading-section text-center wow fadeInUp">
+                    <h3 class="heading">دسته های محبوب</h3>
+                </div>
+                <div class="flat-collection-circle wow fadeInUp">
+                    <div class="swiper tf-sw-categories"
+                         data-mobile="2"
+                         data-mobile-sm="3"
+                         data-pagination="2"
+                         data-pagination-lg="1"
+                         data-pagination-md="4"
+                         data-preview="6"
+                         data-space="15"
+                         data-space-lg="30"
+                         data-space-md="20"
+                         data-tablet="4"
+                         dir="ltr">
+                        <div class="swiper-wrapper">
+                            <!-- item 1 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry1.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry1.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <div>
+                                            <a class="cls-title" href="shop-categories-top.html">
+                                                <h6 class="text">گردنبند</h6>
+                                                <i class="icon icon-arrowUpRight"></i>
+                                            </a>
+                                        </div>
+                                        <div class="count text-secondary">12 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry2.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry2.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <div>
+                                            <a class="cls-title" href="shop-categories-top.html">
+                                                <h6 class="text">حلقه</h6>
+                                                <i class="icon icon-arrowUpRight"></i>
+                                            </a>
+                                        </div>
+                                        <div class="count text-secondary">16 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry3.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry3.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <div>
+                                            <a class="cls-title" href="shop-categories-top.html">
+                                                <h6 class="text">دستبند</h6>
+                                                <i class="icon icon-arrowUpRight"></i>
+                                            </a>
+                                        </div>
+                                        <div class="count text-secondary">18 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- item 4 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry4.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry4.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <a class="cls-title" href="shop-categories-top.html">
+                                            <h6 class="text">درآمد</h6>
+                                            <i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                        <div class="count text-secondary">24 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- item 5 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry5.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry5.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <a class="cls-title" href="shop-categories-top.html">
+                                            <h6 class="text">جذابیت و آویزها</h6>
+                                            <i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                        <div class="count text-secondary">08 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- item 6 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry6.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry6.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <a class="cls-title" href="shop-categories-top.html">
+                                            <h6 class="text">ایده های هدیه</h6>
+                                            <i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                        <div class="count text-secondary">26 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- item 7 -->
+                            <div class="swiper-slide">
+                                <div class="collection-circle hover-img">
+                                    <a class="img-style radius-48"
+                                       href="shop-categories-top.html">
+                                        <img alt="collection-img"
+                                             class="lazyload"
+                                             data-src="~/images/collections/collection-circle/cls-jewelry4.jpg"
+                                             src="~/images/collections/collection-circle/cls-jewelry4.jpg" />
+                                    </a>
+                                    <div class="collection-content text-center">
+                                        <a class="cls-title" href="shop-categories-top.html">
+                                            <h6 class="text">درآمد</h6>
+                                            <i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                        <div class="count text-secondary">24 مورد</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex d-lg-none sw-pagination-categories sw-dots type-circle justify-content-center"></div>
+                    </div>
+                    <div class="nav-prev-categories d-none d-lg-flex nav-sw style-line nav-sw-left">
+                        <i class="icon icon-arrLeft"></i>
+                    </div>
+                    <div class="nav-next-categories d-none d-lg-flex nav-sw style-line nav-sw-right">
+                        <i class="icon icon-arrRight"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Categories -->
+        <!-- today -->
+        <section class="flat-spacing">
+            <div class="container">
+                <div class="heading-section text-center">
+                    <h3 class="heading wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">انتخاب های برتر امروز</h3>
+                    <p class="subheading text-secondary wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">سبک های تازه فقط در!نگاه خود را بالا ببرید.</p>
+                </div>
+                <div class="swiper tf-sw-latest swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" data-mobile="2" data-pagination="1" data-pagination-lg="1" data-pagination-md="1" data-preview="4" data-space="15" data-space-lg="30" data-space-md="30" data-tablet="3" dir="ltr">
+                    <div class="swiper-wrapper" id="swiper-wrapper-10e9857bda726fc33" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 300px; margin-right: 30px;">
+                            <div class="card-product wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                                <div class="card-product-wrapper">
+                                    <a class="product-img" href="product-detail.html">
+                                        <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty8.jpg" src="~/images/products/beauty-cosmetic/beauty8.jpg">
+                                        <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty10.jpg" src="~/images/products/beauty-cosmetic/beauty10.jpg">
+                                    </a>
+                                    <div class="list-product-btn">
+                                        <a class="box-icon wishlist btn-icon-action" href="javascript:void(0);">
+                                            <span class="icon icon-heart"></span>
+                                            <span class="tooltip">علاقه مندی ها</span>
+                                        </a>
+                                        <a aria-controls="compare" class="box-icon compare btn-icon-action" data-bs-toggle="offcanvas" href="home-skincare.html#compare">
+                                            <span class="icon icon-gitDiff"></span>
+                                            <span class="tooltip">مقایسه کردن</span>
+                                        </a>
+                                        <a class="box-icon quickview tf-btn-loading" data-bs-toggle="modal" href="home-skincare.html#quickView">
+                                            <span class="icon icon-eye"></span>
+                                            <span class="tooltip">نمایش سریع</span>
+                                        </a>
+                                    </div>
+                                    <div class="list-btn-main">
+                                        <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#shoppingCart">سبد خرید</a>
+                                    </div>
+                                </div>
+                                <div class="card-product-info">
+                                    <a class="title link" href="product-detail.html">سرم ویتامین B</a>
+                                    <span class="price">59.99 تومان </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4" style="width: 300px; margin-right: 30px;">
+                            <div class="card-product wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                                <div class="card-product-wrapper">
+                                    <a class="product-img" href="product-detail.html">
+                                        <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty11.jpg" src="~/images/products/beauty-cosmetic/beauty11.jpg">
+                                        <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty13.jpg" src="~/images/products/beauty-cosmetic/beauty13.jpg">
+                                    </a>
+                                    <div class="on-sale-wrap"><span class="on-sale-item">-25 ٪</span></div>
+                                    <div class="marquee-product bg-main fa-slider-rtl">
+                                        <div class="marquee-wrapper">
+                                            <div class="initial-child-container">
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="marquee-wrapper">
+                                            <div class="initial-child-container">
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <p class="font-2 text-btn-uppercase fw-6 text-white">
+                                                        فروش داغ 25%
+                                                        تخفیف
+                                                    </p>
+                                                </div>
+                                                <div class="marquee-child-item">
+                                                    <span class="icon icon-lightning text-critical"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-product-btn">
+                                        <a class="box-icon wishlist btn-icon-action" href="javascript:void(0);">
+                                            <span class="icon icon-heart"></span>
+                                            <span class="tooltip">علاقه مندی ها</span>
+                                        </a>
+                                        <a aria-controls="compare" class="box-icon compare btn-icon-action" data-bs-toggle="offcanvas" href="home-skincare.html#compare">
+                                            <span class="icon icon-gitDiff"></span>
+                                            <span class="tooltip">مقایسه کردن</span>
+                                        </a>
+                                        <a class="box-icon quickview tf-btn-loading" data-bs-toggle="modal" href="home-skincare.html#quickView">
+                                            <span class="icon icon-eye"></span>
+                                            <span class="tooltip">نمایش سریع</span>
+                                        </a>
+                                    </div>
+                                    <div class="list-btn-main">
+                                        <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#shoppingCart">سبد خرید</a>
+                                    </div>
+                                </div>
+                                <div class="card-product-info">
+                                    <a class="title link" href="product-detail.html">کرم ضد آفتاب</a>
+                                    <span class="price"><span class="old-price">98.00 تومان </span>79.99 تومان </span>
+                                    <ul class="list-color-product">
+                                        <li class="list-color-item color-swatch active line">
+                                            <span class="swatch-value bg-light-pink"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty11.jpg" src="~/images/products/beauty-cosmetic/beauty11.jpg">
+                                        </li>
+                                        <li class="list-color-item color-swatch">
+                                            <span class="swatch-value bg-light-blue-2"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty14.jpg" src="~/images/products/beauty-cosmetic/beauty14.jpg">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="3 / 4" style="width: 300px; margin-right: 30px;">
+                            <div class="card-product wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                <div class="card-product-wrapper">
+                                    <a class="product-img" href="product-detail.html">
+                                        <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty25.jpg" src="~/images/products/beauty-cosmetic/beauty25.jpg">
+                                        <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty28.jpg" src="~/images/products/beauty-cosmetic/beauty28.jpg">
+                                    </a>
+                                    <div class="on-sale-wrap"><span class="on-sale-item">-25 ٪</span></div>
+                                    <div class="variant-wrap countdown-wrap">
+                                        <div class="variant-box">
+                                            <div class="js-countdown" data-labels=" روز :,ساعت :,دقیقه :,ثانیه" data-timer="1007500"><div aria-hidden="true" class="countdown__timer"><span class="countdown__item"><span class="countdown__value countdown__value--0 js-countdown__value--0">11</span><span class="countdown__label">روز :</span></span><span class="countdown__item"><span class="countdown__value countdown__value--1 js-countdown__value--1">15</span><span class="countdown__label">ساعت :</span></span><span class="countdown__item"><span class="countdown__value countdown__value--2 js-countdown__value--2">51</span><span class="countdown__label">دقیقه :</span></span><span class="countdown__item"><span class="countdown__value countdown__value--3 js-countdown__value--3">23</span><span class="countdown__label">ثانیه</span></span></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="list-product-btn">
+                                        <a class="box-icon wishlist btn-icon-action" href="javascript:void(0);">
+                                            <span class="icon icon-heart"></span>
+                                            <span class="tooltip">علاقه مندی ها</span>
+                                        </a>
+                                        <a aria-controls="compare" class="box-icon compare btn-icon-action" data-bs-toggle="offcanvas" href="home-skincare.html#compare">
+                                            <span class="icon icon-gitDiff"></span>
+                                            <span class="tooltip">مقایسه کردن</span>
+                                        </a>
+                                        <a class="box-icon quickview tf-btn-loading" data-bs-toggle="modal" href="home-skincare.html#quickView">
+                                            <span class="icon icon-eye"></span>
+                                            <span class="tooltip">نمایش سریع</span>
+                                        </a>
+                                    </div>
+                                    <div class="list-btn-main">
+                                        <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#quickAdd">اضافه کردن سریع</a>
+                                    </div>
+                                </div>
+                                <div class="card-product-info">
+                                    <a class="title link" href="product-detail.html">کرم هیدراتاسیون شدید</a>
+                                    <span class="price"><span class="old-price">98.00 تومان </span>89.99 تومان </span>
+                                    <ul class="list-color-product">
+                                        <li class="list-color-item color-swatch active line">
+                                            <span class="swatch-value bg-light-blue"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty25.jpg" src="~/images/products/beauty-cosmetic/beauty25.jpg">
+                                        </li>
+                                        <li class="list-color-item color-swatch">
+                                            <span class="swatch-value bg-light-grey"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty27.jpg" src="~/images/products/beauty-cosmetic/beauty27.jpg">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="4 / 4" style="width: 300px; margin-right: 30px;">
+                            <div class="card-product wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                <div class="card-product-wrapper">
+                                    <a class="product-img" href="product-detail.html">
+                                        <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty35.jpg" src="~/images/products/beauty-cosmetic/beauty35.jpg">
+                                        <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty37.jpg" src="~/images/products/beauty-cosmetic/beauty37.jpg">
+                                    </a>
+                                    <div class="list-product-btn">
+                                        <a class="box-icon wishlist btn-icon-action" href="javascript:void(0);">
+                                            <span class="icon icon-heart"></span>
+                                            <span class="tooltip">علاقه مندی ها</span>
+                                        </a>
+                                        <a aria-controls="compare" class="box-icon compare btn-icon-action" data-bs-toggle="offcanvas" href="home-skincare.html#compare">
+                                            <span class="icon icon-gitDiff"></span>
+                                            <span class="tooltip">مقایسه کردن</span>
+                                        </a>
+                                        <a class="box-icon quickview tf-btn-loading" data-bs-toggle="modal" href="home-skincare.html#quickView">
+                                            <span class="icon icon-eye"></span>
+                                            <span class="tooltip">نمایش سریع</span>
+                                        </a>
+                                    </div>
+                                    <div class="list-btn-main">
+                                        <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#shoppingCart">سبد خرید</a>
+                                    </div>
+                                </div>
+                                <div class="card-product-info">
+                                    <a class="title link" href="product-detail.html">روغن صورت ترمیم کننده جوان سازی</a>
+                                    <span class="price">69.99 تومان </span>
+                                    <ul class="list-color-product">
+                                        <li class="list-color-item color-swatch active line">
+                                            <span class="swatch-value bg-dark-grey"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty35.jpg" src="~/images/products/beauty-cosmetic/beauty35.jpg">
+                                        </li>
+                                        <li class="list-color-item color-swatch">
+                                            <span class="swatch-value bg-light-pink"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty36.jpg" src="~/images/products/beauty-cosmetic/beauty36.jpg">
+                                        </li>
+                                        <li class="list-color-item color-swatch">
+                                            <span class="swatch-value bg-dark-grey-2"></span>
+                                            <img alt="image-product" class=" ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty37.jpg" src="~/images/products/beauty-cosmetic/beauty37.jpg">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sw-pagination-latest sw-dots type-circle justify-content-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+            </div>
+        </section>
+        <!-- /today -->
+        <!-- Banner collection -->
+        <section class="mb-5">
+            <div class="container">
+                <div class="swiper tf-sw-collection"
+                     data-mobile="1"
+                     data-pagination="1"
+                     data-pagination-lg="1"
+                     data-pagination-md="1"
+                     data-preview="2"
+                     data-space="15"
+                     data-space-lg="30"
+                     data-space-md="30"
+                     data-tablet="2"
+                     dir="ltr">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="collection-position radius style-lg hover-img">
+                                <a class="img-style">
+                                    <img alt="banner-cls"
+                                         class="lazyload"
+                                         data-src="~/images/collections/banner-collection/banner-cls26.jpg"
+                                         src="~/images/collections/banner-collection/banner-cls26.jpg" />
+                                </a>
+                                <div class="content">
+                                    <h3 class="title wow fadeInUp">
+                                        <a class="link text-white" href="shop-default-grid.html">مجموعه محصولات</a>
+                                    </h3>
+                                    <p class="desc text-white wow fadeInUp">
+                                        برای مناسبت های خاص رزرو شده است
+                                    </p>
+                                    <div>
+                                        <a class="btn-line style-white"
+                                           href="shop-default-grid.html">اکنون خرید کنید</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="collection-position radius style-lg hover-img">
+                                <a class="img-style">
+                                    <img alt="banner-cls"
+                                         class="lazyload"
+                                         data-src="~/images/collections/banner-collection/banner-cls27.jpg"
+                                         src="~/images/collections/banner-collection/banner-cls27.jpg" />
+                                </a>
+                                <div class="content">
+                                    <h3 class="title wow fadeInUp">
+                                        <a class="link text-white" href="shop-default-grid.html">ورود جدید</a>
+                                    </h3>
+                                    <p class="desc text-white wow fadeInUp">
+                                        برای مناسبت های خاص رزرو شده است
+                                    </p>
+                                    <div>
+                                        <a class="btn-line style-white"
+                                           href="shop-default-grid.html">اکنون خرید کنید</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sw-pagination-collection sw-dots type-circle justify-content-center"></div>
+                </div>
+            </div>
+        </section>
+        <!-- /Banner collection -->
+        <!-- Trendy Collection -->
+        <section class="mt-5 mb-5">
+            <div class="flat-with-text-lookbook-v2 wrap-lookbook-hover">
+                <div class="lookbook-content">
+                    <div class="box-title">
+                        <h3 class="title wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">معاملات زیبایی بی نظیر</h3>
+                        <p class="sub-desc text-secondary wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                            خرید برای مراقبت از پوست در داروخانه می تواند
+                            بسیار زیاد باشد.آن را بخرید ، آن را امتحان کنید ، آن را پرتاب کنید ، تکرار کنید.صدا آشنا
+                            است؟مراقبت از پوست را فقط برای شما کشف کنید
+                        </p>
+                    </div>
+                    <div class="swiper tf-sw-lookbook bundle-hover-wrap swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" data-mobile="2" data-mobile-sm="2" data-pagination="1" data-pagination-lg="1" data-pagination-md="1" data-preview="3" data-space="15" data-space-lg="30" data-space-md="15" data-tablet="3" dir="ltr">
+                        <div class="swiper-wrapper" id="swiper-wrapper-562371077c1328e98" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                            <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 3" style="width: 202px; margin-right: 30px;">
+                                <div class="card-product bundle-hover-item pin1 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                                    <div class="card-product-wrapper">
+                                        <a class="product-img" href="product-detail.html">
+                                            <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty38.jpg" src="~/images/products/beauty-cosmetic/beauty38.jpg">
+                                            <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty37.jpg" src="~/images/products/beauty-cosmetic/beauty37.jpg">
+                                        </a>
+                                        <div class="on-sale-wrap"><span class="on-sale-item">-25 ٪</span></div>
+                                        <div class="list-btn-main">
+                                            <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#quickView">نمایش سریع</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-product-info">
+                                        <a class="title link" href="product-detail.html">سرم هیالورونیک</a>
+                                        <span class="price">
+                                            <span class="old-price">58.00 تومان </span>39.99 تومان
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 3" style="width: 202px; margin-right: 30px;">
+                                <div class="card-product bundle-hover-item pin2 wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                                    <div class="card-product-wrapper">
+                                        <a class="product-img" href="product-detail.html">
+                                            <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty39.jpg" src="~/images/products/beauty-cosmetic/beauty39.jpg">
+                                            <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty37.jpg" src="~/images/products/beauty-cosmetic/beauty37.jpg">
+                                        </a>
+                                        <div class="on-sale-wrap"><span class="on-sale-item">-25 ٪</span></div>
+                                        <div class="list-btn-main">
+                                            <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#quickAdd">نمایش سریع</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-product-info">
+                                        <a class="title link" href="product-detail.html">پاک کننده</a>
+                                        <span class="price">
+                                            <span class="old-price">68.00 تومان </span>49.99 تومان
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" role="group" aria-label="3 / 3" style="width: 202px; margin-right: 30px;">
+                                <div class="card-product bundle-hover-item pin3 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                    <div class="card-product-wrapper">
+                                        <a class="product-img" href="product-detail.html">
+                                            <img alt="image-product" class="img-product ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty40.jpg" src="~/images/products/beauty-cosmetic/beauty40.jpg">
+                                            <img alt="image-product" class="img-hover ls-is-cached lazyloaded" data-src="~/images/products/beauty-cosmetic/beauty13.jpg" src="~/images/products/beauty-cosmetic/beauty13.jpg">
+                                        </a>
+                                        <div class="on-sale-wrap"><span class="on-sale-item">-25 ٪</span></div>
+                                        <div class="list-btn-main">
+                                            <a class="btn-main-product" data-bs-toggle="modal" href="home-skincare.html#quickAdd">نمایش سریع</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-product-info">
+                                        <a class="title link" href="product-detail.html">کرم صورت</a>
+                                        <span class="price">
+                                            <span class="old-price">68.00 تومان </span>49.99 تومان
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sw-pagination-lookbook sw-dots type-circle justify-content-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span></div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                    <div class="total-lb wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <a class="tf-btn btn-reset" data-bs-toggle="modal" href="home-skincare.html#addToCart"><span class="text">مجموعه را سبد خرید</span><i class="icon icon-arrowUpRight"></i></a>
+                    </div>
+                </div>
+                <div class="banner-img">
+                    <img alt="banner" class=" ls-is-cached lazyloaded" data-src="~/images/banner/banner-lookbook-8.jpg" src="~/images/banner/banner-lookbook-8.jpg">
+                    <div class="tf-pin-btn style-hover pin-1 bundle-pin-item swiper-button" data-slide="0" id="pin1">
+                        <span></span>
+                    </div>
+                    <div class="tf-pin-btn style-hover pin-2 bundle-pin-item swiper-button" data-slide="1" id="pin2">
+                        <span></span>
+                    </div>
+                    <div class="tf-pin-btn style-hover pin-3 bundle-pin-item swiper-button" data-slide="2" id="pin3">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Trendy Collection -->
+        <!-- Testimonial -->
+        <section class="flat-spacing pt-0">
+            <div class="container">
+                <div class="heading-section text-center wow fadeInUp">
+                    <h3 class="heading">مشتریان ما چه میگویند ؟</h3>
+                    <p class="subheading">
+                        مشتریان ما محصولات ما را دوست دارند و ما دائماً هدف ما لذت بردن از
+                        آنها هستیم.
+                    </p>
+                </div>
+                <div class="swiper tf-sw-testimonial wow fadeInUp"
+                     data-mobile="1"
+                     data-pagination="1"
+                     data-pagination-lg="1"
+                     data-pagination-md="1"
+                     data-preview="2"
+                     data-space="15"
+                     data-space-lg="30"
+                     data-space-md="30"
+                     data-tablet="1.3"
+                     data-wow-delay="0.1s"
+                     dir="ltr">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-item hover-img">
+                                <div class="img-style">
+                                    <img alt="img-testimonial"
+                                         data-src="~/images/testimonial/tes-1.jpg"
+                                         src="~/images/testimonial/tes-10.jpg" />
+                                    <a class="box-icon hover-tooltip center"
+                                       data-bs-toggle="modal"
+                                       href="home-jewelry-02.html#quickView">
+                                        <span class="icon icon-eye"></span>
+                                        <span class="tooltip">نمایش سریع</span>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="content-top">
+                                        <div class="list-star-default">
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                        </div>
+                                        <p class="text-secondary">
+                                            "فروشگاه فوق العاده! انتخاب عالی ، قیمت های منصفانه و
+                                            کارکنان دوستانه. بسیار توصیه می شود. کیفیت محصولات
+                                            استثنایی است و قیمت ها بسیار مناسب هستند!"
+                                        </p>
+                                        <div class="box-author">
+                                            <div class="text-title author">سیبیل تیز</div>
+                                            <svg class="icon"
+                                                 fill="none"
+                                                 height="21"
+                                                 viewbox="0 0 20 21"
+                                                 width="20"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_15758_14563)">
+                                                    <path d="M6.875 11.6255L8.75 13.5005L13.125 9.12549"
+                                                          stroke="#3DAB25"
+                                                          stroke-linecap="round"
+                                                          stroke-linejoin="round"
+                                                          stroke-width="1.5"></path>
+                                                    <path d="M10 18.5005C14.1421 18.5005 17.5 15.1426 17.5 11.0005C17.5 6.85835 14.1421 3.50049 10 3.50049C5.85786 3.50049 2.5 6.85835 2.5 11.0005C2.5 15.1426 5.85786 18.5005 10 18.5005Z"
+                                                          stroke="#3DAB25"
+                                                          stroke-linecap="round"
+                                                          stroke-linejoin="round"
+                                                          stroke-width="1.5"></path>
+                                                </g>
+                                                <defs>
+                                                    <clippath id="clip0_15758_14563">
+                                                        <rect fill="white"
+                                                              height="20"
+                                                              transform="translate(0 0.684082)"
+                                                              width="20"></rect>
+                                                    </clippath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="box-avt">
+                                        <div class="avatar avt-60 round">
+                                            <img alt="avt" src="~/images/avatar/jewelry-1.jpg" />
+                                        </div>
+                                        <div class="box-price">
+                                            <p class="text-title text-line-clamp-1">
+                                                پیراهن گوسفند متضاد
+                                            </p>
+                                            <div class="text-button price">60.00 تومان</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-item hover-img">
+                                <div class="img-style">
+                                    <img alt="img-testimonial"
+                                         data-src="~/images/testimonial/tes-2.jpg"
+                                         src="~/images/testimonial/tes-11.jpg" />
+                                    <a class="box-icon hover-tooltip center"
+                                       data-bs-toggle="modal"
+                                       href="home-jewelry-02.html#quickView">
+                                        <span class="icon icon-eye"></span>
+                                        <span class="tooltip">نمایش سریع</span>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="content-top">
+                                        <div class="list-star-default">
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                        </div>
+                                        <p class="text-secondary">
+                                            "من این فروشگاه را کاملاً دوست دارم! محصولات با کیفیت
+                                            بالا هستند و خدمات مشتری بسیار عالی است. من همیشه با
+                                            آنچه نیاز دارم و لبخند بر چهره خود می روم."
+                                        </p>
+                                        <div class="box-author">
+                                            <div class="text-title author">مارک جی.</div>
+                                            <svg class="icon"
+                                                 fill="none"
+                                                 height="21"
+                                                 viewbox="0 0 20 21"
+                                                 width="20"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_15758_14563)">
+                                                    <path d="M6.875 11.6255L8.75 13.5005L13.125 9.12549"
+                                                          stroke="#3DAB25"
+                                                          stroke-linecap="round"
+                                                          stroke-linejoin="round"
+                                                          stroke-width="1.5"></path>
+                                                    <path d="M10 18.5005C14.1421 18.5005 17.5 15.1426 17.5 11.0005C17.5 6.85835 14.1421 3.50049 10 3.50049C5.85786 3.50049 2.5 6.85835 2.5 11.0005C2.5 15.1426 5.85786 18.5005 10 18.5005Z"
+                                                          stroke="#3DAB25"
+                                                          stroke-linecap="round"
+                                                          stroke-linejoin="round"
+                                                          stroke-width="1.5"></path>
+                                                </g>
+                                                <defs>
+                                                    <clippath id="clip0_15758_14563">
+                                                        <rect fill="white"
+                                                              height="20"
+                                                              transform="translate(0 0.684082)"
+                                                              width="20"></rect>
+                                                    </clippath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="box-avt">
+                                        <div class="avatar avt-60 round">
+                                            <img alt="avt" src="~/images/avatar/jewelry-2.jpg" />
+                                        </div>
+                                        <div class="box-price">
+                                            <p class="text-title text-line-clamp-1">
+                                                پیراهن گوسفند متضاد
+                                            </p>
+                                            <div class="text-button price">60.00 تومان</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-item hover-img">
+                                <div class="img-style">
+                                    <img alt="img-testimonial"
+                                         data-src="~/images/testimonial/tes-1.jpg"
+                                         src="~/images/testimonial/tes-1.jpg" />
+                                    <a class="box-icon hover-tooltip center"
+                                       data-bs-toggle="modal"
+                                       href="home-jewelry-02.html#quickView">
+                                        <span class="icon icon-eye"></span>
+                                        <span class="tooltip">نمایش سریع</span>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="content-top">
+                                        <div class="list-star-default">
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                            <i class="icon icon-star"></i>
+                                        </div>
+                                        <p class="text-secondary">
+                                            "فروشگاه فوق العاده! انتخاب عالی ، قیمت های منصفانه و
+                                            کارکنان دوستانه. بسیار توصیه می شود. کیفیت محصولات
+                                            استثنایی است و قیمت ها بسیار مناسب هستند!"
+                                        </p>
+                                        <div class="box-author">
+                                            <div class="text-title author">سیبیل تیز</div>
+                                            <svg class="icon"
+                                                 fill="none"
+                                                 height="21"
+                                                 viewbox="0 0 20 21"
+                                                 width="20"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_15758_14563)">
+                                                    <path d="M6.875 11.6255L8.75 13.5005L13.125 9.12549"
+                                                          stroke="#3DAB25"
+                                                          stroke-linecap="round"
+                                                          stroke-linejoin="round"
+                                                          stroke-width="1.5"></path>
+                                                    <path d="M10 18.5005C14.1421 18.5005 17.5 15.1426 17.5 11.0005C17.5 6.85835 14.1421 3.50049 10 3.50049C5.85786 3.50049 2.5 6.85835 2.5 11.0005C2.5 15.1426 5.85786 18.5005 10 18.5005Z"
+                                                          stroke="#3DAB25"
+                                                          stroke-linecap="round"
+                                                          stroke-linejoin="round"
+                                                          stroke-width="1.5"></path>
+                                                </g>
+                                                <defs>
+                                                    <clippath id="clip0_15758_14563">
+                                                        <rect fill="white"
+                                                              height="20"
+                                                              transform="translate(0 0.684082)"
+                                                              width="20"></rect>
+                                                    </clippath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="box-avt">
+                                        <div class="avatar avt-60 round">
+                                            <img alt="avt" src="~/images/avatar/jewelry-1.jpg" />
+                                        </div>
+                                        <div class="box-price">
+                                            <p class="text-title text-line-clamp-1">
+                                                پیراهن گوسفند متضاد
+                                            </p>
+                                            <div class="text-button price">60.00 تومان</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sw-pagination-testimonial sw-dots type-circle d-flex justify-content-center"></div>
+                </div>
+            </div>
+        </section>
+        <!-- /Testimonial -->
+        <!-- Iconbox -->
+        <section class="flat-spacing line-top-container">
+            <div class="container">
+                <div class="swiper tf-sw-iconbox"
+                     data-mobile="1"
+                     data-mobile-sm="2"
+                     data-pagination="1"
+                     data-pagination-lg="4"
+                     data-pagination-md="3"
+                     data-pagination-sm="2"
+                     data-preview="4"
+                     data-space="15"
+                     data-space-lg="30"
+                     data-space-md="30"
+                     data-tablet="3"
+                     dir="ltr">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="tf-icon-box">
+                                <div class="icon-box">
+                                    <span class="icon icon-return"></span>
+                                </div>
+                                <div class="content text-center">
+                                    <h6>بازگشت 14 روزه</h6>
+                                    <p class="text-secondary">خرید بدون ریسک با بازده آسان.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="tf-icon-box">
+                                <div class="icon-box">
+                                    <span class="icon icon-shipping"></span>
+                                </div>
+                                <div class="content text-center">
+                                    <h6>حمل و نقل رایگان</h6>
+                                    <p class="text-secondary">
+                                        بدون هزینه اضافی ، فقط قیمتی که می بینید.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="tf-icon-box">
+                                <div class="icon-box">
+                                    <span class="icon icon-headset"></span>
+                                </div>
+                                <div class="content text-center">
+                                    <h6>پشتیبانی 24/7</h6>
+                                    <p class="text-secondary">
+                                        پشتیبانی 24/7 ، همیشه در اینجا فقط برای شما
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="tf-icon-box">
+                                <div class="icon-box">
+                                    <span class="icon icon-sealCheck"></span>
+                                </div>
+                                <div class="content text-center">
+                                    <h6>تخفیف اعضا</h6>
+                                    <p class="text-secondary">
+                                        قیمت های ویژه برای مشتریان وفادار ما.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sw-pagination-iconbox sw-dots type-circle justify-content-center"></div>
+                </div>
+            </div>
+        </section>
+        <!-- /Iconbox -->
+        <!-- Gallery shop gram -->
+        <section class="flat-spacing pt-0">
+            <div class="container">
+                <div class="heading-section text-center wow fadeInUp">
+                    <h3 class="heading">خرید از اینستاگرام</h3>
+                    <p class="subheading text-secondary">
+                        کمد لباس خود را با یافته های تازه امروز بالا ببرید!
+                    </p>
+                </div>
+                <div class="swiper tf-sw-shop-gallery"
+                     data-mobile="2"
+                     data-pagination="2"
+                     data-pagination-lg="1"
+                     data-pagination-md="3"
+                     data-preview="5"
+                     data-space="8"
+                     data-space-lg="10"
+                     data-space-md="10"
+                     data-tablet="3"
+                     dir="ltr">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="gallery-item hover-overlay hover-img wow fadeInUp"
+                                 data-wow-delay=".1s">
+                                <div class="img-style">
+                                    <img alt="image-gallery"
+                                         class="lazyload img-hover"
+                                         data-src="~/images/gallery/gallery-jewelry1.jpg"
+                                         src="~/images/gallery/gallery-jewelry1.jpg" />
+                                </div>
+                                <a class="box-icon hover-tooltip" href="product-detail.html">
+                                    <span class="icon icon-eye"></span>
+                                    <span class="tooltip">مشاهده محصول</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery-item hover-overlay hover-img wow fadeInUp"
+                                 data-wow-delay=".2s">
+                                <div class="img-style">
+                                    <img alt="image-gallery"
+                                         class="lazyload img-hover"
+                                         data-src="~/images/gallery/gallery-jewelry2.jpg"
+                                         src="~/images/gallery/gallery-jewelry2.jpg" />
+                                </div>
+                                <a class="box-icon hover-tooltip" href="product-detail.html">
+                                    <span class="icon icon-eye"></span>
+                                    <span class="tooltip">مشاهده محصول</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery-item hover-overlay hover-img wow fadeInUp"
+                                 data-wow-delay=".3s">
+                                <div class="img-style">
+                                    <img alt="image-gallery"
+                                         class="lazyload img-hover"
+                                         data-src="~/images/gallery/gallery-jewelry3.jpg"
+                                         src="~/images/gallery/gallery-jewelry3.jpg" />
+                                </div>
+                                <a class="box-icon hover-tooltip" href="product-detail.html">
+                                    <span class="icon icon-eye"></span>
+                                    <span class="tooltip">مشاهده محصول</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery-item hover-overlay hover-img wow fadeInUp"
+                                 data-wow-delay=".4s">
+                                <div class="img-style">
+                                    <img alt="image-gallery"
+                                         class="lazyload img-hover"
+                                         data-src="~/images/gallery/gallery-jewelry4.jpg"
+                                         src="~/images/gallery/gallery-jewelry4.jpg" />
+                                </div>
+                                <a class="box-icon hover-tooltip" href="product-detail.html">
+                                    <span class="icon icon-eye"></span>
+                                    <span class="tooltip">مشاهده محصول</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery-item hover-overlay hover-img wow fadeInUp"
+                                 data-wow-delay=".5s">
+                                <div class="img-style">
+                                    <img alt="image-gallery"
+                                         class="lazyload img-hover"
+                                         data-src="~/images/gallery/gallery-jewelry5.jpg"
+                                         src="~/images/gallery/gallery-jewelry5.jpg" />
+                                </div>
+                                <a class="box-icon hover-tooltip" href="product-detail.html">
+                                    <span class="icon icon-eye"></span>
+                                    <span class="tooltip">مشاهده محصول</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sw-pagination-gallery sw-dots type-circle justify-content-center"></div>
+                </div>
+            </div>
+        </section>
+        <!-- /Gallery shop gram -->
+        <!-- Marquee -->
+        <section class="tf-marquee">
+            <div class="marquee-wrapper">
+                <div class="initial-child-container">
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">
+                            حمل و نقل رایگان با تمام سفارشات بیش از 20.00 تومان
+                        </p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">بازده طی 14 روز رایگان است</p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <!-- 2 -->
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">
+                            حمل و نقل رایگان با تمام سفارشات بیش از 20.00 تومان
+                        </p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">بازده طی 14 روز رایگان است</p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <!-- 3 -->
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">
+                            حمل و نقل رایگان با تمام سفارشات بیش از 20.00 تومان
+                        </p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">بازده طی 14 روز رایگان است</p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <!-- 4 -->
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">
+                            حمل و نقل رایگان با تمام سفارشات بیش از 20.00 تومان
+                        </p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">بازده طی 14 روز رایگان است</p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <!-- 5 -->
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">
+                            حمل و نقل رایگان با تمام سفارشات بیش از 20.00 تومان
+                        </p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">بازده طی 14 روز رایگان است</p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <!-- 6 -->
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">
+                            حمل و نقل رایگان با تمام سفارشات بیش از 20.00 تومان
+                        </p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                    <div class="marquee-child-item">
+                        <p class="text-btn-uppercase">بازده طی 14 روز رایگان است</p>
+                    </div>
+                    <div class="marquee-child-item">
+                        <span class="icon icon-lightning-line"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Marquee -->
+        <!-- NEWSLETTER -->
+        <section class="section-newsletter">
+            <div class="content">
+                <h3 class="heading text-white wow fadeInUp">
+                    ثبت نام کنید و 20 ٪ از سفارش اول خود را دریافت کنید
+                </h3>
+                <p class="text text-white wow fadeInUp" data-wow-delay="0.1s">
+                    برای دسترسی به فروش زودرس ، جدید ، تبلیغات و موارد دیگر ثبت نام کنید
+                </p>
+                <form accept-charset="utf-8"
+                      action="home-jewelry-02.html#"
+                      class="form-newsletter subscribe-form wow fadeInUp"
+                      data-mailchimp="true"
+                      data-wow-delay="0.2s"
+                      id="subscribe-form"
+                      method="post">
+                    <div class="subscribe-content" id="subscribe-content">
+                        <fieldset class="email">
+                            <input aria-required="true"
+                                   class="subscribe-email"
+                                   id="subscribe-email"
+                                   name="email-form"
+                                   placeholder="ایمیل خود را وارد کنید"
+                                   tabindex="0"
+                                   type="email" />
+                        </fieldset>
+                        <div class="button-submit">
+                            <button class="subscribe-button text-btn-uppercase font-2"
+                                    id="subscribe-button"
+                                    type="button">
+                                مشترک شدن
+                            </button>
+                        </div>
+                    </div>
+                    <div class="subscribe-msg" id="subscribe-msg"></div>
+                </form>
+            </div>
+        </section>
+        <!-- /NEWSLETTER -->
+        <!-- Footer -->
+        <partial name="Partial/_Footer.cshtml" />
+        <!-- /Footer -->
+        <!-- toolbar-bottom -->
+        <partial name="Partial/_ToolbarBottom.cshtml" />
+        <!-- /toolbar-bottom -->
     </div>
+    <!-- search -->
+    <partial name="Partial/_Search.cshtml" />
+    <!-- /search -->
+    <!-- modalDemo -->
+    <partial name="Partial/_ModalDemo.cshtml" />
+    <!-- /modalDemo -->
+    <!-- MobileMenu -->
+    <partial name="Partial/_MobileMenu.cshtml" />
+    <!-- /MobileMenu -->
+    <!-- Categories -->
+    <partial name="Partial/_Categories.cshtml" />
+    <!-- /Categories -->
+    <!-- quickView -->
+    <partial name="Partial/_QuickView.cshtml" />
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - EndPoint_Ui - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- /quickView -->
+    <!-- ShoppingCart -->
+    <partial name="Partial/_ShoppingCart.cshtml" />
+    <!-- /ShoppingCart -->
+    <!-- Wishlist -->
+    <partial name="Partial/_Wishlist.cshtml" />
+    <!-- /wishlist -->
+    <!-- SizeGuide -->
+    <partial name="Partial/_SizeGuide.cshtml" />
+    <!-- /size-guide -->
+    <!-- Compare -->
+    <partial name="Partial/_Compare.cshtml" />
+    <!-- /Compare -->
+    <!-- QuickAdd -->
+    <partial name="Partial/_QuickAdd.cshtml" />
+
+    <!-- /quickAdd -->
+    <!-- Javascript -->
+    <partial name="Partial/_Scripts.cshtml" />
+    @await RenderSectionAsync("Script",false)
 </body>
 </html>
