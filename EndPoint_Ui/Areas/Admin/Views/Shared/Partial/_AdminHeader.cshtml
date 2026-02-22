@@ -14,15 +14,18 @@
 
 		<div class="header-body-left">
 
-			<h3 class="page-title">داشبورد</h3>
+			<h3 class="page-title">@ViewData["PageName"]</h3>
 
 			<!-- begin::breadcrumb -->
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">داشبورد</a></li>
-					<li class="breadcrumb-item active" aria-current="page">فروش و مدیریت مشتری</li>
+					<li class="breadcrumb-item"><a href="/Admin">داشبورد</a></li>
+					<li class="breadcrumb-item"><a href="@ViewData["Url"]">@ViewData["ControllerName"]</a></li>
+
+					<li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
 				</ol>
 			</nav>
+			
 			<!-- end::breadcrumb -->
 
 		</div>

@@ -1,0 +1,116 @@
+﻿@using Application.Common
+@using Application.DataTransferObject
+@model PaginatedList<RoleDto>
+@{
+    ViewData["Title"] = "نقش های کاربری";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = "نقش های کاربری";
+
+    ViewData["ControllerName"] = "نقش های کاربری";
+
+    ViewData["Title"] = "لیست نقش کاربران";
+
+    ViewData["Url"] = "/Admin/Role";
+
+
+}
+
+@section Script {
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/pagination.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/admin/assets/js/role/index.js"></script>
+}
+<div class="row">
+    <div class="col-6 mb-3">
+        <a asp-area="Admin" asp-controller="Role" asp-action="Create" class="btn btn-primary text-white">
+            <i class="ti-plus mr-2"></i> ایجاد نقش
+        </a>
+    </div>
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-body">
+                <div class="mb-4 mt-1 row">
+
+                    <div class="col-10">
+                        <label>جستجو</label>
+                        <form asp-area="Admin" asp-controller="Role" asp-action="Index" method="get" class="form-group d-flex flex-row">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="reounded-17 form-control w-25 mx-sm-3 text-left" />
+                            <button type="submit" class="btn btn-sm btn-success text-white mx-1 reounded-17"><i class="ti-search"></i></button>
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="btn btn-sm btn-warning text-white mx-1 reounded-17"><i class="ti-reload"></i></a>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">نام</th>
+                                <th scope="col">نام سیستمی</th>
+                                <th class="text-right" scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.List != null && Model.List.Any())
+                            {
+                                @foreach (var item in Model.List)
+                                {
+                                    <tr id="item_@item.Id">
+                                        <td>@item.PersianName</td>
+                                        <td>
+                                            @item.Name
+
+                                            @if (item.IsCustomer)
+                                            {
+                                                <span class="badge badge-pill badge-success">نقش پیشفرض مشتری</span>
+                                            }
+                                        </td>
+
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-light btn-floating btn-icon btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    @if (item.IsCustomer is false)
+                                                    {
+
+                                                        <a class="dropdown-item">تعیین سطح دسترسی</a>
+                                                    }
+                                                    <a asp-area="Admin" 
+                                                    asp-controller="Role"
+                                                    asp-action="Edit"
+                                                    asp-route-Id="@item.Id"
+                                                    class="dropdown-item">ویرایش</a>
+                                                    <a onclick="Delete('@item.Id')" class="dropdown-item">حذف</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+                @if (Model!.TotalPage > 1)
+                {
+                    <div id="pagination-body"
+                         data-page-index="@Model.CurrentPage"
+                         data-total-pages="@Model.TotalPage"
+                         data-search="@ViewBag.Search"
+                         data-path="/Admin/Role/Index">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
