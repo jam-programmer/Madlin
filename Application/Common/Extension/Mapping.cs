@@ -27,7 +27,7 @@ public static class Mapping
         }
         model.TotalItem = totalItem;
         model.List = Convertedlist;
-        model.CurentPage = curentPage;
+        model.CurrentPage = curentPage;
         model.TotalPage = count;
         model.PageSize = pageSize;
         return model;

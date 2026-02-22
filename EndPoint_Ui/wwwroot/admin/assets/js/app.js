@@ -35,7 +35,7 @@
 					showDuration: 200,
 					hideDuration: 200
 				};
-				toastr.success('خوش آمدید! جان اسنو.');
+				//toastr.success('خوش آمدید! جان اسنو.');
 			}, 1000);
 		});
 

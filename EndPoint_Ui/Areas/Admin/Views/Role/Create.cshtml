@@ -1,0 +1,63 @@
+﻿@using EndPoint_Ui.Areas.Admin.Models.Role
+@model CreateRoleModel
+@{
+    string title = "ایجاد نقش";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "نقش های کاربری";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Role";
+
+
+}
+@section Script {
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+    
+<div class="row">
+    <div class="col-md-6 offset-3 mt-5">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+      
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="Role" asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label >نام نقش</label>
+                        <input asp-for="PersianName" type="text" class="form-control text-left"  />
+                       <span class="text-danger" asp-validation-for="PersianName"></span>
+                    </div>
+                     <div class="form-group">
+                        <label >نام سیستمی نقش</label>
+                        <input asp-for="Name" type="text" class="form-control text-left" />
+                        <small class="form-text text-muted">
+                           نام سیستمی نقش باید انگلیسی باشد
+                        </small>
+                        <span class="text-danger" asp-validation-for="Name"></span>
+
+                    </div>
+                    <div class="form-group form-check">
+                        <input asp-for="IsCustomer" type="checkbox" class="form-check-input" >
+                        <label class="form-check-label" >نقش پیشفرض مشتری</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="Role" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
