@@ -11543,3 +11543,8 @@ body.dark .ui-datepicker select {
     color: inherit;
     border-color: #404356;
 }
+
+
+.reounded-17{
+	border-radius:17px !important;
+}

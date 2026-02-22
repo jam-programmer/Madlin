@@ -6,6 +6,8 @@ using Application.Common.CustomException;
 using Application.Common.Resource;
 using Mapster;
 using Application.Common.Extension;
+using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace Application.Services.Identity.Role;
 
 public class RoleService : IRoleService
@@ -54,13 +56,33 @@ public class RoleService : IRoleService
 
 	public async Task InsertRoleAsync(RoleDto role, CancellationToken cancellation = default)
 	{
+		IQueryable<RoleEntity> query= _roleManager.Roles.AsQueryable();
+		if (role.IsCustomer)
+		{
+			if (await query.AnyAsync(a => a.IsCustomer == true))
+			{
+				throw new InternalException(Messages.ExistRoleForCustomer);
+			}
+		}
+		
+
+
 		RoleEntity roleEntity=role.Adapt<RoleEntity>();
 		await _roleManager.CreateAsync(roleEntity);
 	}
 
 	public async Task UpdateRoleAsync(RoleDto role, CancellationToken cancellation = default)
 	{
-		RoleEntity? roleEntity = await _roleManager.FindByIdAsync(role.Id.ToString());
+        IQueryable<RoleEntity> query = _roleManager.Roles.AsQueryable();
+
+        if (role.IsCustomer)
+        {
+            if (await query.AnyAsync(a => a.IsCustomer == true && a.Id !=role.Id))
+            {
+                throw new InternalException(Messages.ExistRoleForCustomer);
+            }
+        }
+        RoleEntity? roleEntity = await _roleManager.FindByIdAsync(role.Id.ToString());
 		if (role == null)
 		{
 			throw new InternalException(Messages.NotFoundOnDb);
