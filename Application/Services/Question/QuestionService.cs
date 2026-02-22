@@ -1,5 +1,12 @@
-﻿using Application.Contract;
+﻿using Application.Common.CustomException;
+using Application.Common.Resource;
+using Application.Contract;
 using Application.DataTransferObject;
+using Domain.Entities.Identity;
+using Domain.Entities.System;
+using Mapster;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Question;
 
@@ -11,24 +18,48 @@ public class QuestionService : IQuestionService
         _questionRepository = questionRepository;
     }
 
-    public Task DeleteQuestionAsync(Guid QuestionId)
+    public async Task DeleteQuestionAsync(Guid QuestionId)
     {
-        
-        throw new NotImplementedException();
+        QuestionEntity? question = await _questionRepository
+    .GetByIdAsync<QuestionEntity>(g => g.Id == QuestionId);
+
+        if (question == null)
+            {
+                throw new InternalException(Messages.NotFoundOnDb);
+            }
+
+            question.IsDeleted = true;
+
+            await _questionRepository.UpdateAsync(question);
     }
 
-    public Task<QuestionDto> GetQuestionByIdAsync(Guid QuestionId)
+    public async Task<QuestionDto> GetQuestionByIdAsync(Guid QuestionId)
     {
-        throw new NotImplementedException();
+        QuestionEntity? question = await _questionRepository
+       .GetByIdAsync<QuestionEntity>(g => g.Id == QuestionId);
+        if (question == null)
+        {
+            throw new InternalException(Messages.NotFoundOnDb);
+        }
+        return question.Adapt<QuestionDto>();
     }
 
-    public Task InsertQuestionAsync(QuestionDto Question)
+    public async Task InsertQuestionAsync(QuestionDto Question)
     {
-        throw new NotImplementedException();
+        QuestionEntity question = Question.Adapt<QuestionEntity>();
+
+        await _questionRepository.InsertAsync(question);
     }
 
-    public Task UpdateQuestionAsync(QuestionDto Question)
+    public async Task UpdateQuestionAsync(QuestionDto Question)
     {
-        throw new NotImplementedException();
+        QuestionEntity? question = await _questionRepository
+       .GetByIdAsync<QuestionEntity>(g => g.Id == Question.Id);
+        if (question == null)
+        {
+            throw new InternalException(Messages.NotFoundOnDb);
+        }
+        Question.Adapt(question);
+        await _questionRepository.UpdateAsync(question);
     }
 }
