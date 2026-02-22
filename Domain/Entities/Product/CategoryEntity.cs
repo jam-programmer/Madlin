@@ -23,10 +23,8 @@ namespace Domain.Entities.Product
         public bool IsFeatured { get; set; }
 
         #region Relation 
-        public CategoryEntity? ParentCategory { get; set; }
-        public Guid? ParentProductCategoryId { get; set; }
+      
         public ICollection<ProductEntity>? Products { get; set; }
-        public ICollection<CategoryEntity>? SubCategories { get; set; }
         #endregion
         public bool IsDeleted { get; set; }
     }

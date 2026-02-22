@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Identity;
 
-public class UserEntity : IdentityUser<Guid>
+public class UserEntity : IdentityUser<Guid>,IDelete
 {
+	public string? FullName { get; set; }	
+
+	public bool IsDeleted { get; set; } = false;
 }
