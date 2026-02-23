@@ -54,6 +54,16 @@ public class RoleService : IRoleService
 		return model;
 	}
 
+	public async Task<IReadOnlyList<ItemGeneric<string, string>>> GetRolesForDropDownAsync()
+	{
+		IQueryable<RoleEntity> query=_roleManager.Roles.AsQueryable();
+		return await query.Select(s=>new ItemGeneric<string, string>()
+		{
+			Id=s.Name,
+			Title	=s.PersianName
+		}).ToListAsync();
+	}
+
 	public async Task InsertRoleAsync(RoleDto role, CancellationToken cancellation = default)
 	{
 		IQueryable<RoleEntity> query= _roleManager.Roles.AsQueryable();
