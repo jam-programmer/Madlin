@@ -63,6 +63,16 @@ public class UserService : IUserService
 	public async Task<PaginatedList<UserDto>> GetUsersAsync(Pagination pagination, CancellationToken cancellationToken = default)
 	{
 		IQueryable<UserEntity> query = _userManager.Users.AsQueryable();
+		TypeAdapterConfig config = new();
+		config.NewConfig<UserEntity,UserDto>()
+			.Map(d=>d.Email,s=>s.Email)
+			.Map(d=>d.PhoneNumber,s=>s.PhoneNumber)
+			.Map(d=>d.UserName, s=>s.UserName)
+			.Map(d=>d.FullName,s=>s.FullName)
+			.Map(d=>d.Id, s=>s.Id)
+			.Map(d=>d.IsActive, s=>s.EmailConfirmed)
+			.Compile();
+
 
 		PaginatedList<UserDto> model = new();
 		if (!string.IsNullOrEmpty(pagination!.keyword))
@@ -77,7 +87,7 @@ public class UserService : IUserService
 
 		model = await query.MappingedAsync<UserEntity, UserDto>
 				(pagination!.currentPage,
-				pagination!.pageSize, count, total);
+				pagination!.pageSize, count, total, config);
 		return model;
 	}
 
@@ -94,7 +104,8 @@ public class UserService : IUserService
 				try
 				{
 					UserEntity userEntity = user.Adapt<UserEntity>();
-
+					userEntity.EmailConfirmed=user.IsActive;	
+					userEntity.PhoneNumberConfirmed=user.IsActive;	
 					IdentityResult insertUserResult =
 						await _userManager.CreateAsync(userEntity);
 					if (insertUserResult.Succeeded is false)
@@ -167,9 +178,10 @@ public class UserService : IUserService
 						throw new InternalException(Messages.NotFoundOnDb);
 					}
 					user.Adapt(userEntity);
+                    userEntity.EmailConfirmed = user.IsActive;
+                    userEntity.PhoneNumberConfirmed = user.IsActive;
 
-
-					IdentityResult updateUserResult =
+                    IdentityResult updateUserResult =
 						await _userManager.UpdateAsync(userEntity!);
 					if (updateUserResult.Succeeded is false)
 					{

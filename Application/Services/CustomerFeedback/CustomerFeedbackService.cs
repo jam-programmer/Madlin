@@ -4,11 +4,6 @@ using Application.Contract;
 using Application.DataTransferObject;
 using Domain.Entities.System;
 using Mapster;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.CustomerFeedback
 {
@@ -54,14 +49,14 @@ namespace Application.Services.CustomerFeedback
 
         public async Task UpdateCustomerFeedbackAsync(CustomerFeedbackDto CustomerFeedback)
         {
-            CustomerFeedbackEntity? customerFeedback = await _customerFeedbackRepository
-       .GetByIdAsync<CustomerFeedbackEntity>(g => g.Id == CustomerFeedback.Id);
-            if (customerFeedback == null)
+            CustomerFeedbackEntity? customerFeedbackEntity = await _customerFeedbackRepository
+                .GetByIdAsync<CustomerFeedbackEntity>(g => g.Id == CustomerFeedback.Id);
+            if (customerFeedbackEntity == null)
             {
                 throw new InternalException(Messages.NotFoundOnDb);
             }
-            CustomerFeedback.Adapt(customerFeedback);
-            await _customerFeedbackRepository.UpdateAsync(customerFeedback);
+            CustomerFeedback.Adapt(customerFeedbackEntity);
+            await _customerFeedbackRepository.UpdateAsync(customerFeedbackEntity);
         }
     }
 }
