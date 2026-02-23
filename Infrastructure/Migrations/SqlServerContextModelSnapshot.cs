@@ -258,6 +258,29 @@ namespace Infrastructure.Migrations
                     b.ToTable("Product", "Product");
                 });
 
+            modelBuilder.Entity("Domain.Entities.System.ImageEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ImageEntity");
+                });
+
             modelBuilder.Entity("Domain.Entities.System.QuestionEntity", b =>
                 {
                     b.Property<Guid>("Id")
