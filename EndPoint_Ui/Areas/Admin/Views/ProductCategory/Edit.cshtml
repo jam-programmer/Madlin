@@ -1,0 +1,151 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.ProductCategory
+@model EditProductCategoryModel
+@{
+    string title = "ویرایش دسته بندی";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "دسته بندی محصولات";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/ProductCategory";
+
+
+}
+@section Script {
+    <script src="~/js/upload.js"></script>
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3 mt-5">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="ProductCategory" asp-action="Edit"
+                enctype="multipart/form-data" method="post">
+                    <div class="validation text-danger" asp-validation-summary="All"></div>
+                    <input type="hidden" asp-for="Id"/>
+                    <input type="hidden" asp-for="IconImagePath"/>
+                    <input type="hidden" asp-for="MainImagePath"/>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">اطلاعات پایه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">فارسی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link show" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">انگلیسی</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                        <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+                            <div class="row">
+                                <div class="col-md-6 m-b-15">
+                                    @if (Model.MainImagePath == "default.jpg")
+                                    {
+                                        <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePath_1" src="~/gallery/ProductCategory/@Model.MainImagePath" width="150" height="90">
+
+                                    }
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">تصویر شاخص</label>
+                                        <input asp-for="MainImageFile" onchange="ChangeImage(this,1)"
+                                               type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 m-b-15">
+                                    @if (Model.IconImagePath == "default.jpg")
+                                    {
+                                        <img id="imagePath_2" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePath_2" src="~/gallery/ProductCategory/@Model.IconImagePath" width="150" height="90">
+
+                                    }
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">تصویر آیکون</label>
+                                        <input type="file"
+                                               asp-for="IconImageFile" onchange="ChangeImage(this,2)"
+                                               class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-switch mb-2">
+                                <input asp-for="IsFeatured" type="checkbox" class="custom-control-input"
+                                       id="customSwitch" />
+                                <label class="custom-control-label" for="customSwitch">دسته بندی ویژه</label>
+
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="form-group">
+                                <label>عنوان فارسی</label>
+                                <input asp-for="TitleFa" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="TitleFa"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>توضیح فارسی</label>
+                                <textarea class="form-control" asp-for="DescriptionFa" rows="3"></textarea>
+                                <span class="text-danger" asp-validation-for="DescriptionFa"></span>
+
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="form-group">
+                                <label>عنوان انگلیسی</label>
+                                <input asp-for="TitleEn" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="TitleEn"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>توضیح انگلیسی</label>
+                                <textarea class="form-control" asp-for="DescriptionEn" rows="3"></textarea>
+                                <span class="text-danger" asp-validation-for="DescriptionEn"></span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="ProductCategory" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

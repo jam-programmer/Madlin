@@ -7,7 +7,7 @@ namespace Application.Contract;
 
 public interface IRepository<TEntity> where TEntity : BaseEntity 
 {
-    Task<TEntity> GetByIdAsync<TModel>(Expression<Func<TEntity, bool>>
+    Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>>
         condition);
 
  

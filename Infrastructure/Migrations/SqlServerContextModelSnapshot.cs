@@ -139,12 +139,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DescriptionEn")
-                        .IsRequired()
                         .HasMaxLength(6000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescriptionFa")
-                        .IsRequired()
                         .HasMaxLength(6000)
                         .HasColumnType("nvarchar(max)");
 
@@ -167,12 +165,10 @@ namespace Infrastructure.Migrations
                         .HasDefaultValue("default.jpg");
 
                     b.Property<string>("TitleEn")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("TitleFa")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -314,13 +310,19 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionFa")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

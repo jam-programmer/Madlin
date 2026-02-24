@@ -36,7 +36,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         return await _context.Set<TEntity>().AnyAsync(condition);
     }
 
-    public async Task<TEntity> GetByIdAsync<TModel>
+    public async Task<TEntity> GetByIdAsync
         (Expression<Func<TEntity, bool>> condition)
     {
         return await _context.Set<TEntity>().FirstOrDefaultAsync(condition);

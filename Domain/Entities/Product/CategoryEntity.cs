@@ -8,11 +8,11 @@ namespace Domain.Entities.Product
 {
    public class CategoryEntity:BaseEntity,IDelete
     {
-        public string TitleEn { get; set; }
-        public string TitleFa { get; set; }
+        public string? TitleEn { get; set; }
+        public string? TitleFa { get; set; }
 
-        public string DescriptionEn { get; set; }
-        public string DescriptionFa { get; set; }
+        public string? DescriptionEn { get; set; }
+        public string? DescriptionFa { get; set; }
 
 
 

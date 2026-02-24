@@ -8,8 +8,10 @@ namespace Domain.Entities.System
 {
     public class QuestionEntity:BaseEntity,IDelete
     {
-        public string? Title {  get; set; }
-        public string? Description { get; set; }
+        public string? TitleFa {  get; set; }
+        public string? DescriptionFa { get; set; }
+        public string? TitleEn {  get; set; }
+        public string? DescriptionEn { get; set; }
         public bool IsDeleted {  get; set; }=false;
     }
 }

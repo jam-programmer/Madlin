@@ -4,8 +4,34 @@ namespace Application.Services.Question;
 
 public interface IQuestionService
 {
-    Task InsertQuestionAsync(QuestionDto Question);
-    Task UpdateQuestionAsync(QuestionDto Question);
-    Task<QuestionDto> GetQuestionByIdAsync(Guid QuestionId);
-    Task DeleteQuestionAsync(Guid QuestionId);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Question"></param>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task InsertQuestionAsync(QuestionDto Question,CancellationToken cancellation=default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Question"></param>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task UpdateQuestionAsync(QuestionDto Question, CancellationToken cancellation = default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="QuestionId"></param>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task<QuestionDto> GetQuestionByIdAsync(Guid QuestionId, CancellationToken cancellation = default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="QuestionId"></param>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task DeleteQuestionAsync(Guid QuestionId, CancellationToken cancellation = default);
+
+    Task<PaginatedList<QuestionDto>> GetQuestionsAsync(Pagination pagination,CancellationToken cancellation = default);
 }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.DataTransferObject
+﻿namespace Application.DataTransferObject
 {
     public sealed record QuestionDto
     {
         public Guid Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
+        public string? TitleFa { get; set; }
+        public string? DescriptionFa { get; set; }
+        public string? TitleEn { get; set; }
+        public string? DescriptionEn { get; set; }
     }
 }
