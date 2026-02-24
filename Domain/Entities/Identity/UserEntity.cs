@@ -9,6 +9,11 @@ namespace Domain.Entities.Identity;
 
 public class UserEntity : IdentityUser<Guid>,IDelete
 {
+	public override string Email
+	{
+		get => base.Email;
+		set => base.Email = value;
+	}
 	public string? FullName { get; set; }	
 
 	public bool IsDeleted { get; set; } = false;

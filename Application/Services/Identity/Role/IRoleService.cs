@@ -47,4 +47,10 @@ public interface IRoleService
 
 	Task<PaginatedList<RoleDto>> GetRolesAsync(Pagination pagination,CancellationToken cancellation = default);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	Task<IReadOnlyList<ItemGeneric<string, string>>> GetRolesForDropDownAsync();
+
 }

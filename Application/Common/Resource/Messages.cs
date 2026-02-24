@@ -8,6 +8,7 @@ namespace Application.Common.Resource;
 
 public static class Messages
 {
-	public const string NotFoundOnDb = "موجودیت در دیتابیس یافت نشد.";
+	public const string NotFoundOnDb = "موجودیت در دیتابیس یافت نشد";
+	public const string NotFoundUserRole = "نقشی برای کاربر یافت نشد";
 	public const string ExistRoleForCustomer = "نقش پیشفرضی برای کاربر تعیین شده است";
 }

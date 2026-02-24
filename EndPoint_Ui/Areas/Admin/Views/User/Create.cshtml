@@ -1,0 +1,102 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.User
+@model CreateUserModel
+@{
+    string title = "ایجاد کاربر";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "کاربران";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/User";
+
+
+}
+@section Script {
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3 mt-5">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="User" asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label>نام و نام خانوادگی</label>
+                        <input asp-for="FullName" type="text" class="form-control text-left" />
+                        <span class="text-danger" asp-validation-for="FullName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>کدملی</label>
+                        <input asp-for="UserName" type="text" class="form-control text-left" />
+                        <span class="text-danger" asp-validation-for="UserName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ایمیل</label>
+                        <input asp-for="Email" type="text" class="form-control text-left" />
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>شماره تماس</label>
+                        <input asp-for="PhoneNumber" type="text" class="form-control text-left" />
+                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>گذرواژه</label>
+                        <input asp-for="Password" type="password" class="form-control text-left" />
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>نقش کاربری</label>
+                        <select class="form-control" asp-for="Role">
+                            <option disabled="disabled" selected="selected">یک نقش انتخاب کنید</option>
+                            @if (ViewBag.Roles as IReadOnlyList<ItemGeneric<string, string>> != null)
+                            {
+                                @foreach (var role in ViewBag.Roles as IReadOnlyList<ItemGeneric<string, string>>)
+                                {
+                                    <option value="@role.Id">@role.Title</option>
+                                }
+                            }
+
+                        </select>
+                        <span class="text-danger" asp-validation-for="Role"></span>
+                    </div>
+
+
+
+
+
+                    <div class="form-group form-check">
+                        <input asp-for="IsActive" type="checkbox" class="form-check-input">
+                        <label class="form-check-label">وضعیت حساب کاربری(فعال/غیرفعال)</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="User" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

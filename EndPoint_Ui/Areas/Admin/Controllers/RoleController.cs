@@ -18,7 +18,9 @@ public class RoleController(IRoleService roleService) : Controller
     [HttpGet]
     public async Task<IActionResult> Index([FromQuery] Pagination pagination)
     {
-        PaginatedList<RoleDto> pageModel = await _roleService.GetRolesAsync(pagination);
+        PaginatedList<RoleDto> model =
+            await _roleService.GetRolesAsync(pagination);
+        PaginatedList<RoleViewModel> pageModel = model.Adapt<PaginatedList<RoleViewModel>>();
         ViewBag.Keyword = pageModel.Keyword;
         return View(pageModel);
     }
@@ -82,7 +84,7 @@ public class RoleController(IRoleService roleService) : Controller
     {
         try
         {
-          
+
             await _roleService.DeleteRoleAsync(input.Id);
             return new JsonResult(new
             {

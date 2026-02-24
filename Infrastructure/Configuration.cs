@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Identity;
+﻿using Application.Contract;
+using Domain.Entities.Identity;
 using Infrastructure.Common;
 using Infrastructure.Context;
 using Infrastructure.Implement;
@@ -63,7 +64,7 @@ public static class Configuration
         });
         #endregion
 
-
+        service.AddScoped<IContextProvider, ContextProvider>();
         return service;
     }
 }
