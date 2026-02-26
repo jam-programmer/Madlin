@@ -15,6 +15,7 @@ builder.Services.AddLocalization(option =>
 {
     option.ResourcesPath = "Resources";
 });
+
 builder.Services.Application(builder.Configuration);
 builder.Services.Infrastructure(builder.Configuration);
 builder.Services.Scan(scan => scan

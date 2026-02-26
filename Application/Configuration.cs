@@ -50,7 +50,7 @@ public static class Configuration
 
         service.AddSerilog();
         #endregion
-
+    
 
 
         return service;

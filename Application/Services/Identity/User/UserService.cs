@@ -72,8 +72,6 @@ public class UserService : IUserService
 			.Map(d=>d.Id, s=>s.Id)
 			.Map(d=>d.IsActive, s=>s.EmailConfirmed)
 			.Compile();
-
-
 		PaginatedList<UserDto> model = new();
 		if (!string.IsNullOrEmpty(pagination!.keyword))
 		{

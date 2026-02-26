@@ -17,7 +17,7 @@ namespace Application.Services.CustomerFeedback
         public async Task DeleteCustomerFeedbackAsync(Guid CustomerFeedbackId)
         {
             CustomerFeedbackEntity? customerFeedback = await _customerFeedbackRepository
-    .GetByIdAsync<CustomerFeedbackEntity>(g => g.Id == CustomerFeedbackId);
+    .GetByIdAsync(g => g.Id == CustomerFeedbackId);
 
             if (customerFeedback == null)
             {
@@ -32,7 +32,7 @@ namespace Application.Services.CustomerFeedback
         public async Task<CustomerFeedbackDto> GetCustomerFeedbackByIdAsync(Guid CustomerFeedbackId)
         {
             CustomerFeedbackEntity? customerFeedback = await _customerFeedbackRepository
-         .GetByIdAsync<CustomerFeedbackEntity>(g => g.Id == CustomerFeedbackId);
+         .GetByIdAsync(g => g.Id == CustomerFeedbackId);
             if (customerFeedback == null)
             {
                 throw new InternalException(Messages.NotFoundOnDb);
@@ -50,7 +50,7 @@ namespace Application.Services.CustomerFeedback
         public async Task UpdateCustomerFeedbackAsync(CustomerFeedbackDto CustomerFeedback)
         {
             CustomerFeedbackEntity? customerFeedbackEntity = await _customerFeedbackRepository
-                .GetByIdAsync<CustomerFeedbackEntity>(g => g.Id == CustomerFeedback.Id);
+                .GetByIdAsync(g => g.Id == CustomerFeedback.Id);
             if (customerFeedbackEntity == null)
             {
                 throw new InternalException(Messages.NotFoundOnDb);
