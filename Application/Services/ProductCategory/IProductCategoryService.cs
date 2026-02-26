@@ -42,4 +42,11 @@ public interface IProductCategoryService
     /// <returns></returns>
     Task<PaginatedList<ProductCategoryDto>> GetProductCategoriesAsync
         (Pagination pagination, CancellationToken cancellation = default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="search"></param>
+    /// <returns></returns>
+    Task<IReadOnlyList<ItemGeneric<Guid, string>>>
+        GetCategoriesForDropDownAsync(string search);
 }

@@ -11548,3 +11548,9 @@ body.dark .ui-datepicker select {
 .reounded-17{
 	border-radius:17px !important;
 }
+
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}

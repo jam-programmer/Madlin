@@ -1,0 +1,213 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Product
+@model CreateProductModel
+@{
+    string title = "ایجاد محصول";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "محصولات";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Product";
+
+
+}
+@section Style {
+    @* <link rel="stylesheet" href="vendors/bundle.css" type="text/css"> *@
+    <link rel="stylesheet" href="~/admin/vendors/select2/css/select2.min.css" type="text/css">
+}
+@section Script {
+    <script src="~/admin/vendors/ckeditor/ckeditor.js"></script>
+    @* <script src="~/admin/assets/js/examples/ckeditor.js"></script> *@
+
+    <script src="~/admin/vendors/select2/js/select2.min.js"></script>
+    <script src="~/admin/assets/js/examples/select2.js"></script>
+    <script src="~/js/upload.js"></script>
+    <script src="~/admin/assets/js/product/create.js"></script>
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="Product" asp-action="Create"
+                enctype="multipart/form-data" method="post">
+                    <div class="validation text-danger" asp-validation-summary="All"></div>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item ">
+                            <a class="nav-link show active" id="basic-tab" data-toggle="tab"
+                               href="#basic" role="tab" aria-controls="basic" aria-selected="false">اطلاعات پایه</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link show" id="profile-tab" data-toggle="tab"
+                               href="#profile" role="tab" aria-controls="profile" aria-selected="false">فارسی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link show" id="contact-tab" data-toggle="tab"
+                               href="#contact" role="tab" aria-controls="contact" aria-selected="false">انگلیسی</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                        <div class="tab-pane fade active show" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+                            <div class="row">
+                                <div class="col-md-6 m-b-15">
+                                    <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">تصویر شاخص</label>
+                                        <input asp-for="MainImageFile" onchange="ChangeImage(this,1)"
+                                               type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 m-b-15">
+                                    <img id="imagePath_2" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">تصویر هاور</label>
+                                        <input type="file"
+                                               asp-for="HoverImageFile" onchange="ChangeImage(this,2)"
+                                               class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 m-b-15">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">انتخاب دسته بندی</label>
+
+                                        <select asp-for="CategoryId" class="form-control" id="dropDownCategory">
+                                        </select>
+                                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 m-b-15">
+                                    <div class="form-group">
+                                        <label>تعداد</label>
+                                        <input type="number"
+                                               asp-for="Quantity" value="0" class="form-control" />
+                                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 m-b-15">
+                                    <div class="form-group">
+                                        <label>قیمت</label>
+                                        <input type="number"
+                                               asp-for="Price" class="form-control no-spinner" />
+                                        <span asp-validation-for="Quantity" class="text-danger "></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 m-b-15">
+                                    <div class="form-group">
+                                        <label>قیمت با تخفیف</label>
+                                        <input type="number"
+                                               asp-for="DiscountPrice" class="form-control no-spinner" />
+                                        <small class="text-muted">در صورت عدم مقداردهی تخفیفی لحاظ نمیگردد</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 m-b-15">
+                                    <div class="form-group">
+                                        <label>شناسه محصول</label>
+                                        <input type="text"
+                                               asp-for="ProductCode"  class="form-control" />
+                                        <span asp-validation-for="ProductCode" class="text-danger"></span>
+
+                                    </div>
+                                </div>   <div class="col-md-4 m-b-15">
+                                    <div class="form-group">
+                                        <label>امتیاز</label>
+                                        <input type="number"
+                                               asp-for="Rating" min="1" max="5" value="1" class="form-control " />
+                                        <small class="text-muted">بین 1 تا 5 امتیاز دهید</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 m-b-15">
+                                    <div class="form-group">
+                                        <label>آدرس</label>
+                                        <input type="text"
+                                               asp-for="UrlName"  class="form-control" />
+                                        <small class="text-muted">آدرس صفحه محصول(در صورت عدم مقدار دهی عنوان انگلیسی لحاظ میشود)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="tab-pane fade  " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="form-group">
+                                <label>عنوان فارسی</label>
+                                <input asp-for="TitleFa" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="TitleFa"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>توضیح کوتاه فارسی</label>
+                                <textarea class="form-control" asp-for="ShortDescriptionFa" rows="3"></textarea>
+                                <span class="text-danger" asp-validation-for="ShortDescriptionFa"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>توضیح فارسی</label>
+                                <textarea class="form-control" id="editor-fa" asp-for="FullDescriptionFa" rows="3"></textarea>
+                                <span class="text-danger" asp-validation-for="FullDescriptionFa"></span>
+
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="form-group">
+                                <label>عنوان انگلیسی</label>
+                                <input asp-for="TitleEn" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="TitleEn"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>توضیح کوتاه انگلیسی</label>
+                                <textarea class="form-control" asp-for="ShortDescriptionEn" rows="3"></textarea>
+                                <span class="text-danger" asp-validation-for="ShortDescriptionEn"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>توضیح انگلیسی</label>
+                                <textarea class="form-control" id="editor-en" asp-for="FullDescriptionEn" rows="3"></textarea>
+                                <span class="text-danger" asp-validation-for="FullDescriptionEn"></span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="Product" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

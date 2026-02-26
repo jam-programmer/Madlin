@@ -3,6 +3,7 @@ using Domain.Entities.Identity;
 using Domain.Entities.Product;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.ProductCategory;
 
@@ -24,6 +25,23 @@ public class ProductCategoryService : IProductCategoryService
         }
         categoryEntity.IsDeleted = true;
         await _productCategoryRepository.UpdateAsync(categoryEntity,cancellation);
+    }
+
+    public async Task<IReadOnlyList<ItemGeneric<Guid, string>>> GetCategoriesForDropDownAsync(string search)
+    {
+        IQueryable<CategoryEntity> query = _productCategoryRepository.GetByQuery();
+
+        if (string.IsNullOrEmpty(search) is false)
+        {
+            query = query.Where(w => w.TitleFa!.Contains(search));
+        }
+        return await query
+            .Take(10).Select(s=>new ItemGeneric<Guid, string>()
+        {
+            Id = s.Id,
+            Title=s.TitleFa
+        }).ToListAsync();   
+            
     }
 
     public async Task<PaginatedList<ProductCategoryDto>> GetProductCategoriesAsync(Pagination pagination, CancellationToken cancellation = default)

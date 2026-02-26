@@ -12,7 +12,7 @@ public static class Common
         DisplayAttribute? attribute = FieldInfo!.GetCustomAttribute<DisplayAttribute>();
         return attribute != null ? attribute.ShortName! : item.ToString();
     }
-    
+
     public static string GetEnumName(this Enum item)
     {
         FieldInfo? FieldInfo = item.GetType().GetField(item.ToString());
@@ -23,7 +23,7 @@ public static class Common
     {
         FieldInfo? FieldInfo = item.GetType().GetField(item.ToString());
         DisplayAttribute? attribute = FieldInfo!.GetCustomAttribute<DisplayAttribute>();
-        return attribute != null ? int.Parse(attribute.Name!):503;
+        return attribute != null ? int.Parse(attribute.Name!) : 503;
     }
 
     public static string GenerateRandomString(int length = 8)
@@ -38,4 +38,19 @@ public static class Common
 
         return result.ToString()!;
     }
+
+
+
+
+    public static string GenerateUrl(this string url)
+    {
+        List<char> invalidCharacter =
+            ['!', '@', '#', '$', '%', '^', '&',':',';','~','`',
+            '*', '(', ')', '.', '_', '>', '<',
+            '?', ',', '/', '|', '\\',];
+        url = url.Replace(" ", "-");
+        string newUrl = new string(url.Where(w => !invalidCharacter.Contains(w)).ToArray());
+        return url;
+    }
+
 }

@@ -17,8 +17,8 @@ internal sealed class ProductMap : IEntityTypeConfiguration<ProductEntity>
         builder.Property(p=>p.TitleFa).IsRequired().HasMaxLength(250);
         builder.Property(p=>p.ShortDescriptionEn).IsRequired();
         builder.Property(p=>p.ShortDescriptionFa).IsRequired();
-        builder.Property(p => p.FullDescriptionEn).IsRequired();
-        builder.Property(p => p.FullDescriptionFa).IsRequired();
+        builder.Property(p => p.UrlName).IsRequired();
+
         builder.HasIndex(p => p.ProductCode).IsUnique();
         builder.Property(p => p.Price).HasPrecision(18, 2).IsRequired();
         builder.Property(p => p.DiscountPrice).HasPrecision(18, 2);
