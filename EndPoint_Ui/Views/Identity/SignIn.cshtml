@@ -1,0 +1,66 @@
+﻿
+@model EndPoint_Ui.Models.Identity.SignInModel
+@inject IViewLocalizer Localizer
+@{
+
+    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "Sign In" : "ورود به سایت";
+    ViewData["Title"] = Localizer["PageTitle"];
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+@section Script {
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+
+<section class="flat-spacing" dir="rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 offset-xl-3 offset-lg-3">
+                @if (ViewBag.ErrorMessage != null)
+                {
+
+                    <div class="alert alert-danger">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+                <form asp-controller="Identity" asp-action="SignIn" method="post" class="form-login form-has-password">
+                    <div class="wrap" dir="@dir">
+
+                        <fieldset class="">
+                            <label>
+                                @Localizer["username"]<span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="UserName" type="text" />
+                            <span class="text-danger" asp-validation-for="UserName"></span>
+                        </fieldset>
+                       
+
+
+
+                        <fieldset class="position-relative password-item">
+                            <label>
+                                @Localizer["password"]<span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Password" type="password" value="">
+                            <span class="text-danger" asp-validation-for="Password"></span>
+
+                        </fieldset>
+                       
+                    </div>
+                    <div class="button-submit">
+                        <button class="tf-btn btn-fill" type="submit">
+                            <span class="text text-button">
+                                @Localizer["btn"]
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,45 @@
+﻿@{
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    ViewData["Title"] = "404";
+}
+<section class="flat-spacing page-404" dir="@dir" style="background-color:#d7d6d5;">
+    <div class="container">
+        <div class="page-404-inner">
+            <div class="image">
+                <img alt="image" class=" ls-is-cached lazyloaded" data-src="images/section/404.png" src="images/section/404.png">
+            </div>
+            <div class="content" dir="@dir">
+                @if (CultureInfo.CurrentUICulture.Name == "fa-IR")
+                {
+                    <div>
+                        <h2 class="title mb_4">
+                            صفحه مورد نظر یافت نشد
+                        </h2>
+                        <div class="text body-text-1 text-secondary">
+                            صفحی که دنبال آن میگردید یا وجود ندارد یا از دسترسی خارج شده است
+
+                        </div>
+                    </div>
+                    <a class="tf-btn btn-fill" href="/"><span class="text text-button">بازگشت به صفحه اصلی</span></a>
+
+                }  else
+                {
+               
+                    <div>
+                        <h2 class="title mb_4">
+                            Page Not Found
+
+                        </h2>
+                        <div class="text body-text-1 text-secondary">
+                            The page you are looking for either does not exist or has been removed
+
+
+                        </div>
+                    </div>
+                    <a class="tf-btn btn-fill" href="/"><span class="text text-button">Go To Homw Page</span></a>
+
+                }
+            </div>
+        </div>
+    </div>
+</section>

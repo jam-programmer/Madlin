@@ -92,7 +92,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 m-b-15">
-                                    <img id="imagePath_2" src="~/gallery/default.jpg" width="150" height="90">
 
 
                                     @if (Model.HoverImagePath == "default.jpg")
@@ -171,6 +170,13 @@
                                                asp-for="UrlName" class="form-control" />
                                         <small class="text-muted">آدرس صفحه محصول(در صورت عدم مقدار دهی عنوان انگلیسی لحاظ میشود)</small>
                                     </div>
+                                </div><div class="col-md-4 m-b-15">
+                                <div class="custom-control custom-switch mb-2">
+                                    <input asp-for="IsShowSlider" type="checkbox" class="custom-control-input"
+                                           id="customSwitch" />
+                                    <label class="custom-control-label" for="customSwitch">نمایش در اسلایدر</label>
+
+                                </div>
                                 </div>
                             </div>
                         </div>

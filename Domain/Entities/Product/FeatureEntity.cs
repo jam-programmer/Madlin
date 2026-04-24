@@ -14,5 +14,5 @@ public class FeatureEntity : BaseEntity, IDelete
     public string? ValueEn { get; set; }
     public Guid ProductId { get; set; }
     public ProductEntity? Product { get; set; }
-    public bool IsDeleted { get ; set; }
+    public bool IsDeleted { get; set; } = false;
 }

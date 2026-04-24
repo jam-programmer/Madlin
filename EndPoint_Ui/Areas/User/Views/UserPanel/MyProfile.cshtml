@@ -1,0 +1,92 @@
+﻿@using EndPoint_Ui.Areas.User.Models
+@model ProfileModel
+@inject IViewLocalizer Localizer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string UserPanelTitle = CultureInfo.CurrentUICulture.Name == "en-US" ? "User Panel" : "پنل کاربری";
+    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "My Profile" : "پروفایل من";
+    ViewData["Title"] = Localizer["PageTitle"];
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("/UserPanel", UserPanelTitle!);
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+
+
+@section Script{
+    <partial name="_ValidationScriptsPartial.cshtml" />
+
+}
+
+<div class="container mt-4">
+    <div class="my-account-wrap">
+        @await Component.InvokeAsync("UserSidebarComponent", Guid.Parse(User.Claims.FirstOrDefault(f => f.Type == "Id")!.Value))
+        <div class="my-account-content">
+            <div class="account-details mb-2">
+                @if (ViewBag.Alert != null)
+                {
+                    <div class="alert alert-danger alert-dismissible d-flex align-items-center" role="alert">
+                        <i class="bx bx-xs bx-store me-2"></i>
+                        @ViewBag.Alert
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                <form asp-area="User" asp-controller="UserPanel" asp-action="MyProfile"
+                      method="post" class="form-account-details form-has-password">
+                    <div class="account-info">
+                        <h5 class="title">@Localizer["title"]</h5>
+                        <fieldset class="">
+                            <label>@Localizer["fullname"]</label>
+                            <input type="text" asp-for="FullName" />
+                            <span class="text-danger" asp-validation-for="FullName"></span>
+                        </fieldset>
+                        <div class="cols mb_20">
+                            <fieldset class="">
+                                <label>@Localizer["email"]</label>
+                                <input type="text" asp-for="Email" />
+                                <span class="text-danger" asp-validation-for="Email"></span>
+
+                            </fieldset>
+                            <fieldset class="">
+                                <label>@Localizer["phone"]</label>
+                                <input type="text" asp-for="PhoneNumber" />
+                                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                            </fieldset>
+
+                        </div>
+
+                    </div>
+                    <div class="account-password">
+                        <h5 class="title">@Localizer["textchangepassword"]</h5>
+                        <fieldset class="position-relative password-item mb_20">
+                            <label>@Localizer["oldpassword"]</label>
+                            <input type="password" asp-for="OldPassword" />
+                            <span class="text-danger" asp-validation-for="OldPassword"></span>
+
+                        </fieldset>
+                        <fieldset class="position-relative password-item mb_20">
+                            <label>@Localizer["password"]</label>
+                            <input type="password" asp-for="Password" />
+                            <span class="text-danger" asp-validation-for="Password"></span>
+
+                        </fieldset>
+                        <fieldset class="position-relative password-item mb_20">
+                            <label>@Localizer["repassword"]</label>
+                            <input type="password" asp-for="ConfirmPassword" />
+                            <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+
+                        </fieldset>
+
+                    </div>
+                    <div class="button-submit">
+                        <button class="tf-btn btn-fill" type="submit">
+                            <span class="text text-button">@Localizer["btn"]</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@model IReadOnlyList<PageItemViewModel>
+@if(Model!=null && Model.Any())
+{
+    <div class="footer-col-block">
+        <div class="footer-heading text-button footer-heading-mobile">
+            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Pages" : "صفحات")
+        </div>
+        <div class="tf-collapse-content">
+            <ul class="footer-menu-list">
+                @foreach(var item in Model)
+                {
+                    <li class="text-caption-1">
+                        <a class="footer-menu_item" href="/Page/@item.Url">
+                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

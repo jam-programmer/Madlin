@@ -43,4 +43,10 @@ public interface IFeatureService
     /// <param name="cancellation"></param>
     /// <returns></returns>
     Task DeleteFeatureAsync(Guid Id, CancellationToken cancellation=default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    Task<IReadOnlyList<FeatureDto>> GetFeaturesByProductIdAsync(Guid Id);
 }

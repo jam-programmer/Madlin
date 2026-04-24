@@ -2,7 +2,7 @@
 
 	<!-- begin::header logo -->
 	<div class="header-logo">
-		<a href="index.html">
+		<a href="/admin">
 			<img class="large-logo" src="~/admin/assets/media/image/logo.png" alt="image">
 			<img class="small-logo" src="~/admin/assets/media/image/logo-sm.png" alt="image">
 			<img class="dark-logo" src="~/admin/assets/media/image/logo-dark.png" alt="image">
@@ -20,8 +20,13 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="/Admin">داشبورد</a></li>
-					<li class="breadcrumb-item"><a href="@ViewData["Url"]">@ViewData["ControllerName"]</a></li>
+					
+					@if (ViewData["ParentUrl"] != null)
+					{
+						<li class="breadcrumb-item"><a href="@ViewData["ParentUrl"]">@ViewData["ParentControllerName"]</a></li>
 
+					}
+					<li class="breadcrumb-item"><a href="@ViewData["Url"]">@ViewData["ControllerName"]</a></li>
 					<li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
 				</ol>
 			</nav>
@@ -33,7 +38,7 @@
 		<div class="header-body-right">
 			<!-- begin::navbar main body -->
 			<ul class="navbar-nav">
-				<li class="nav-item">
+			@* 	<li class="nav-item">
 					<form>
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="جستجو">
@@ -178,12 +183,12 @@
 							</ul>
 						</div>
 					</div>
-				</li>
+				</li> *@
 				<li class="nav-item dropdown">
-					<a href="#" class="nav-link" data-toggle="dropdown">
-						<i class="ti-bell"></i>
+					<a href="/" class="nav-link" @* data-toggle="dropdown" *@>
+						<i class="ti-home"></i>
 					</a>
-					<div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+					@* <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
 						<div class="p-4 text-center" data-backround-image="~/admin/assets/media/image/image1.png">
 							<h6 class="m-b-0">اعلان ها</h6>
 							<small class="font-size-13 opacity-7">2 اعلان خوانده نشده</small>
@@ -253,10 +258,10 @@
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div> *@
 				</li>
 				<li class="nav-item dropdown">
-					<a href="#" class="nav-link bg-none" data-sidebar-open="#userProfile">
+					<a href="#" class="nav-link bg-none" @* data-sidebar-open="#userProfile" *@>
 						<div>
 							<figure class="avatar avatar-state-success avatar-sm">
 								<img src="~/admin/assets/media/image/avatar.jpg" class="rounded-circle" alt="image">

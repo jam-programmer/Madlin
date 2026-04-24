@@ -4,14 +4,17 @@ using Application.DataTransferObject;
 using Application.Services.ProductCategory;
 using EndPoint_Ui.Areas.Admin.Models.Common;
 using EndPoint_Ui.Areas.Admin.Models.ProductCategory;
+using EndPoint_Ui.Attributes;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoint_Ui.Areas.Admin.Controllers;
 [Area("Admin")]
-public class ProductCategoryController (IProductCategoryService prodcutCategoryService): Controller
+[AdminAuthorize("ProductCategory")]
+
+public class ProductCategoryController (IProductCategoryService ProductCategoryService): Controller
 {
-    readonly IProductCategoryService _productCategoryService=prodcutCategoryService;
+    readonly IProductCategoryService _productCategoryService=ProductCategoryService;
     [HttpGet]   
     public async Task<IActionResult> Index([FromQuery]Pagination pagination)
     {
@@ -39,6 +42,7 @@ public class ProductCategoryController (IProductCategoryService prodcutCategoryS
         {
             ProductCategoryDto dto = new()
             {
+                UrlName = model.UrlName,
                 DescriptionEn = model.DescriptionEn,
                 DescriptionFa = model.DescriptionFa,
                 IconImageFile = model.IconImageFile,
@@ -76,6 +80,7 @@ public class ProductCategoryController (IProductCategoryService prodcutCategoryS
         {
             ProductCategoryDto dto = new()
             {
+                UrlName= model.UrlName,
                 DescriptionEn = model.DescriptionEn,
                 DescriptionFa = model.DescriptionFa,
                 IconImageFile = model.IconImageFile,

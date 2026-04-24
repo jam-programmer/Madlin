@@ -9,7 +9,7 @@
 
     ViewData["ControllerName"] = "دسته بندی محصولات";
 
-    ViewData["Title"] = "دسته بندی محصولات";
+    ViewData["Title"] = "لیست";
 
     ViewData["Url"] = "/Admin/ProductCategory";
 
@@ -121,7 +121,7 @@
                     <div id="pagination-body"
                          data-page-index="@Model.CurrentPage"
                          data-total-pages="@Model.TotalPage"
-                         data-search="@ViewBag.Search"
+                         data-search="@ViewBag.Keyword"
                          data-path="/Admin/ProductCategory/Index">
                     </div>
                 }

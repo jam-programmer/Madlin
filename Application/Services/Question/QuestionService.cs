@@ -1,7 +1,7 @@
 ﻿using Application.Common.CustomException;
 using Application.Common.Extension;
 using Application.Common.Resource;
-using Application.Contract;
+using Domain.Contract;
 using Application.DataTransferObject;
 using Domain.Entities.Identity;
 using Domain.Entities.Product;
@@ -70,6 +70,19 @@ public class QuestionService : IQuestionService
                 (pagination!.currentPage,
                 pagination!.pageSize, count, total, config);
         return model;
+    }
+
+    public async Task<IReadOnlyList<QuestionDto>> GetQuestionsAsync()
+    {
+        IQueryable<QuestionEntity> query = _questionRepository.GetByQuery();
+        return await query.Select(s=>new QuestionDto()
+        {
+            TitleEn = s.TitleEn,
+            TitleFa = s.TitleFa,
+            Id = s.Id,  
+            DescriptionEn = s.DescriptionEn,
+            DescriptionFa   = s.DescriptionFa,  
+        }).ToListAsync();
     }
 
     public async Task InsertQuestionAsync(QuestionDto Question, CancellationToken cancellation = default)

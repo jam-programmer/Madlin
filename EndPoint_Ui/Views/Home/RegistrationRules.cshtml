@@ -1,0 +1,52 @@
+﻿@model RegistrationRuleViewModel
+@inject IViewLocalizer Localizer
+@{
+
+    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "Registration Rules" : "قوانین ثبت نام";
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+
+<section class="flat-spacing" dir="@dir">
+    <div class="container">
+       
+        <div class="terms-of-use-content">
+            @if (CultureInfo.CurrentUICulture.Name == "en-US")
+            {
+                @if (string.IsNullOrEmpty(Model.RegistrationRulesEn))
+                {
+                    <span>
+                        Registration rules have not been set
+
+
+                    </span>
+                }
+                else
+                {
+                    @Html.Raw(Model.RegistrationRulesEn)
+                }
+            }
+            else
+            {
+                @if (string.IsNullOrEmpty(Model.RegistrationRulesFa))
+                {
+                    <span>
+                        قوانینی برای تبت نام تنظیم نگردیده است
+
+
+
+
+                    </span>
+                }
+                else
+                {
+                    @Html.Raw(Model.RegistrationRulesFa)
+                }
+            }
+        </div>
+    </div>
+</section>

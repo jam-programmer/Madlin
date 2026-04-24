@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Entities.Blog;
+using Domain.Entities.Product;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,8 @@ public class UserEntity : IdentityUser<Guid>,IDelete
 		get => base.Email;
 		set => base.Email = value;
 	}
-	public string? FullName { get; set; }	
-
-	public bool IsDeleted { get; set; } = false;
+	public string? FullName { get; set; }
+    public ICollection<BlogEntity>? Blogs { get; set; }
+	public ICollection<WishEntity> Wishes { get; set; }
+    public bool IsDeleted { get; set; } = false;
 }

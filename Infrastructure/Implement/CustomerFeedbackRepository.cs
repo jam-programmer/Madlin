@@ -1,4 +1,4 @@
-﻿using Application.Contract;
+﻿using Domain.Contract;
 using Domain.Entities.System;
 using Infrastructure.Context;
 using System;

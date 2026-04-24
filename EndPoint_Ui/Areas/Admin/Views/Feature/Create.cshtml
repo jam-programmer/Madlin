@@ -1,0 +1,98 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Feature
+@model CreateFeatureModel
+@{
+    string title = "ایجاد ویژگی";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "ویژگی‌های محصول";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = $"/Admin/Feature?ParentId={@ViewBag.ParentId}";
+
+
+}
+@section Script {
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3 mt-5">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="Feature"
+                asp-action="Create"  method="post">
+                    <div class="validation text-danger" asp-validation-summary="All"></div>
+                    <input type="hidden" asp-for="ProductId" value="@ViewBag.ParentId" />
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        
+                        <li class="nav-item ">
+                            <a class="nav-link show active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">فارسی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link show" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">انگلیسی</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                        <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="form-group">
+                                <label>عنوان فارسی</label>
+                                <input asp-for="TitleFa" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="TitleFa"></span>
+                            </div>
+
+                             <div class="form-group">
+                                <label>مقدار فارسی</label>
+                                <input asp-for="ValueFa" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="ValueFa"></span>
+                            </div>
+
+                           
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="form-group">
+                                <label>عنوان انگلیسی</label>
+                                <input asp-for="TitleEn" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="TitleEn"></span>
+                            </div>
+                               <div class="form-group">
+                                <label>مقدار انگلیسی</label>
+                                <input asp-for="ValueEn" type="text" class="form-control text-left" />
+                                <span class="text-danger" asp-validation-for="ValueEn"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="Feature" asp-action="Index"
+                       asp-route-ParentId="@ViewBag.ParentId"
+                    class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

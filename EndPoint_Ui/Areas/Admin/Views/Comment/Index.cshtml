@@ -1,0 +1,118 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Comment
+@model PaginatedList<CommentViewModel>
+@{
+    ViewData["Title"] = "دیدگاه ها";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = "دیدگاه ها";
+
+    ViewData["ControllerName"] = "دیدگاه ها";
+
+    ViewData["Title"] = "لیست";
+    ViewData["Url"] = "/Admin/Comment";
+
+
+}
+
+@section Script {
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/pagination.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/admin/assets/js/Comment/index.js"></script>
+}
+<div class="row">
+   
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-body">
+                <div class="mb-4 mt-1 row">
+
+                    <div class="col-10">
+                        <label>جستجو</label>
+                        <form asp-area="Admin" asp-controller="Comment" asp-action="Index" method="get" class="form-group d-flex flex-row">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="reounded-17 form-control w-25 mx-sm-3 text-left" />
+                            <button type="submit" class="btn btn-sm btn-success text-white mx-1 reounded-17"><i class="ti-search"></i></button>
+                            <a asp-area="Admin" asp-controller="Comment" asp-action="Index" class="btn btn-sm btn-warning text-white mx-1 reounded-17"><i class="ti-reload"></i></a>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">عنوان </th>
+                                <th scope="col">نام محصول </th>
+                                <th scope="col">نام نظر دهنده </th>
+                                <th scope="col">شماره موبایل نظر دهنده </th>
+                                <th scope="col">وضعیت </th>
+                                <th scope="col">تاریخ ثبت </th>
+                                <th class="text-right" scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.List != null && Model.List.Any())
+                            {
+                                @foreach (var item in Model.List)
+                                {
+                                    <tr id="item_@item.Id">
+                                        <td> @item.Title </td>
+                                        <td> @item.ProductTitle </td>
+                                        <td> @item.UserPublicName </td>
+                                        <td> @item.UserPhoneNumber </td>
+                                        <td> 
+                                            @if(item.IsActive){
+                                                <span class="badge bg-success">منتشر شده</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning">در انتظار</span>
+                                            } 
+                                        </td>
+                                        <td> @item.CreatedDate </td>
+
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-light btn-floating btn-icon btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                  
+                                                    <a asp-area="Admin"
+                                                       asp-controller="Comment"
+                                                    asp-action="Reply"
+                                                    asp-route-Id="@item.Id"
+                                                    class="dropdown-item">
+                                                مشاهده و ثبت پاسخ
+                                                </a>
+                                                    <a onclick="Delete('@item.Id')" class="dropdown-item">حذف</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+                @if (Model!.TotalPage > 1)
+                {
+                    <div id="pagination-body"
+                         data-page-index="@Model.CurrentPage"
+                         data-total-pages="@Model.TotalPage"
+                         data-search="@ViewBag.Keyword"
+                         data-path="/Admin/Comment/Index">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

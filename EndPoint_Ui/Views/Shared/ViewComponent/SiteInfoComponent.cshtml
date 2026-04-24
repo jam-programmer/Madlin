@@ -1,0 +1,4 @@
+﻿@model SiteInfoViewModel
+<title>@(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TitleEn : Model.TitleFa) - @ViewData["Title"]</title>
+<link href="~/gallery/setting/@Model.FaviconPath" rel="shortcut icon" />
+<link href="~/gallery/setting/@Model.FaviconPath" rel="apple-touch-icon-precomposed" />

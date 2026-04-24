@@ -1,0 +1,51 @@
+﻿@model ValueTuple<IReadOnlyList<ImageViewModel>, HeaderViewModel>
+@if (Model.Item1 != null && Model.Item1.Any())
+{
+    <section class="flat-spacing pt-0">
+        <div class="container">
+            <div class="heading-section text-center wow fadeInUp">
+                <h3 class="heading">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item2.TitleEn : Model.Item2.TitleFa)
+                </h3>
+             
+            </div>
+            <div class="swiper tf-sw-shop-gallery"
+                 data-mobile="2"
+                 data-pagination="2"
+                 data-pagination-lg="1"
+                 data-pagination-md="3"
+                 data-preview="5"
+                 data-space="8"
+                 data-space-lg="10"
+                 data-space-md="10"
+                 data-tablet="3"
+                 dir="ltr">
+                <div class="swiper-wrapper" id="swiper-wrapper-3729236e14c73915" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                    @for (int i = 0; i < Model.Item1.Count(); i++)
+                    {
+                        string sliderClass;
+                        if (i == 0) sliderClass = "swiper-slide-active";
+                        else if (i == 1) sliderClass = "swiper-slide-next";
+                        else sliderClass = string.Empty;
+
+                        <div class="swiper-slide @sliderClass " role="group" aria-label="@(i+1) / @Model.Item1.Count()" style="width: 250px; margin-right: 10px;">
+                            <div class="gallery-item hover-overlay hover-img wow fadeInUp" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                                <div class="img-style">
+                                    <img alt="image-gallery" class="img-hover ls-is-cached lazyloaded"
+                                         data-src="~/gallery/Image/@Model.Item1[i].FilePath"
+                                         src="~/gallery/Image/@Model.Item1[i].FilePath">
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                    }
+
+                
+                
+                </div>
+                <div class="sw-pagination-gallery sw-dots type-circle justify-content-center"></div>
+            </div>
+        </div>
+    </section>
+}

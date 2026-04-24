@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     let category = document.getElementById("selectedCategory");
-    console.log( category);
+  
     CKEDITOR.replace('editor-fa');
     CKEDITOR.replace('editor-en');
     $('#dropDownCategory').select2({

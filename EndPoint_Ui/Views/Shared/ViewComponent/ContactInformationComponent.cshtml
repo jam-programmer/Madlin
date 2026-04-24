@@ -1,0 +1,18 @@
+﻿@model ContactInformationViewModel
+
+<div class="mb-~/contact">
+    <p class="text-caption-1">
+        @(CultureInfo.CurrentUICulture.Name=="en-US"?Model.AddressEn:Model.AddressFa)
+    </p>
+   
+</div>
+<ul class="mb-info mt-2">
+    <li>
+        <i class="icon icon-mail"></i>
+        <p>@Model.Email</p>
+    </li>
+    <li>
+        <i class="icon icon-phone"></i>
+        <p>@Model.PhoneNumber</p>
+    </li>
+</ul>

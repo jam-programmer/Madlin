@@ -1,0 +1,20 @@
+﻿@model IReadOnlyList<FeatureViewModel>
+@if(Model!=null && Model.Any())
+{
+    <div class="variant-picker-item">
+        @foreach(var item in Model)
+        {
+            <div class="d-flex justify-content-between mb_12">
+                <div class="variant-picker-label">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                    :<span class="text-title variant-picker-label-value">
+                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.ValueEn : item.ValueFa)
+
+                    </span>
+                </div>
+            </div>
+        }
+
+
+    </div>
+}

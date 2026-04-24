@@ -1,6 +1,6 @@
 ﻿using Application.Common.CustomException;
 using Application.Common.Resource;
-using Application.Contract;
+using Domain.Contract;
 using Application.DataTransferObject;
 using Domain.Entities.System;
 using Mapster;

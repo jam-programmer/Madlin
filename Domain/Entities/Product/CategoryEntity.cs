@@ -19,6 +19,7 @@ namespace Domain.Entities.Product
         public string? MainImagePath { get; set; }
 
         public string? IconImagePath { get; set; }
+        public string? UrlName { get; set; }
 
         public bool IsFeatured { get; set; }
 
@@ -26,6 +27,7 @@ namespace Domain.Entities.Product
       
         public ICollection<ProductEntity>? Products { get; set; }
         #endregion
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime CreatedAt { get; set; }=DateTime.Now;
     }
 }

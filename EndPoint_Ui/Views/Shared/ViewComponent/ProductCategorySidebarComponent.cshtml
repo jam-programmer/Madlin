@@ -1,0 +1,36 @@
+﻿@model IReadOnlyList<ProductCategoryItemViewModel>
+
+<h6 class="facet-title">
+    @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Product Category" : "دسته بندی محصولات")
+</h6>
+<hr/>
+<ul class="facet-content">
+    @if(Model!=null && Model.Any())
+    {
+        @foreach(var item in Model)
+        {
+            @if (ViewBag.UrlName == item.UrlName)
+            {
+                <li class="mt-1">
+                    <a class="categories-item" style="color:#78519a;"
+                       asp-controller="Product" asp-action="Category" asp-route-UrlName="@item.UrlName">
+                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                        <span class="count-cate">(@item.Count)</span>
+                    </a>
+                </li>}
+    else
+                {
+                    <li class="mt-1">
+                        <a class="categories-item" 
+                           asp-controller="Product" asp-action="Category" asp-route-UrlName="@item.UrlName">
+                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                            <span class="count-cate">(@item.Count)</span>
+                        </a>
+                    </li>
+                }
+
+        }
+    }
+   
+    
+</ul>

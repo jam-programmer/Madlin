@@ -1,0 +1,283 @@
+﻿@model ProductDetailViewModel
+@inject IViewLocalizer Localizer
+@{
+    string? Title = CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TitleEn : Model.TitleFa;
+    string? categoryTitle = CultureInfo.
+    CurrentUICulture.Name == "en-US" ? Model.CategoryTitleEn : Model.CategoryTitleFa;
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("/Product/Category/" + Model.CategoryUrlName, categoryTitle!);
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+@section Script{
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/js/productDetail.js"></script>
+}
+<partial name="Partial/_PageHeader" model="@header" />
+<section class="flat-spacing">
+    <div class="tf-main-product section-image-zoom">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <div class="slider-scroll">
+                        <div class="d-grid grid-template-columns-2 gap-20 wrapper-gallery-scroll" id="gallery-started">
+                            <a class="item item-scroll-target" data-pswp-height="800px"
+                               data-pswp-width="600px" data-scroll="gray" href="~/gallery/Product/@Model.MainImagePath"
+                            target="_blank">
+                                <img alt="" class="tf-image-zoom radius-12 w-100 ls-is-cached lazyloaded"
+                                     data-src="~/gallery/Product/@Model.MainImagePath"
+                                     data-zoom="~/gallery/Product/@Model.MainImagePath"
+                                src="~/gallery/Product/@Model.MainImagePath">
+                            </a>
+
+
+                            <a class="item item-scroll-target"
+                            data-pswp-height="800px" data-pswp-width="600px"
+                            data-scroll="gray"
+                               href="~/gallery/Product/@Model.HoverImagePath" target="_blank">
+                                <img alt="" class="tf-image-zoom radius-12 w-100 ls-is-cached lazyloaded"
+                                     data-src="~/gallery/Product/@Model.HoverImagePath"
+                                     data-zoom="~/gallery/Product/@Model.HoverImagePath"
+                                     src="~/gallery/Product/@Model.HoverImagePath">
+                            </a>
+
+                            @await Component.InvokeAsync("PictureComponent", Model.Id)
+
+                         
+                        </div>
+                    </div>
+                </div>
+                <!-- /Product default -->
+                <!-- tf-product-info-list -->
+                <div class="col-md-6">
+                    <div class="sticky-top">
+                        <div class="tf-product-info-wrap position-relative">
+                            <div class="tf-zoom-main"></div>
+                            <div class="tf-product-info-list other-image-zoom">
+                                <div class="tf-product-info-heading">
+                                    <div class="tf-product-info-name">
+                                        <div class="text text-btn-uppercase">
+                                            <span class="lbl-category">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.CategoryTitleEn : Model.CategoryTitleFa)
+                                           </span> 
+                                        </div>
+                                        <h3 class="name mt-3">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TitleEn : Model.TitleFa)
+
+                                        </h3>
+                                        <div class="sub">
+                                            <div class="tf-product-info-rate">
+                                                <div class="list-star">
+                                                    @for(int i = 1; i <= Model.Rating; i++)
+                                                    {
+                                                      
+                                                        <i class="icon icon-star"></i>
+                                                        
+                                                    }
+                                                </div>
+                                                @* <div class="text text-caption-1">(134 بررسی)</div> *@
+                                            </div>
+                                           @*  <div class="tf-product-info-sold">
+                                                <i class="icon icon-lightning"></i>
+                                                <div class="text text-caption-1">
+                                                    18 فروخته شده در 32 ساعت گذشته
+                                                </div>
+                                            </div> *@
+                                        </div>
+                                    </div>
+                                    <div class="tf-product-info-desc">
+                                        <div class="tf-product-info-price">
+                                           
+                                             @if (Model.DiscountPrice != null)
+                                            {
+                                                <h5 class="price-on-sale font-2">@Model.DiscountPrice @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")</h5>
+
+                                                <div class="compare-at-price font-2">
+                                                    @Model.Price @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                                </div>
+                                                <div class="badges-on-sale text-btn-uppercase">
+                                                    @Math.Round((((decimal)Model.Price - (decimal)Model.DiscountPrice) / (decimal)Model.Price) * 100)
+                                                    ٪
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h5 class="price-on-sale font-2">@Model.Price @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")</h5>
+                                            }
+                                            
+                                        </div>
+                                        <p>
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.ShortDescriptionEn : Model.ShortDescriptionFa)
+                                        </p>
+                                        @* <div class="tf-product-info-liveview">
+                                            <i class="icon icon-eye"></i>
+                                            <p class="text-caption-1">
+                                                <span class="liveview-count">28</span>نفر در حال
+                                                مشاهده این هستند
+                                            </p>
+                                        </div> *@
+                                    </div>
+                                </div>
+                                <div class="tf-product-info-choose-option">
+                                    <ul class="tf-product-info-sku">
+                                        <li>
+                                            <p class="text-caption-1">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "SKU" : "شناسه محصول")
+                                                :
+                                            </p>
+                                            <p class="text-caption-1 text-1">@Model.ProductCode</p>
+                                        </li>
+
+                                        <li>
+                                            <p class="text-caption-1">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Category" : "دسته بندی"):
+                                            </p>
+                                            <p class="text-caption-1 text-1">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.CategoryTitleEn : Model.CategoryTitleFa)
+                                            </p>
+                                        </li>
+
+                                    </ul>
+                                    <h6> @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Features" : "ویژگی ها")</h6>
+                                    @await Component.InvokeAsync("FeatureComponent",Model.Id)
+                                   
+                                    <div>
+                                        <div class="tf-product-info-by-btn mb_10">
+                                            <a class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart"  >
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Currently, online ordering is not available" : "در حال حاضر امکان سفارش آنلاین وجود ندارد")
+                                            </a>
+                                           @*  <a aria-controls="compare" class="box-icon hover-tooltip compare btn-icon-action" data-bs-toggle="offcanvas" href="product-grid-2.html#compare">
+                                                <span class="icon icon-gitDiff"></span>
+                                                <span class="tooltip text-caption-2">مقایسه کردن</span>
+                                            </a> *@
+                                            <a class="box-icon hover-tooltip text-caption-2 wishlist btn-icon-action" onclick="AddToWishList('@Model.Id','@dir')" ">
+                                                <span class="icon icon-heart"></span>
+                                                <span class="tooltip text-caption-2">علاقه مندی ها</span>
+                                            </a>
+                                        </div>
+                                        @* <a class="btn-style-3 text-btn-uppercase" href="product-grid-2.html#">اکنون آن را بخرید</a> *@
+                                    </div>
+                                  
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /tf-product-info-list -->
+            </div>
+        </div>
+    </div>
+    <div class="tf-sticky-btn-atc">
+        <div class="container">
+        </div>
+    </div>
+</section>
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="widget-tabs style-1">
+                    <ul class="widget-menu-tab">
+                        <li class="item-title active">
+                            <span class="inner">
+                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Description" : "توضیحات")
+                            </span>
+                        </li>
+                        <li class="item-title">
+                            <span class="inner">
+                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Comments" : "دیدگاه ها")
+                            </span>
+                        </li>
+                       @*  <li class="item-title">
+                            <span class="inner">حمل و نقل و برگشت</span>
+                        </li>
+                        <li class="item-title">
+                            <span class="inner">سیاست های بازگشت</span>
+                        </li> *@
+                    </ul>
+                    <div class="widget-content-tab">
+                        <div class="widget-content-inner active">
+                            <div >
+                                @Html.Raw((CultureInfo.CurrentUICulture.Name == "en-US" ?Model.FullDescriptionEn:Model.FullDescriptionFa))
+                            </div>
+                        </div>
+                        <div class="widget-content-inner">
+                            <div class="tab-reviews write-cancel-review-wrap">
+                                <div class="tab-reviews-heading">
+                                  
+                                    <div>
+                                        <div class="btn-style-4 text-btn-uppercase letter-1 btn-comment-review btn-cancel-review">
+                                            
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Close form" : "بستن فرم")
+                                        </div>
+                                        <div class="btn-style-4 text-btn-uppercase letter-1 btn-comment-review btn-write-review">
+                                            
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Write a comment" : "یک دیدگاه بنویسید")
+                                        </div>
+                                    </div>
+                                </div>
+                            
+
+
+
+
+                                @await Component.InvokeAsync("ProductCommentsComponent", Model.Id)
+
+
+
+
+
+
+                                <div class="form-write-review write-review-wrap" >
+                                    <div class="heading">
+                                        <h4>
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Post your comment": "دیدگاه خود را بپرسید")
+                                        </h4>
+                                       
+                                    </div>
+                                    <div class="mb_32">
+                                        <div class="mb_8">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Title" : "عنوان")
+
+                                        </div>
+                                        <fieldset class="mb_20">
+                                            <input aria-required="true" class="" name="text" id="title"
+                                                   placeholder="@(CultureInfo.CurrentUICulture.Name == "en-US" ? "Title" : "عنوان")" required="" tabindex="2" type="text" value="">
+                                        </fieldset>
+                                        <div class="mb_8">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Comment" : "دیدگاه")
+                                        </div>
+                                        <fieldset class="d-flex mb_20">
+                                            <textarea aria-required="true" id="message" class="" placeholder=" @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Comment" : "دیدگاه")" required="" rows="4" tabindex="2"></textarea>
+                                        </fieldset>
+                                        <div class="cols mb_20 row">
+                                            <fieldset class="col-6">
+                                                <input aria-required="true" id="username"
+                                                       name="text" placeholder="@(CultureInfo.CurrentUICulture.Name == "en-US" ? "Your display name " : "نام شما برای نمایش عمومی")" required="" tabindex="2" type="text" value="">
+                                            </fieldset>
+                                            <fieldset class="col-6">
+                                                <input aria-required="true" id="phonenumber" class="" placeholder="@(CultureInfo.CurrentUICulture.Name == "en-US" ? "Your Phone Number (will not be displayed) " : "شماره موبایل شما(نمایش داده نمیشود)")" required="" tabindex="2" type="email" value="">
+                                            </fieldset>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="button-submit">
+                                        <button class="text-btn-uppercase" onclick="SubmitComment('@dir','@Model.Id')">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Submit Comment " : "ثبت دیدگاه")
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+﻿@using EndPoint_Ui.Models
+@model IReadOnlyList<TagViewModel>
+@if(Model!=null && Model.Any())
+{
+    <div class="sidebar-item sidebar-tag mt-5">
+        <h5 class="sidebar-heading">
+            @(CultureInfo.CurrentUICulture.Name == "en-US" ?"Tags" : "برچسب ها")
+        </h5>
+        <hr/>
+        <ul class="list-tags">
+            @foreach(var item in Model)
+            {
+                <li>
+                    <a asp-controller="Blog"
+                        asp-action="Tag"
+                        asp-route-TagKey="@item.Key"
+                    class="text-caption-1 link">
+                        @(CultureInfo.CurrentUICulture.Name=="en-US"?item.TitleEn:item.TitleFa)
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </div>
+}

@@ -22,6 +22,124 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.Blog.BlogEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ShortDescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UrlName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Blog", "blog");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Blog.BlogTagEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("BlogTagMap");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Blog.CategoryEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UrlName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category", "blog");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Blog.TagEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tag", "blog");
+                });
+
             modelBuilder.Entity("Domain.Entities.Identity.RoleEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -57,6 +175,27 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Identity.RoleRouteEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RouteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("RouteId");
+
+                    b.ToTable("RoleRouteMap", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.Identity.UserEntity", b =>
@@ -138,6 +277,9 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DescriptionEn")
                         .HasMaxLength(6000)
                         .HasColumnType("nvarchar(max)");
@@ -172,9 +314,51 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("UrlName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Category", "Product");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product.CommentEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPublicName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Comment", "Product");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product.FeatureEntity", b =>
@@ -208,6 +392,28 @@ namespace Infrastructure.Migrations
                     b.ToTable("Feature", "Product");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Product.PictureEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Picture", "Product");
+                });
+
             modelBuilder.Entity("Domain.Entities.Product.ProductEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -216,6 +422,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("DiscountPrice")
                         .HasPrecision(18, 2)
@@ -233,6 +442,9 @@ namespace Infrastructure.Migrations
                         .HasDefaultValue("default.jpg");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsShowSlider")
                         .HasColumnType("bit");
 
                     b.Property<string>("MainImagePath")
@@ -286,6 +498,113 @@ namespace Infrastructure.Migrations
                     b.ToTable("Product", "Product");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Product.ResponseEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId")
+                        .IsUnique();
+
+                    b.ToTable("Response", "Product");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product.WishEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Wish", "Product");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.AboutEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("About", "Setting");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c11cc931-6a66-1249-bd81-12de6c72b976"),
+                            ImagePath = "default.jpg",
+                            TextEn = "",
+                            TextFa = ""
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.AdvertisingBannerEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImageFivePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageFourPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageOnePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageThreePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageTwoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdvertisingBanner", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a1b4c3d4-e7f6-4a6b-8c5d-0e3f2a3b4c5d"),
+                            ImageOnePath = "default.jpg",
+                            ImageTwoPath = "default.jpg"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Entities.System.CustomerFeedbackEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -312,6 +631,192 @@ namespace Infrastructure.Migrations
                     b.ToTable("CustomerFeedback", "dbo");
                 });
 
+            modelBuilder.Entity("Domain.Entities.System.GeneralEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AddressEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaviconPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Footer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Header")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Linkedin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegistrationRulesEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegistrationRulesFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telegram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WhatsApp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("General", "Setting");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c11cc931-7a86-4239-bd29-08de6c72b976"),
+                            AddressEn = "",
+                            AddressFa = "",
+                            DescriptionEn = "",
+                            DescriptionFa = "",
+                            Email = "",
+                            FaviconPath = "",
+                            Instagram = "",
+                            Linkedin = "",
+                            LogoPath = "",
+                            PhoneNumber = "",
+                            Telegram = "",
+                            TitleEn = "",
+                            TitleFa = "",
+                            WhatsApp = ""
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.HeaderEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BlogTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BlogTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GalleryTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GalleryTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderTextEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderTextFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextOneSliderDownEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextOneSliderDownFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextOneSliderTopEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextOneSliderTopFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextThreeSliderDownEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextThreeSliderDownFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextThreeSliderTopEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextThreeSliderTopFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextTwoSliderDownEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextTwoSliderDownFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextTwoSliderTopEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextTwoSliderTopFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Header", "Setting");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a1b4d3c4-e7f6-4a6b-8e5f-0e3f2b3b4c8d"),
+                            BlogTitleEn = "",
+                            BlogTitleFa = "",
+                            CategoryTitleEn = "",
+                            CategoryTitleFa = "",
+                            GalleryTitleEn = "",
+                            GalleryTitleFa = "",
+                            ProductTitleEn = "",
+                            ProductTitleFa = "",
+                            SliderTextEn = "",
+                            SliderTextFa = "",
+                            SliderTitleEn = "",
+                            SliderTitleFa = ""
+                        });
+                });
+
             modelBuilder.Entity("Domain.Entities.System.ImageEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -324,15 +829,84 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Image", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.MessageEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2026, 4, 17, 3, 42, 27, 908, DateTimeKind.Local).AddTicks(8162));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Message", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.NewsletterEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Newsletter", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.PageEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Show")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TextEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextFa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TitleEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TitleFa")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ImageEntity");
+                    b.ToTable("Page", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.System.QuestionEntity", b =>
@@ -359,6 +933,340 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Question", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.RouteEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ControllerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UniqueId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Route", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            ControllerName = "",
+                            Icon = "<i class=\"icon ti-layers\"></i>",
+                            Name = "اطلاعات پایه",
+                            Order = 10,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UniqueId = "navigationBase",
+                            Url = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                            ControllerName = "",
+                            Icon = "<i class=\"icon ti-package\"></i>",
+                            Name = "مدیریت محصولات",
+                            Order = 20,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UniqueId = "navigationProduct",
+                            Url = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("6ba7b810-9dad-11d1-80b4-00c04fd430c8"),
+                            ControllerName = "",
+                            Icon = "<i class=\"icon ti-user\"></i>",
+                            Name = "مدیریت کاربران",
+                            Order = 30,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UniqueId = "navigationUser",
+                            Url = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("7d444840-9dc0-11d1-b245-5ffdce74fad2"),
+                            ControllerName = "Question",
+                            Icon = "",
+                            Name = "سوالات متداول",
+                            Order = 11,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Question/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("8c5e3f1a-9d5f-4b6a-8c7d-0e1f2a3b4c5d"),
+                            ControllerName = "BlogCategory",
+                            Icon = "",
+                            Name = "دسته بندی مقالات",
+                            Order = 12,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/BlogCategory/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("9f8e7d6c-5b4a-3c2d-1e0f-123456789abc"),
+                            ControllerName = "Tag",
+                            Icon = "",
+                            Name = "برچسب ها",
+                            Order = 13,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Tag/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("01234567-89ab-cdef-0123-456789abcdef"),
+                            ControllerName = "ProductCategory",
+                            Icon = "",
+                            Name = "دسته بندی محصولات",
+                            Order = 21,
+                            ParentId = new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                            UniqueId = "",
+                            Url = "/Admin/ProductCategory/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("e4d909c2-d4d8-4b6e-9b9d-1c3a4b5c6d7e"),
+                            ControllerName = "Product",
+                            Icon = "",
+                            Name = "محصولات",
+                            Order = 22,
+                            ParentId = new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                            UniqueId = "",
+                            Url = "/Admin/Product/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c6b909c2-d6d8-4b6e-7b2d-1c3a3b8c6d1e"),
+                            ControllerName = "Comment",
+                            Icon = "",
+                            Name = "دیدگاه ها",
+                            Order = 23,
+                            ParentId = new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                            UniqueId = "",
+                            Url = "/Admin/Comment/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("3f2504e0-4f89-11d3-9a0c-0305e82c3301"),
+                            ControllerName = "Role",
+                            Icon = "",
+                            Name = "‌نقش های کاربری",
+                            Order = 31,
+                            ParentId = new Guid("6ba7b810-9dad-11d1-80b4-00c04fd430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Role/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("21f202f2-4f89-11d3-9a0c-0305e82c3301"),
+                            ControllerName = "User",
+                            Icon = "",
+                            Name = "کاربران",
+                            Order = 32,
+                            ParentId = new Guid("6ba7b810-9dad-11d1-80b4-00c04fd430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/User/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("b6c7f8d9-e0a1-4b2c-8d3e-0f1a2b3c4d5e"),
+                            ControllerName = "Blog",
+                            Icon = "",
+                            Name = "مقالات",
+                            Order = 14,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Blog/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c8d9e0f1-a2b3-4c5d-6e7f-8a9b0c1d2e3f"),
+                            ControllerName = "Setting",
+                            Icon = "",
+                            Name = "تنظیمات",
+                            Order = 15,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Setting/General"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3d6e0f1-a0b3-4c5d-6e5f-8a1b0c4d2e3f"),
+                            ControllerName = "Setting",
+                            Icon = "",
+                            Name = "بنر های تبلیغاتی",
+                            Order = 16,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Setting/AdvertisingBanner"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3d4a0f1-a2b3-4b3d-6e5f-6a4b0c4b2e3f"),
+                            ControllerName = "Image",
+                            Icon = "",
+                            Name = "گالری تصاویر",
+                            Order = 17,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Image/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("a4d4a0f1-e5f6-4a7b-8c9d-6a7b0c4b2a3f"),
+                            ControllerName = "Setting",
+                            Icon = "",
+                            Name = "عناوین",
+                            Order = 18,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Setting/Header"
+                        },
+                        new
+                        {
+                            Id = new Guid("f4d2a0f1-a5d1-5a7b-3c9d-6a7b0c7e2a3e"),
+                            ControllerName = "Newsletter",
+                            Icon = "",
+                            Name = "خبرنامه",
+                            Order = 19,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Newsletter/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("a7d4a5f6-a5d1-567b-2c2d-6a2b0c2e2a3e"),
+                            ControllerName = "Setting",
+                            Icon = "",
+                            Name = "درباره ما",
+                            Order = 19,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Setting/About"
+                        },
+                        new
+                        {
+                            Id = new Guid("b7a4a3f2-a4d8-567b-2c2d-6a2b0c2e2a3e"),
+                            ControllerName = "Message",
+                            Icon = "",
+                            Name = "پیام های ارتباطی",
+                            Order = 19,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Message/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3a3a3f3-a4d8-434b-2c2d-6c2c0c2e2a3e"),
+                            ControllerName = "Page",
+                            Icon = "",
+                            Name = "صفحات",
+                            Order = 19,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Page/Index"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.SeoEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Canonical")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KeywordsEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KeywordsFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgDescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgDescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OgUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Robots")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ThemeColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TwitterDescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TwitterDescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TwitterImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TwitterTitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TwitterTitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Seo", "Setting");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c41ad831-7a86-4559-cd29-08de6c72b976")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -464,10 +1372,89 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Blog.BlogEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Blog.CategoryEntity", "Category")
+                        .WithMany("Blogs")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Identity.UserEntity", "User")
+                        .WithMany("Blogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Blog.BlogTagEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Blog.BlogEntity", "Blog")
+                        .WithMany("BlogTags")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Blog.TagEntity", "Tag")
+                        .WithMany("BlogTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Identity.RoleRouteEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Identity.RoleEntity", "RoleEntity")
+                        .WithMany("RoleRoutes")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.System.RouteEntity", "RouteEntity")
+                        .WithMany("RoleRoutes")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RoleEntity");
+
+                    b.Navigation("RouteEntity");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product.CommentEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Product.ProductEntity", "Product")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Domain.Entities.Product.FeatureEntity", b =>
                 {
                     b.HasOne("Domain.Entities.Product.ProductEntity", "Product")
                         .WithMany("Features")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product.PictureEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Product.ProductEntity", "Product")
+                        .WithMany("Pictures")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -484,6 +1471,36 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product.ResponseEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Product.CommentEntity", "Comment")
+                        .WithOne("Response")
+                        .HasForeignKey("Domain.Entities.Product.ResponseEntity", "CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product.WishEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Product.ProductEntity", "Product")
+                        .WithMany("Wishes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Identity.UserEntity", "User")
+                        .WithMany("Wishes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -537,14 +1554,58 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.Blog.BlogEntity", b =>
+                {
+                    b.Navigation("BlogTags");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Blog.CategoryEntity", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Blog.TagEntity", b =>
+                {
+                    b.Navigation("BlogTags");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Identity.RoleEntity", b =>
+                {
+                    b.Navigation("RoleRoutes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Identity.UserEntity", b =>
+                {
+                    b.Navigation("Blogs");
+
+                    b.Navigation("Wishes");
+                });
+
             modelBuilder.Entity("Domain.Entities.Product.CategoryEntity", b =>
                 {
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Product.CommentEntity", b =>
+                {
+                    b.Navigation("Response")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.Product.ProductEntity", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Features");
+
+                    b.Navigation("Pictures");
+
+                    b.Navigation("Wishes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.RouteEntity", b =>
+                {
+                    b.Navigation("RoleRoutes");
                 });
 #pragma warning restore 612, 618
         }

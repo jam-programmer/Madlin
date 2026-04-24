@@ -4,6 +4,7 @@ namespace EndPoint_Ui.Areas.Admin.Models.ProductCategory;
 
 public record CreateProductCategoryModel
 {
+    public string? UrlName { get; set; }
     [Required(ErrorMessage ="عنوان انگلیسی الزامی است")]
     public string? TitleEn { get; set; }
     [Required(ErrorMessage = "عنوان فارسی الزامی است")]

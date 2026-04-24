@@ -6,7 +6,7 @@ public record CreateUserModel
 {
     [Required(ErrorMessage ="نام و نام خانوادگی الزامی است")]
     public string? FullName { get; set; }
-    [Required(ErrorMessage = "کدملی الزامی است")]
+    [Required(ErrorMessage = "نام کاربری الزامی است")]
     public string? UserName { get; set; }
     [Required(ErrorMessage = "پست الکترونیک الزامی است")]
     public string? Email { get; set; }

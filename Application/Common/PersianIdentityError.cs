@@ -104,7 +104,7 @@ public class PersianIdentityError : IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(DuplicateUserName),
-            Description = $"این نام کدملی '{userName}' به کاربر دیگری اختصاص یافته است."
+            Description = $"این نام کاربری '{userName}' به کاربر دیگری اختصاص یافته است."
         };
     }
     public override IdentityError DuplicateEmail(string email)

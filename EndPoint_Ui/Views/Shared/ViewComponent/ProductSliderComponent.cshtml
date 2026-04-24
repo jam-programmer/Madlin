@@ -1,0 +1,124 @@
+﻿@model ValueTuple<IReadOnlyList<CardProductViewModel>, SliderHeaderViewModel>
+
+@{
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+
+}
+<div class="box-title">
+    <h3 class="title wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item2.SliderTitleEn : Model.Item2.SliderTitleFa)
+    </h3>
+    <p class="sub-desc text-secondary wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item2.SliderTextEn : Model.Item2.SliderTextFa)
+    </p>
+</div>
+
+
+@if (Model.Item1 != null && Model.Item1.Any())
+{
+    <div class="swiper tf-sw-lookbook bundle-hover-wrap swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" data-mobile="2" data-mobile-sm="2" data-pagination="1" data-pagination-lg="1" data-pagination-md="1" data-preview="3" data-space="15" data-space-lg="30" data-space-md="15" data-tablet="3" dir="ltr">
+        <div class="swiper-wrapper" id="swiper-wrapper-562371077c1328e98" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+
+            @for (int i = 0; i < Model.Item1.Count(); i++)
+            {
+                string className;
+                if (i == 0) className = "swiper-slide-active";
+                else if (i == 1) className = "swiper-slide-next";
+                else className = string.Empty;
+
+                <div class="swiper-slide @className" role="group" aria-label="@(i+1) / @Model.Item1.Count()" style="width: 300px; margin-right: 30px;">
+                    <div class="card-product wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <div class="card-product-wrapper">
+                            <a class="product-img" asp-controller="Product"
+                               asp-action="Detail" asp-route-UrlName="@Model.Item1[i].UrlName">
+                                <img alt="image-product"
+                                     class="img-product ls-is-cached lazyloaded"
+                                     data-src="~/gallery/product/@Model.Item1[i].MainImagePath"
+                                     src="~/gallery/product/@Model.Item1[i].MainImagePath">
+                                <img alt="image-product"
+                                     class="img-hover ls-is-cached lazyloaded"
+                                     data-src="~/gallery/product/@Model.Item1[i].HoverImagePath"
+                                     src="~/gallery/product/@Model.Item1[i].HoverImagePath">
+                            </a>
+                            @if (Model.Item1[i].DiscountPrice != null)
+                            {
+                                <div class="on-sale-wrap">
+                                    @if (Model.Item1[i].Price > 0)
+                                    {
+                                        <span class="on-sale-item">
+                                            @Math.Round((((decimal)Model.Item1[i].Price - (decimal)Model.Item1[i].DiscountPrice) / (decimal)Model.Item1[i].Price) * 100)
+                                            ٪
+                                        </span>
+                                    }
+                                </div>
+                            }
+
+                            <div class="list-product-btn">
+                                <a class="box-icon wishlist btn-icon-action" onclick="AddToWishList('@Model.Item1[i].Id','@dir')">
+                                    <span class="icon icon-heart"></span>
+                                    <span class="tooltip">علاقه مندی ها</span>
+                                </a>
+                               @*  <a aria-controls="compare" class="box-icon compare btn-icon-action" data-bs-toggle="offcanvas" href="home-skincare.html#compare">
+                                    <span class="icon icon-gitDiff"></span>
+                                    <span class="tooltip">مقایسه کردن</span>
+                                </a>
+                                <a class="box-icon quickview tf-btn-loading" data-bs-toggle="modal" href="home-skincare.html#quickView">
+                                    <span class="icon icon-eye"></span>
+                                    <span class="tooltip">نمایش سریع</span>
+                                </a> *@
+                            </div>
+                            <div class="list-btn-main">
+                                <a class="btn-main-product" 
+                                   asp-controller="Product"
+                                   asp-action="Detail" asp-route-UrlName="@Model.Item1[i].UrlName">
+                                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? "View Product" : "مشاهده محصول")
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-product-info">
+                            <a class="title link" asp-controller="Product"
+                               asp-action="Detail" asp-route-UrlName="@Model.Item1[i].UrlName">
+                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item1[i].TitleEn : Model.Item1[i].TitleFa)
+                            </a>
+                            @if (Model.Item1[i].DiscountPrice != null)
+                            {
+                                <span class="price">
+                                    <span class="old-price">
+                                        @Model.Item1[i].Price
+                                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                    </span>
+                                    @Model.Item1[i].DiscountPrice  @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                </span>
+
+                            }
+                            else
+                            {
+                                <span class="price">
+
+                                    @Model.Item1[i].Price @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            }
+
+
+
+
+        </div>
+        <div class="sw-pagination-lookbook sw-dots type-circle justify-content-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span></div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+    </div>
+    <div class="total-lb wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <a class="tf-btn btn-reset" asp-controller="Product" asp-action="Products">
+            <span class="text">
+                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "View Products" : "مشاهده محصولات")
+            </span></a>
+    </div>
+}

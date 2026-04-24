@@ -10,7 +10,7 @@
 
     ViewData["ControllerName"] = title;
 
-    ViewData["Title"] = title;
+    ViewData["Title"] = "لیست";
 
     ViewData["Url"] = "/Admin/Product";
 
@@ -112,6 +112,20 @@
                                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
+                                                    <a asp-area="Admin"
+                                                       asp-controller="Feature"
+                                                       asp-action="Index"
+                                                       asp-route-ParentId="@item.Id"
+                                                       class="dropdown-item">ویژگی های محصول</a>
+
+
+                                                    <a asp-area="Admin"
+                                                       asp-controller="Picture"
+                                                       asp-action="Index"
+                                                       asp-route-ParentId="@item.Id"
+                                                       class="dropdown-item">تصاویر محصول </a>
+
+
 
                                                     <a asp-area="Admin"
                                                        asp-controller="Product"
@@ -137,7 +151,7 @@
                     <div id="pagination-body"
                          data-page-index="@Model.CurrentPage"
                          data-total-pages="@Model.TotalPage"
-                         data-search="@ViewBag.Search"
+                         data-search="@ViewBag.Keyword"
                          data-path="/Admin/Product/Index">
                     </div>
                 }

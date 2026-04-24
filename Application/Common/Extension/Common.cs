@@ -28,17 +28,21 @@ public static class Common
 
     public static string GenerateRandomString(int length = 8)
     {
+       
         var random = new Random();
         int numberPosition = random.Next(length);
         int numberValue = random.Next(Numbers.Length);
-        var result = Enumerable.Range(0, length)
-            .Select(i => i == numberPosition ? Numbers[numberValue].ToString() :
-                        Letters[random.Next(Letters.Length)].ToString())
+
+        var resultChars = Enumerable.Range(0, length)
+            .Select(i => i == numberPosition
+                ? Numbers[numberValue].ToString()
+                : Letters[random.Next(Letters.Length)].ToString())
             .ToArray();
 
-        return result.ToString()!;
-    }
+        var myString = string.Join("", resultChars);
 
+        return myString;
+    }
 
 
 

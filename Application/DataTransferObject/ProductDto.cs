@@ -12,6 +12,7 @@ public sealed record class ProductDto
     public string? HoverImagePath { get; set; } 
     public IFormFile? MainImageFile { get; set; }
     public IFormFile? HoverImageFile { get; set; }
+    public bool IsShowSlider { get; set; }
     public string? UrlName { get; set; }
     public ulong Price { get; set; }
 

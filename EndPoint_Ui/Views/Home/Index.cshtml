@@ -1,8 +1,170 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
+    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "Home" : "صفحه اصلی";
+    ViewData["Title"] = Title;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+}
+@section Script{
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+}
+@section Style{
+    @await Component.InvokeAsync("MetaTagsComponent")
+}
+<!-- Slider -->
+@await Component.InvokeAsync("FeaturedProductCategoryComponent")
+<!-- Slider -->
+<!-- Categories -->
+@await Component.InvokeAsync("NewestProductCategoryComponent")
+
+<!-- /Categories -->
+<!-- today -->
+@await Component.InvokeAsync("NewestProductComponent")
+
+<!-- /today -->
+<!-- Banner collection -->
+@await Component.InvokeAsync("AdvertisingBannerComponent")
+<!-- /Banner collection -->
+<!-- Trendy Collection -->
+<section class="mt-5 mb-5">
+    <div class="flat-with-text-lookbook-v2 wrap-lookbook-hover">
+        <div class="lookbook-content">
+           
+
+            @await Component.InvokeAsync("ProductSliderComponent")
+
+
+
+
+
+
+        </div>
+        @await Component.InvokeAsync("SliderBannerComponent")
+    </div>
+</section>
+<!-- /Trendy Collection -->
+<!-- Blog -->
+@await Component.InvokeAsync("BlogComponent")
+
+<!-- /Blog -->
+<!-- Iconbox -->
+@* <section class="flat-spacing line-top-container">
+    <div class="container">
+        <div class="swiper tf-sw-iconbox"
+             data-mobile="1"
+             data-mobile-sm="2"
+             data-pagination="1"
+             data-pagination-lg="4"
+             data-pagination-md="3"
+             data-pagination-sm="2"
+             data-preview="4"
+             data-space="15"
+             data-space-lg="30"
+             data-space-md="30"
+             data-tablet="3"
+             dir="ltr">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="tf-icon-box">
+                        <div class="icon-box">
+                            <span class="icon icon-return"></span>
+                        </div>
+                        <div class="content text-center">
+                            <h6>بازگشت 14 روزه</h6>
+                            <p class="text-secondary">خرید بدون ریسک با بازده آسان.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="tf-icon-box">
+                        <div class="icon-box">
+                            <span class="icon icon-shipping"></span>
+                        </div>
+                        <div class="content text-center">
+                            <h6>حمل و نقل رایگان</h6>
+                            <p class="text-secondary">
+                                بدون هزینه اضافی ، فقط قیمتی که می بینید.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="tf-icon-box">
+                        <div class="icon-box">
+                            <span class="icon icon-headset"></span>
+                        </div>
+                        <div class="content text-center">
+                            <h6>پشتیبانی 24/7</h6>
+                            <p class="text-secondary">
+                                پشتیبانی 24/7 ، همیشه در اینجا فقط برای شما
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="tf-icon-box">
+                        <div class="icon-box">
+                            <span class="icon icon-sealCheck"></span>
+                        </div>
+                        <div class="content text-center">
+                            <h6>تخفیف اعضا</h6>
+                            <p class="text-secondary">
+                                قیمت های ویژه برای مشتریان وفادار ما.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sw-pagination-iconbox sw-dots type-circle justify-content-center"></div>
+        </div>
+    </div>
+</section>
+ *@<!-- /Iconbox -->
+<!-- Gallery shop gram -->
+@await Component.InvokeAsync("GalleryComponent")
+<!-- /Gallery shop gram -->
+<!-- Marquee -->
+@await Component.InvokeAsync("SliderTextDownComponent")
+<!-- /Marquee -->
+<!-- NEWSLETTER -->
+<section class="section-newsletter">
+    <div class="content">
+        <h3 class="heading text-white wow fadeInUp">
+          @(CultureInfo.CurrentUICulture.Name=="en-US"?"Join MADLIN's Newsletter":"در خبرنامه مادلین عضو شوید")
+        </h3>
+        <p class="text text-white wow fadeInUp" data-wow-delay="0.1s">
+            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Subscribe for early access to sales, new products, promotions, and more" : "برای دسترسی به فروش زودرس ، محصولات جدید ، تبلیغات و موارد دیگر عضو شوید")
+
+        </p>
+        <form accept-charset="utf-8"
+             
+              class="form-newsletter subscribe-form wow fadeInUp"
+            
+              id="subscribe-form"
+              >
+            <div class="subscribe-content" id="subscribe-content">
+                <fieldset class="email">
+                    <input aria-required="true"
+                           class="subscribe-email"
+                           id="subscribe-email"
+                           name="email-form"
+                           placeholder=" @(CultureInfo.CurrentUICulture.Name=="en-US"?
+                           "Enter your email address":
+                           "ایمیل خود را وارد کنید ")"
+                           tabindex="0"
+                           type="email" />
+                </fieldset>
+                <div class="button-submit">
+                    <button class="subscribe-button text-btn-uppercase font-2"
+                            
+                            onclick="JoinToNewsletter('@(CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" :"rtl ")')"
+                            type="button">
+                        @(CultureInfo.CurrentUICulture.Name == "en-US" ?
+                            "Submit" :
+                            "ثبت ")
+                    </button>
+                </div>
+            </div>
+            <div class="subscribe-msg" id="subscribe-msg"></div>
+        </form>
+    </div>
+</section>

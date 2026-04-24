@@ -1,0 +1,160 @@
+﻿@using Application.Common
+@model ValueTuple<PaginatedList<CardProductViewModel>,CategoryPageViewModel>
+@inject IViewLocalizer Localizer
+@{
+
+    string? Title = CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item2.TitleEn : Model.Item2.TitleFa;
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+<section class="flat-spacing">
+    <div class="container">
+       
+        <div class="wrapper-control-shop gridLayout-wrapper">
+            
+            <div class="row">
+                <div class="col-xl-9 mb-5">
+                   
+                    <div class="tf-grid-layout wrapper-shop tf-col-3" id="gridLayout">
+                    
+
+                        @foreach (var item in Model.Item1!.List!)
+                        {
+
+                                <div class="card-product grid">
+                                    <div class="card-product-wrapper">
+                                        <a class="product-img" 
+                                        asp-controller="Product" 
+                                        asp-action="Detail" asp-route-UrlName="@item.UrlName" >
+
+                                            <img alt="image-product" class="img-product ls-is-cached lazyloaded"
+                                                 data-src="~/gallery/Product/@item.MainImagePath"
+                                                 src="~/gallery/Product/@item.MainImagePath">
+                                            <img alt="image-product" class="img-hover ls-is-cached lazyloaded"
+                                                 data-src="~/gallery/Product/@item.HoverImagePath"
+                                                 src="~/gallery/Product/@item.HoverImagePath">
+                                        </a>@if (item.DiscountPrice != null)
+                                        {
+                                            <div class="on-sale-wrap">
+                                                @if (item.Price > 0)
+                                                {
+                                                    <span class="on-sale-item">
+                                                        @Math.Round((((decimal)item.Price - (decimal)item.DiscountPrice) / (decimal)item.Price) * 100)
+                                                        ٪
+                                                    </span>
+                                                }
+                                            </div>
+                                        }
+                                        <div class="list-product-btn">
+
+                                        <a class="box-icon wishlist btn-icon-action" onclick="AddToWishList('@item.Id','@dir')">
+                                                <span class="icon icon-heart"></span>
+                                                <span class="tooltip">علاقه مندی ها</span>
+                                            </a>
+                                         @*    <a aria-controls="compare" class="box-icon compare btn-icon-action" data-bs-toggle="offcanvas" href="shop-right-sidebar.html#compare">
+                                                <span class="icon icon-gitDiff"></span>
+                                                <span class="tooltip">مقایسه کردن</span>
+                                            </a>
+                                            <a class="box-icon quickview tf-btn-loading" data-bs-toggle="modal" href="shop-right-sidebar.html#quickView">
+                                                <span class="icon icon-eye"></span>
+                                                <span class="tooltip">نمایش سریع</span>
+                                            </a> *@
+                                        </div>
+                                        <div class="list-btn-main">
+                                            <a class="btn-main-product" 
+                                           asp-controller="Product"
+                                           asp-action="Detail" asp-route-UrlName="@item.UrlName">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "View Product" : "مشاهده محصول")
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card-product-info">
+                                    <a class="title link" asp-controller="Product"
+                                       asp-action="Detail" asp-route-UrlName="@item.UrlName">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                                        </a>
+                                        @if (item.DiscountPrice != null)
+                                        {
+                                            <span class="price">
+                                                <span class="old-price">
+                                                    @item.Price
+                                                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                                </span>
+                                                @item.DiscountPrice  @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                            </span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="price">
+
+                                                @item.Price @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Toman" : "تومان")
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+                      
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <form class="mb-5" method="get" asp-controller="Product" asp-action="Category" asp-route-UrlName="@Model.Item2.UrlName">
+                        <fieldset class="text">
+                            <input name="search" placeholder=" @(CultureInfo.CurrentUICulture.Name == "en-US" ?
+                                "Search" : "جستجو")" required="" tabindex="0" type="text" value="" data-np-checked="1">
+                        </fieldset>
+                        <button class="btn-custom-search" type="submit">
+                            @(CultureInfo.CurrentUICulture.Name == "en-US" ?
+                                "Search" : "جستجو")
+                        </button> 
+                        
+                    </form>
+                        @await Component.InvokeAsync("ProductCategorySidebarComponent")
+                    @await Component.InvokeAsync("ProductSidebarBannerComponent")
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                @if (Model!.Item1.TotalPage > 1)
+                {
+                    <div id="pagination-body"
+                         data-page-index="@Model.Item1.CurrentPage"
+                         data-total-pages="@Model.Item1.TotalPage"
+                         data-search="@ViewBag.Keyword"
+                         data-path="/Product/Category/@Model.Item2.UrlName">
+                    </div>
+                }
+                <hr class="mt-5"/>
+                <p>
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ?
+                        Model.Item2.DescriptionEn : Model.Item2.DescriptionFa)
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+
+    <script src="~/js/nouislider.min.js" type="text/javascript"></script>
+    <script src="~/js/shop.js" type="text/javascript"></script>
+    <script src="~/js/paginationUi.js"></script>
+
+}

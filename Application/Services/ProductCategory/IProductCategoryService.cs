@@ -49,4 +49,33 @@ public interface IProductCategoryService
     /// <returns></returns>
     Task<IReadOnlyList<ItemGeneric<Guid, string>>>
         GetCategoriesForDropDownAsync(string search);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task<IReadOnlyList<FeaturedProductCategoryDto>>
+        GetFeaturedProductCategoriesAsync ( CancellationToken cancellation = default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task<IReadOnlyList<ProductCategoryItemDto>>
+        GetNewestProductCategoriesForSliderAsync(CancellationToken cancellation = default);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="urlName"></param>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
+    Task<CategoryPageDto>GetCategoryByUrlNameAsync(string urlName, 
+        CancellationToken cancellation = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    Task<IReadOnlyList<ProductCategoryItemDto>> GetProductCategoriesForFilterAsync();
 }

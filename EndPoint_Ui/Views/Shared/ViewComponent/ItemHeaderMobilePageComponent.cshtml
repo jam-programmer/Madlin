@@ -1,0 +1,13 @@
+﻿@model IReadOnlyList<PageItemViewModel>
+@if (Model != null && Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        <li class="nav-mb-item mt-2">
+            <a href="/Page/@item.Url" class="mb-2">
+                @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+            </a>
+        </li>
+       
+    }
+}

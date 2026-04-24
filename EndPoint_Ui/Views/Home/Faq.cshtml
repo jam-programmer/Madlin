@@ -1,0 +1,50 @@
+﻿@model IReadOnlyList<QuestionViewModel>
+@inject IViewLocalizer Localizer
+@{
+
+    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "Faq" : "سوالات متداول";
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+
+<section class="flat-spacing" dir="@dir">
+    <div class="container">
+
+        <div class="row" dir="rtl">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 offset-xl-2 offset-lg-2 offset-md-2">
+               
+                @if(Model!=null && Model.Any())
+                {
+                    <ul class="accordion-product-wrap style-faqs" id="accordion-faq-1" dir="@dir">
+                        @for(int i = 0; i < Model.Count; i++)
+                        {
+                            <li class="accordion-product-item">
+                                <a aria-controls="accordion-@i" aria-expanded="false"
+                                   class="accordion-title current collapsed"
+                                   data-bs-toggle="collapse" href="#accordion-@i">
+                                    <h6>
+                                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model[i].TitleEn : Model[i].TitleFa)
+                                    </h6>
+                                    <span class="btn-open-sub"></span>
+                                </a>
+                                <div class="collapse" data-bs-parent="#accordion-faq-@i" id="accordion-@i" style="">
+                                    <div class="accordion-faqs-content">
+                                        <p class="text-secondary">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model[i].DescriptionEn : Model[i].DescriptionFa)
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        }
+                    </ul>
+                }
+            </div>
+           
+        </div>
+    </div>
+</section>

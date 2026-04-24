@@ -1,0 +1,52 @@
+﻿@model ValueTuple<Dictionary<string,string>,string>
+@inject IViewLocalizer Localizer
+@{
+
+    string homePage = CultureInfo.CurrentUICulture.Name == "en-US" ? "Home" : "صفحه اصلی";
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    string iconArr = CultureInfo.CurrentUICulture.Name == "en-US" ? "icon-arrRight" : "icon-arrLeft";
+
+}
+
+<div class="page-title" style="background-image: url(/images/section/page-title.jpg)">
+    <div class="container-full">
+        <div class="row" dir="@dir">
+            <div class="col-12">
+                <h3 class="heading text-center">
+                   
+                    @Model.Item2
+                </h3>
+                <ul class="breadcrumbs d-flex align-items-center justify-content-center">
+
+                    <li>
+                        <a class="link" href="/">@homePage</a>
+                    </li>
+                    <li>
+                        <i class="@iconArr"></i>
+                    </li>
+                    @if (Model.Item1 != null && Model.Item1.Any())
+                    {
+                        @foreach (var item in Model.Item1)
+                        {
+                            @if (string.IsNullOrEmpty(item.Key))
+                            {
+                                <li>@item.Value</li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="link" href="@item.Key">@item.Value</a>
+                                </li>
+                                <li>
+                                    <i class="@iconArr"></i>
+                                </li>
+                            }
+                        }
+                    }
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

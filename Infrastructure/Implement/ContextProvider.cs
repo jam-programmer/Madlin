@@ -1,4 +1,4 @@
-﻿using Application.Contract;
+﻿using Domain.Contract;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;

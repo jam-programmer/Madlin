@@ -1,0 +1,21 @@
+﻿@model IReadOnlyList<TagViewModel>
+
+<ul class="list-tags has-bg">
+    <li>
+        @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Tags" : "برچسب")
+        :</li>
+    
+    @if(Model!=null && Model.Any())
+    {
+        @foreach(var item in Model)
+        {
+            <li>
+                <a class="link" asp-controller="Blog"
+                   asp-action="Tag"
+                   asp-route-TagKey="@item.Key">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                </a>
+            </li>
+        }
+    }
+</ul>

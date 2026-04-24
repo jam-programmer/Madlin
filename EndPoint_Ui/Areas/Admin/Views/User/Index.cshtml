@@ -10,7 +10,7 @@
 
     ViewData["ControllerName"] = "کاربران";
 
-    ViewData["Title"] = "لیست کاربران";
+    ViewData["Title"] = "لیست";
 
     ViewData["Url"] = "/Admin/User";
 
@@ -111,7 +111,7 @@
                     <div id="pagination-body"
                          data-page-index="@Model.CurrentPage"
                          data-total-pages="@Model.TotalPage"
-                         data-search="@ViewBag.Search"
+                         data-search="@ViewBag.Keyword"
                          data-path="/Admin/User/Index">
                     </div>
                 }

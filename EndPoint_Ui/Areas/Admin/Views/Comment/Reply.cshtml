@@ -1,0 +1,72 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Comment
+@model ReplyCommentModel
+@{
+    string title = "مشاهده و ثبت پاسخ";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "دیدگاه ها";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Comment";
+
+
+}
+@section Script {
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3 mt-5">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="Comment"
+                      asp-action="Reply" method="post">
+
+                    <label class="text-primary">عنوان: </label>
+                    <h4>@Model.Title</h4>
+                    <label class="text-primary">دیدگاه: </label>
+                    <p>@Model.Text</p>
+                    <hr />
+                    <ul>
+                        <li><span class="mt-2 text-primary">نام ثبت کننده:</span>@Model.UserPublicName</li>
+                        <hr/><li><span class="mt-2 text-primary">شماره تماس ثبت کننده:</span>@Model.UserPhoneNumber</li>
+                        <hr/><li><span class="mt-2 text-primary">نام محصول:</span>@Model.ProductTitleFa</li>
+                        <hr/><li><span class="mt-2 text-primary">تاریخ ثبت:</span>@Model.CreatedDate</li>
+                    </ul>
+                    <label class="mt-4">پاسخ</label>
+                    <textarea asp-for="Reply" rows="4" class="form-control"></textarea>
+                    <div class="custom-control custom-switch mt-2 mb-2">
+                        <input type="checkbox" class="custom-control-input" 
+                        id="customSwitch" data-val="true" data-val-required="The IsShowSlider field is required."
+                               asp-for="IsActive" value="true">
+                        
+                        <label class="custom-control-label" for="customSwitch">در انتظار / نمایش دیدگاه</label>
+
+                    </div>
+                    
+                    <input type="hidden" asp-for="Id" />
+                    <br/>
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="Comment" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,187 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Setting
+@model AdvertisingBannerModel
+@{
+    string title = "بنرهای تبلیغاتی ";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "تنظیمات ";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Setting/AdvertisingBanner";
+
+
+}
+
+@section Script {
+
+    <script src="~/js/upload.js"></script>
+
+}
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+
+                <form asp-area="admin" asp-controller="Setting" asp-action="AdvertisingBanner"
+                      enctype="multipart/form-data" method="post">
+
+
+
+                    <div class="row">
+                        <div class="col-md-6 m-b-15">
+                            @if (Model.ImageOnePath == "default.jpg")
+                            {
+                                <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                            }
+                            else
+                            {
+                                <img id="imagePath_1" src="~/gallery/Setting/@Model.ImageOnePath" width="150" height="90">
+
+                            }
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">بنر اول</label>
+                                <input asp-for="ImageOneFile" onchange="ChangeImage(this,1)"
+                                       type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+                        <div class="col-md-6 m-b-15">
+                            @if (Model.ImageTwoPath == "default.jpg")
+                            {
+                                <img id="imagePath_2" src="~/gallery/default.jpg" width="150" height="90">
+
+                            }
+                            else
+                            {
+                                <img id="imagePath_2" src="~/gallery/Setting/@Model.ImageTwoPath" width="150" height="90">
+
+                            }
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">بنر دوم</label>
+                                <input asp-for="ImageTwoFile" onchange="ChangeImage(this,2)"
+                                       type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 m-b-15">
+                            @if (Model.ImageThreePath == "default.jpg")
+                            {
+                                <img id="imagePath_3" src="~/gallery/default.jpg" width="150" height="90">
+
+                            }
+                            else
+                            {
+                                <img id="imagePath_3" src="~/gallery/Setting/@Model.ImageThreePath" width="150" height="90">
+
+                            }
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">بنر اسلایدر</label>
+                                <input asp-for="ImageThreeFile" onchange="ChangeImage(this,3)"
+                                       type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-md-4 m-b-15">
+                            @if (Model.ImageFourPath == "default.jpg")
+                            {
+                                <img id="imagePath_4" src="~/gallery/default.jpg" width="150" height="90">
+
+                            }
+                            else
+                            {
+                                <img id="imagePath_4" src="~/gallery/Setting/@Model.ImageFourPath" width="150" height="90">
+
+                            }
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">بنر سایدبار مقالات</label>
+                                <input asp-for="ImageFourFile" onchange="ChangeImage(this,4)"
+                                       type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-md-4 m-b-15">
+                            @if (Model.ImageFivePath == "default.jpg")
+                            {
+                                <img id="imagePath_5" src="~/gallery/default.jpg" width="150" height="90">
+
+                            }
+                            else
+                            {
+                                <img id="imagePath_5" src="~/gallery/Setting/@Model.ImageFivePath" width="150" height="90">
+
+                            }
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">بنر سایدبار محصولات</label>
+                                <input asp-for="ImageFiveFile" onchange="ChangeImage(this,5)"
+                                       type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                    <input type="hidden" asp-for="ImageOnePath" />
+                    <input type="hidden" asp-for="ImageTwoPath" />
+                    <input type="hidden" asp-for="ImageThreePath" />
+                    <input type="hidden" asp-for="ImageFourPath" />
+                    <input type="hidden" asp-for="ImageFivePath" />
+
+
+
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

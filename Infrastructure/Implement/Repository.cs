@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Application.Contract;
+using Domain.Contract;
 using Domain.Entities;
 namespace Infrastructure.Implement;
 
@@ -48,6 +48,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellation = default)
     {
         return await _context.Set<TEntity>().Where(condition).ToListAsync();
+
+    }
+
+    
+    public async Task<List<TEntity>> GetListAsync( CancellationToken cancellation = default)
+    {
+        return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
 
     }
 

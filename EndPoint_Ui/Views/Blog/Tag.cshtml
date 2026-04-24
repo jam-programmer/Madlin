@@ -1,0 +1,111 @@
+﻿@using Application.Common
+@model ValueTuple<PaginatedList<BlogViewModel>, TagViewModel>
+@inject IViewLocalizer Localizer
+@{
+
+    string? Title = CultureInfo.CurrentUICulture.Name == "en-US" ?
+    Model.Item2.TitleEn : Model.Item2.TitleFa;
+
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+<section class ="main-content-page">
+    <div class="container">
+       
+        <div class="wrapper-control-shop gridLayout-wrapper">
+            
+            <div class="row">
+                <div class="col-xl-9 mb-lg-30">
+                   
+                        @foreach (var item in Model!.Item1.List!)
+                        {
+                             
+                            <div class="wg-blog style-row hover-image mb_40">
+                                <div class="image">
+                                    <img class=" ls-is-cached lazyloaded"
+                                         data-src="~/gallery/Blog/@item.ImagePath"
+                                         src="~/gallery/Blog/@item.ImagePath">
+                                </div>
+                            <div class="content" style="@(CultureInfo.CurrentCulture.Name=="en-US"?"    margin-left: 20px;":"")">
+                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-10">
+                                        <div class="meta" dir="rtl">
+                                            <div class="meta-item gap-8">
+                                                <div class="icon">
+                                                    <i class="icon-calendar"></i>
+                                                </div>
+                                                <p class="text-caption-1">
+                                                    @item.CreatedAt
+                                                </p>
+                                            </div>
+                                            <div class="meta-item gap-8">
+                                                
+                                                <p class="text-caption-1">
+                                                   @(CultureInfo.CurrentUICulture.Name=="en-US"?item.CategoryTitleEn:item.CategoryTitleFa)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="title">
+                                    <a class="link" asp-controller="Blog" asp-action="Detail" asp-route-UrlName="@item.UrlName">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                                        </a>
+                                    </h5>
+                                <p>
+                                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.ShortDescriptionEn : item.ShortDescriptionFa)
+                                </p>
+                                <a class="link text-button bot-button" asp-controller="Blog" asp-action="Detail" asp-route-UrlName="@item.UrlName">
+                                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? "More" : "بیشتر بخوانید")
+                                    </a>
+                                </div>
+                            </div>
+
+                        }
+                   
+                </div>
+                <div class="col-xl-3">
+                    <form class="mb-5" method="get" asp-controller="Blog" asp-action="Tag"
+                          asp-route-UrlName="@ViewBag.TagKey">
+                        <fieldset class="text">
+                            <input name="search" placeholder=" @(CultureInfo.CurrentUICulture.Name == "en-US" ?
+                                "Search" : "جستجو")" required="" tabindex="0" type="text" value="" data-np-checked="1">
+                        </fieldset>
+                        <button class="btn-custom-search" type="submit">
+                            @(CultureInfo.CurrentUICulture.Name == "en-US" ?
+                                "Search" : "جستجو")
+                        </button> 
+                        
+                    </form>
+                    @await Component.InvokeAsync("BlogSidebarBannerComponent")
+                    @await Component.InvokeAsync("BlogCategorySidebarComponent")
+                    @await Component.InvokeAsync("TagsComponent")
+                  
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                @if (Model!.Item1.TotalPage > 1)
+                {
+                    <div id="pagination-body"
+                         data-page-index="@Model.Item1.CurrentPage"
+                         data-total-pages="@Model.Item1.TotalPage"
+                         data-search="@ViewBag.Keyword"
+                         data-path="/Blogs/Category/@ViewBag.TagKey">
+                    </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+
+    <script src="~/js/nouislider.min.js" type="text/javascript"></script>
+    <script src="~/js/shop.js" type="text/javascript"></script>
+    <script src="~/js/paginationUi.js"></script>
+
+}

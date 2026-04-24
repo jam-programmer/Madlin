@@ -1,0 +1,18 @@
+﻿@model IReadOnlyList<EndPoint_Ui.Models.PictureViewModel>
+
+
+@if(Model!=null && Model.Any())
+{
+    @foreach(var item in Model)
+    {
+        <a class="item item-scroll-target"
+           data-pswp-height="800px" data-pswp-width="600px"
+           data-scroll="gray"
+           href="~/gallery/Product/@item.Path" target="_blank">
+            <img alt="" class="tf-image-zoom radius-12 w-100 ls-is-cached lazyloaded"
+                 data-src="~/gallery/Product/@item.Path"
+                 data-zoom="~/gallery/Product/@item.Path"
+                 src="~/gallery/Product/@item.Path">
+        </a>
+    }
+}

@@ -1,8 +1,6 @@
 ﻿
 using Application.Common.Extension;
-using Application.Contract;
 using Domain.Entities.Product;
-using Domain.Entities.System;
 using Mapster;
 
 namespace Application.Services.Feature;
@@ -17,13 +15,13 @@ public class FeatureService : IFeatureService
 
     public async Task DeleteFeatureAsync(Guid Id, CancellationToken cancellation = default)
     {
-        FeatureEntity featureEntity=await _featureRepository.GetByIdAsync(g=>g.Id==Id);
+        FeatureEntity featureEntity = await _featureRepository.GetByIdAsync(g => g.Id == Id);
         if (featureEntity == null)
         {
             throw new InternalException(Messages.NotFoundOnDb);
         }
         featureEntity.IsDeleted = true;
-        await _featureRepository.UpdateAsync(featureEntity,cancellation);
+        await _featureRepository.UpdateAsync(featureEntity, cancellation);
     }
 
     public async Task<FeatureDto> GetFeatureByIdAsync(Guid Id, CancellationToken cancellationToken = default)
@@ -33,7 +31,7 @@ public class FeatureService : IFeatureService
         {
             throw new InternalException(Messages.NotFoundOnDb);
         }
-        return featureEntity.Adapt<FeatureDto>();   
+        return featureEntity.Adapt<FeatureDto>();
     }
 
     public async Task<PaginatedList<FeatureDto>> GetFeaturesAsync(PaginationWithParent pagination, CancellationToken cancellationToken = default)
@@ -42,8 +40,6 @@ public class FeatureService : IFeatureService
         TypeAdapterConfig config = new();
         config.NewConfig<FeatureEntity, FeatureDto>()
             .Map(d => d.TitleFa, s => s.TitleFa)
-            .Map(d => d.TitleEn, s => s.TitleEn)
-            .Map(d => d.ValueEn, s => s.ValueEn)
             .Map(d => d.ValueFa, s => s.ValueFa)
             .Map(d => d.Id, s => s.Id)
             .Compile();
@@ -55,7 +51,7 @@ public class FeatureService : IFeatureService
 
                  w.TitleFa!.Contains(pagination!.keyword));
         }
-        int count = query.Count().PageCount(pagination!.pageSize); ;
+        int count = query.Count().PageCount(pagination!.pageSize);
         int total = query.Count();
 
         model = await query.MappingedAsync<FeatureEntity, FeatureDto>
@@ -64,9 +60,16 @@ public class FeatureService : IFeatureService
         return model;
     }
 
+    public async Task<IReadOnlyList<FeatureDto>> GetFeaturesByProductIdAsync(Guid Id)
+    {
+        IList<FeatureEntity> features=await _featureRepository
+            .GetFeaturesByProductIdAsync(Id);
+        return features.Adapt<IReadOnlyList<FeatureDto>>();
+    }
+
     public async Task InsertFeatureAsync(FeatureDto feature, CancellationToken cancellation = default)
     {
-        FeatureEntity featureEntity=feature.Adapt<FeatureEntity>();
+        FeatureEntity featureEntity = feature.Adapt<FeatureEntity>();
         await _featureRepository.InsertAsync(featureEntity, cancellation);
     }
 
@@ -78,6 +81,6 @@ public class FeatureService : IFeatureService
             throw new InternalException(Messages.NotFoundOnDb);
         }
         feature.Adapt(featureEntity);
-        await _featureRepository.UpdateAsync(featureEntity,cancellation);
+        await _featureRepository.UpdateAsync(featureEntity, cancellation);
     }
 }

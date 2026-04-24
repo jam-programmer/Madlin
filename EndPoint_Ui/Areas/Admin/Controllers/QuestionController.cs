@@ -3,12 +3,14 @@ using Application.DataTransferObject;
 using Application.Services.Question;
 using EndPoint_Ui.Areas.Admin.Models.Common;
 using EndPoint_Ui.Areas.Admin.Models.Question;
+using EndPoint_Ui.Attributes;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoint_Ui.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[AdminAuthorize("Question")]
 public class QuestionController(IQuestionService questionService) : Controller
 {
     readonly IQuestionService _questionService = questionService;

@@ -1,0 +1,221 @@
+﻿@using Application.Common
+@model BlogDetailViewModel
+@inject IViewLocalizer Localizer
+@{
+
+    string? Title = CultureInfo.CurrentUICulture.Name == "en-US" ?
+    Model.TitleEn : Model.TitleFa;
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+
+    var scheme = Context.Request.Scheme;
+    var host = Context.Request.Host;
+    var pathBase = Context.Request.PathBase;
+
+    var baseUrl = $"{scheme}://{host}/Blog/Detail/{Model.UrlName}";
+}
+
+<partial name="Partial/_PageHeader" model="@header" />
+<section class ="main-content-page" dir="@dir">
+    <div class="container">
+       
+        <div class="wrapper-control-shop gridLayout-wrapper">
+            
+            <div class="row">
+                <div class="col-xl-9 mb-lg-30">
+                    <div class="blog-detail-wrap page-single-2">
+                        <div class="inner">
+                            <div class="heading">
+                                <ul class="list-tags has-bg">
+                                    <li>
+                                        <a class="link" >
+                                            @(CultureInfo.CurrentUICulture.Name=="en-US"?Model.CategoryTitleEn:Model.CategoryTitleFa )
+                                        </a>
+                                    </li>
+                                </ul>
+                                <h3 class="fw-5">
+                                    @(CultureInfo.CurrentUICulture.Name == "en-US" ?Model.TitleEn:Model.TitleFa )
+                                </h3>
+                                <div class="meta" dir="rtl">
+                                    <div class="meta-item gap-8">
+                                        <div class="icon">
+                                            <i class="icon-calendar"></i>
+                                        </div>
+                                        <p class="body-text-1">
+                                                @Model.CreatedAt
+                                        </p>
+                                    </div>
+                                    <div class="meta-item gap-8">
+                                        <div class="icon">
+                                            <i class="icon-user"></i>
+                                        </div>
+                                        <p class="body-text-1">
+                                            @Model.UserFullName
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  dir="rtl">
+                                <img style="border-radius:50px;" class=" ls-is-cached lazyloaded"
+                                     data-src="~/gallery/Blog/@Model.ImagePath"
+                                src="~/gallery/Blog/@Model.ImagePath">
+                            </div>
+                            <div class="content">
+                               @Html.Raw((CultureInfo.CurrentUICulture.Name=="en-US"?Model.DescriptionEn:Model.DescriptionFa))
+                            </div>
+                            
+                            <div class="bot d-flex justify-content-between gap-10 flex-wrap">
+                                @await Component.InvokeAsync("BlogTagsComponent",Model.Id)
+                                <div class="d-flex align-items-center justify-content-between gap-16">
+                                    <p>
+
+                                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Share this post" : "این پست را به اشتراک بگذارید")
+                                        :
+                                        <a onclick="copyTextToClipboard('@baseUrl.ToLower()','@dir')" class="badge color-site rounded-3 p-2">
+                                            @baseUrl.ToLower()
+                                        </a>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                          @* 
+                            <div class="reply-comment">
+                                <h4 class="reply-comment-heading">03 نظر</h4>
+                                <div class="reply-comment-wrap">
+                                    <div class="reply-comment-item">
+                                        <div class="image">
+                                            <img alt="" src="images/avatar/user-1.jpg">
+                                        </div>
+                                        <div class="content">
+                                            <div class="d-flex justify-content-between gap-10 flex-wrap">
+                                                <div>
+                                                    <div class="d-flex gap-12 align-items-center">
+                                                        <h6>
+                                                            <a class="link" href="blog-detail-02.html#">گای هاوکینز</a>
+                                                        </h6>
+                                                        <div class="box-check">
+                                                            <svg fill="none" height="8" viewBox="0 0 10 8" width="10" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.39644 7.84288L0.146441 4.35628C-0.0488135 4.14681 -0.0488135 3.80718 0.146441 3.59769L0.853531 2.8391C1.04879 2.62961 1.36539 2.62961 1.56064 2.8391L3.75 5.18782L8.43936 0.157101C8.63461 -0.0523671 8.95121 -0.0523671 9.14647 0.157101L9.85356 0.915689C10.0488 1.12516 10.0488 1.46479 9.85356 1.67428L4.10355 7.8429C3.90828 8.05237 3.5917 8.05237 3.39644 7.84288Z" fill="white"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="day text-caption-1">13 آبان 1403</div>
+                                                </div>
+                                                <a class="link btn-style-1 font-3" href="blog-detail-02.html#">آیا این مفید بود؟</a>
+                                            </div>
+                                            <p>
+                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
+                                                صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
+                                                و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
+                                                لا.
+                                            </p>
+                                            <div>
+                                                <a class="text-button" href="blog-detail-02.html#">پاسخ</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="reply-comment-item type-reply">
+                                        <div class="image">
+                                            <img alt="" src="images/avatar/user-2.jpg">
+                                        </div>
+                                        <div class="content">
+                                            <div class="d-flex justify-content-between gap-10 flex-wrap">
+                                                <div>
+                                                    <div class="d-flex gap-12 align-items-center">
+                                                        <h6>
+                                                            <a class="link" href="blog-detail-02.html#">ایلنور پنا</a>
+                                                        </h6>
+                                                        <div class="box-check">
+                                                            <svg fill="none" height="8" viewBox="0 0 10 8" width="10" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.39644 7.84288L0.146441 4.35628C-0.0488135 4.14681 -0.0488135 3.80718 0.146441 3.59769L0.853531 2.8391C1.04879 2.62961 1.36539 2.62961 1.56064 2.8391L3.75 5.18782L8.43936 0.157101C8.63461 -0.0523671 8.95121 -0.0523671 9.14647 0.157101L9.85356 0.915689C10.0488 1.12516 10.0488 1.46479 9.85356 1.67428L4.10355 7.8429C3.90828 8.05237 3.5917 8.05237 3.39644 7.84288Z" fill="white"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="day text-caption-1">13 آبان 1403</div>
+                                                </div>
+                                                <a class="link btn-style-1 font-3" href="blog-detail-02.html#">آیا این مفید بود؟</a>
+                                            </div>
+                                            <p>انتخاب عالی مخفف AF1</p>
+                                        </div>
+                                    </div>
+                                    <div class="reply-comment-item">
+                                        <div class="image">
+                                            <img alt="" src="images/avatar/user-3.jpg">
+                                        </div>
+                                        <div class="content">
+                                            <div class="d-flex justify-content-between gap-10 flex-wrap">
+                                                <div>
+                                                    <div class="d-flex gap-12 align-items-center">
+                                                        <h6>
+                                                            <a class="link" href="blog-detail-02.html#">جروم بل</a>
+                                                        </h6>
+                                                        <div class="box-check">
+                                                            <svg fill="none" height="8" viewBox="0 0 10 8" width="10" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.39644 7.84288L0.146441 4.35628C-0.0488135 4.14681 -0.0488135 3.80718 0.146441 3.59769L0.853531 2.8391C1.04879 2.62961 1.36539 2.62961 1.56064 2.8391L3.75 5.18782L8.43936 0.157101C8.63461 -0.0523671 8.95121 -0.0523671 9.14647 0.157101L9.85356 0.915689C10.0488 1.12516 10.0488 1.46479 9.85356 1.67428L4.10355 7.8429C3.90828 8.05237 3.5917 8.05237 3.39644 7.84288Z" fill="white"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="day text-caption-1">13 آبان 1403</div>
+                                                </div>
+                                                <a class="link btn-style-1 font-3" href="blog-detail-02.html#">آیا این مفید بود؟</a>
+                                            </div>
+                                            <p>
+                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
+                                                صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
+                                                و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
+                                                لا.
+                                            </p>
+                                            <div>
+                                                <a class="text-button" href="blog-detail-02.html#">پاسخ</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-comment">
+                                <h4 class="leave-comment-heading">یک نظر بگذارید</h4>
+                                <form class="form-leave-comment">
+                                    <div class="wrap">
+                                        <div class="cols">
+                                            <fieldset class="">
+                                                <input aria-required="true" class="" name="text" placeholder="نام شما*" required="" tabindex="2" type="text" value="">
+                                            </fieldset>
+                                            <fieldset class="">
+                                                <input aria-required="true" class="" name="email" placeholder="ایمیل شما*" required="" tabindex="2" type="email" value="">
+                                            </fieldset>
+                                        </div>
+                                        <fieldset class="">
+                                            <textarea aria-required="true" class="" placeholder="پیام شما*" required="" rows="4" tabindex="2"></textarea>
+                                        </fieldset>
+                                    </div>
+                                    <div class="button-submit">
+                                        <button class="" type="submit">ارسال بررسی</button>
+                                    </div>
+                                </form>
+                            </div> *@
+                        </div>
+                    </div>
+                       
+                   
+                </div>
+                <div class="col-xl-3">
+                    @await Component.InvokeAsync("BlogSidebarBannerComponent")
+                    @await Component.InvokeAsync("BlogCategorySidebarComponent")
+                    @await Component.InvokeAsync("TagsComponent")
+                  
+                </div>
+
+            </div>
+          
+        </div>
+    </div>
+</section>
+
+@section Script{
+    <script src="~/js/sweetalert.js"></script>
+
+
+}

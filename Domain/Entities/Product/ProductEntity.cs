@@ -19,13 +19,17 @@ public class ProductEntity : BaseEntity
     public int Quantity { get; set; }
     public string? ProductCode { get; set; }
     public int Rating { get; set; }
+    public bool IsShowSlider { get; set; }
 
     #region Relation
     public CategoryEntity? Category { get; set; }
     public Guid CategoryId { get; set; }
     public ICollection<FeatureEntity> Features { get; set; }
+    public ICollection<PictureEntity> Pictures { get; set; }
+    public ICollection<CommentEntity> Comments { get; set; }
+    public ICollection<WishEntity> Wishes { get; set; }
     #endregion
     public bool IsDeleted { get; set; } = false;
-
+    public DateTime CreatedAt { get; set; }= DateTime.Now;  
 
 }

@@ -1,0 +1,30 @@
+﻿@model SliderTextTopViewModel
+
+<div class="col-xl-6 col-12 text-center">
+    <div class="swiper tf-sw-top_bar"
+         data-auto-play="true"
+         data-delay="2000"
+         data-loop="true"
+         data-preview="1"
+         data-space="0"
+         data-speed="1000"
+         dir="ltr">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <p class="top-bar-text text-line-clamp-1 text-btn-uppercase fw-semibold letter-1">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TextOneSliderTopEn : Model.TextOneSliderTopFa)
+                </p>
+            </div>
+            <div class="swiper-slide">
+                <p class="top-bar-text text-line-clamp-1 text-btn-uppercase fw-semibold letter-1">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TextTwoSliderTopEn : Model.TextTwoSliderTopFa)
+                </p>
+            </div>
+            <div class="swiper-slide">
+                <p class="top-bar-text text-line-clamp-1 text-btn-uppercase fw-semibold letter-1">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TextThreeSliderTopEn : Model.TextThreeSliderTopFa)
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

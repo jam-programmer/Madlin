@@ -1,0 +1,43 @@
+﻿@model ValueTuple<IReadOnlyList<BlogViewModel>, HeaderViewModel>
+
+@if (Model.Item1 != null && Model.Item1.Any())
+{
+    <section class="flat-spacing">
+        <div class="container">
+            <div class="heading-section text-center wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <h3 class="heading">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item2.TitleEn : Model.Item2.TitleFa)
+                </h3>
+               
+            </div>
+          <div class="row">
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <div class="wg-blog style-1 hover-image wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="image">
+                                <img alt="" class=" ls-is-cached lazyloaded"
+                                     data-src="~/gallery/Blog/@item.ImagePath"
+                                src="~/gallery/Blog/@item.ImagePath">
+                            </div>
+                            <div class="content">
+                                <p class="text-btn-uppercase text-secondary-2">
+                                    @item.CreatedAt - @(CultureInfo.CurrentUICulture.Name == "en-US" ?item.CategoryTitleEn:item.CategoryTitleFa)
+                                </p>
+                                <div>
+                                    <h6 class="title fw-5">
+                                        <a class="link" asp-controller="Blog" asp-action="Detail" asp-route-UrlName="@item.UrlName">
+                                           @(CultureInfo.CurrentUICulture.Name=="en-US"?item.TitleEn:item.TitleFa)
+                                        </a>
+                                    </h6>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

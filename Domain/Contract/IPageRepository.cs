@@ -1,0 +1,14 @@
+﻿using Domain.Entities.System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Contract;
+
+public interface  IPageRepository: IRepository<PageEntity>
+{
+    Task<PageEntity> GetPageByUrlAsync(string url);
+    Task<IReadOnlyList<PageEntity>> GetPagesByShowPositionAsync(int showPosition);
+}

@@ -1,0 +1,68 @@
+﻿@model ValueTuple<IReadOnlyList<ProductCategoryItemViewModel>, HeaderViewModel>
+@if (Model.Item1 != null && Model.Item1.Any())
+{
+    <section class="flat-spacing">
+        <div class="container">
+            <div class="heading-section text-center wow fadeInUp">
+                <h3 class="heading">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.Item2.TitleEn : Model.Item2.TitleFa)
+                </h3>
+            </div>
+
+            <div class="swiper tf-sw-categories swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
+                 dir="ltr"
+                 data-mobile="2" data-mobile-sm="3"
+                 data-tablet="4"
+                 data-preview="6"
+                 data-space="15" data-space-md="20" data-space-lg="30"
+                 data-pagination="2" data-pagination-md="4" data-pagination-lg="1">
+
+                <div class="swiper-wrapper" id="swiper-wrapper-d9941f01caa81e32" aria-live="polite">
+                    @for (int i = 0; i < Model.Item1.Count(); i++)
+                    {
+                        var item = Model.Item1[i];
+                       
+                        string slideClass = "swiper-slide";
+                        if (i == 0) slideClass += " swiper-slide-prev";
+                        else if (i == 1) slideClass += " swiper-slide-active";
+                        else slideClass += " swiper-slide-next";
+
+                        <div class="@slideClass" role="group" aria-label="@(i + 1) / @Model.Item1.Count()">
+                            <div class="collection-circle hover-img">
+                                <a class="img-style radius-48" asp-controller="Product"
+                                   asp-action="Category" asp-route-UrlName="@Model.Item1[i].UrlName">
+                                    <img alt="collection-img"
+                                         class="lazyloaded"
+                                         src="~/gallery/ProductCategory/@item.IconImagePath"
+                                         data-src="~/gallery/ProductCategory/@item.IconImagePath">
+                                </a>
+                                <div class="collection-content text-center">
+                                    <div>
+                                        <a class="cls-title" asp-controller="Product"
+                                           asp-action="Category" asp-route-UrlName="@Model.Item1[i].UrlName">
+                                            <h6 class="text">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)
+                                            </h6>
+                                            <i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                    </div>
+                                    <div class="count text-secondary">
+                                        @item.Count
+                                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Product" : "محصول")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex d-lg-none sw-pagination-categories sw-dots type-circle justify-content-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true"></span>
+                </div>
+
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+        </div>
+    </section>
+}

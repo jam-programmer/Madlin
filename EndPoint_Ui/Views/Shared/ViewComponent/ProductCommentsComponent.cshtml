@@ -1,0 +1,65 @@
+﻿@model IReadOnlyList<ProductCommentViewModel>
+@{
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+}
+@if(Model!=null && Model.Any())
+{
+    <div class="reply-comment style-1 cancel-review-wrap" dir="@dir">
+        <div class="d-flex mb_24 gap-20 align-items-center justify-content-between flex-wrap">
+            <h4 class="">@Model.Count
+                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Comment" : "دیدگاه")
+
+            </h4>
+            <div class="d-flex align-items-center gap-12">
+                
+            </div>
+        </div>
+        <div class="reply-comment-wrap">
+
+            @foreach (var item in Model)
+            {
+                <div class="reply-comment-item" dir="@dir">
+                    <div class="user">
+                        <div class="image">
+                            <img alt="" src="~/images/avatar/user-default.jpg">
+                        </div>
+                        <div>
+                            <h6>
+
+                                @item.Title
+                            </h6>
+                            <div class="day text-secondary-2 text-caption-1">
+                                @item.UserPublicName - @item.CreatedDate
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-secondary">
+                        @item.Text
+                    </p>
+                </div>
+                @if (string.IsNullOrEmpty(item.ResponseText) is false)
+                {
+                    <div class="reply-comment-item type-reply" style="background-color:#78519a30;">
+                        <div class="user" dir="@dir">
+                            <div class="image">
+                                <img alt="" src="~/gallery/site.png">
+                            </div>
+                            <div>
+                                <h6>
+                                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Reply" : "پاسخ")
+                                </h6>
+                                <div class="day text-secondary-2 text-caption-1">
+                                    @item.ResponseCreatedDate
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary">
+                            @item.ResponseText
+                        </p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+}

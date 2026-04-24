@@ -1,0 +1,164 @@
+﻿@model SeoViewModel
+@{
+    var scheme = Context.Request.Scheme; 
+    var host = Context.Request.Host; 
+    var pathBase = Context.Request.PathBase; 
+
+    var baseUrl = $"{scheme}://{host}/";
+}
+@if (CultureInfo.CurrentUICulture.Name == "en-US")
+{
+    @if (string.IsNullOrEmpty(Model.TitleEn) is false)
+    {
+        <meta name="Title" content="@Model.TitleEn" />
+    }
+    @if (string.IsNullOrEmpty(Model.KeywordsEn) is false)
+    {
+        <meta name="keywords" content="@Model.KeywordsEn">
+    }
+
+    @if (string.IsNullOrEmpty(Model.DescriptionEn) is false)
+    {
+        <meta name="description" content="@Model.DescriptionEn">
+    }
+
+    
+
+    @if (string.IsNullOrEmpty(Model.TitleEn) is false)
+    {
+        <meta property="og:site_name" content="@Model.TitleEn" />
+        <meta name="twitter:site" content="@Model.TitleEn" />
+    }
+   
+
+    @if (string.IsNullOrEmpty(Model.OgTitleEn) is false)
+    {
+        <meta property="og:title" content="@Model.OgTitleEn" />
+    }
+
+  
+
+    @if (string.IsNullOrEmpty(Model.OgDescriptionEn) is false)
+    {
+        <meta property="og:description" content="@Model.OgDescriptionEn" />
+    }
+
+   
+
+    @if (string.IsNullOrEmpty(Model.TwitterTitleEn) is false)
+    {
+        <meta name="twitter:title" content="@Model.TwitterTitleEn" />
+    }
+
+    @if (string.IsNullOrEmpty(Model.TwitterDescriptionEn) is false)
+    {
+        <meta name="twitter:description" content="@Model.TwitterDescriptionEn" />
+    }
+
+ 
+}
+else
+{
+    @if (string.IsNullOrEmpty(Model.TitleFa) is false)
+    {
+        <meta name="Title" content="@Model.TitleFa" />
+    }
+    @if (string.IsNullOrEmpty(Model.KeywordsFa) is false)
+    {
+        <meta name="keywords" content="@Model.KeywordsFa">
+    }
+
+    @if (string.IsNullOrEmpty(Model.DescriptionFa) is false)
+    {
+        <meta name="description" content="@Model.DescriptionFa">
+    }
+
+
+
+    @if (string.IsNullOrEmpty(Model.TitleFa) is false)
+    {
+        <meta property="og:site_name" content="@Model.TitleFa" />
+        <meta name="twitter:site" content="@Model.TitleFa" />
+    }
+
+
+    @if (string.IsNullOrEmpty(Model.OgTitleFa) is false)
+    {
+        <meta property="og:title" content="@Model.OgTitleFa" />
+    }
+
+
+
+    @if (string.IsNullOrEmpty(Model.OgDescriptionFa) is false)
+    {
+        <meta property="og:description" content="@Model.OgDescriptionFa" />
+    }
+
+
+
+    @if (string.IsNullOrEmpty(Model.TwitterTitleFa) is false)
+    {
+        <meta name="twitter:title" content="@Model.TwitterTitleFa" />
+    }
+
+    @if (string.IsNullOrEmpty(Model.TwitterDescriptionFa) is false)
+    {
+        <meta name="twitter:description" content="@Model.TwitterDescriptionFa" />
+    }
+}
+
+
+@if (string.IsNullOrEmpty(Model.OgType) is false)
+{
+    <meta property="og:type" content="@Model.OgType" />
+}
+
+@if (string.IsNullOrEmpty(Model.Canonical) is false)
+{
+    <link rel="canonical" href="@Model.Canonical">
+}
+@if (string.IsNullOrEmpty(Model.OgUrl) is false)
+{
+    <meta property="og:url" content="@Model.OgUrl" />
+}
+
+
+
+
+
+
+@if (string.IsNullOrEmpty(Model.OgImage) is false)
+{
+
+    <meta property="og:image" content="@(baseUrl+"Gallery/Setting/" + Model.OgImage)" />
+}
+@if (string.IsNullOrEmpty(Model.TwitterImage) is false)
+{
+    <meta name="twitter:image" content="@(baseUrl+"Gallery/Setting/" + Model.TwitterImage)" />
+}
+
+@if (string.IsNullOrEmpty(Model.ThemeColor) is false)
+{
+    <meta name="theme-color" content="@Model.ThemeColor" />
+}
+
+
+
+@{
+    string robots = Model.Robots switch
+    {
+       0 => "noindex, follow",
+        1=> "noindex, nofollow",
+        3 => "index, nofollow",
+        2=> "index, follow",
+        _ => ""
+    };
+
+}
+
+
+@if (!string.IsNullOrEmpty(robots))
+{
+    <meta name="robots" content="@robots" />
+}
+

@@ -1,0 +1,99 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Picture
+@model IReadOnlyList<EndPoint_Ui.Areas.Admin.Models.PictureViewModel>
+@{
+    string title = "تصاویر محصول";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = title;
+    ViewData["ParentControllerName"] = "محصولات";
+
+    ViewData["Title"] = "لیست";
+
+    ViewData["Url"] = $"/Admin/Picture?ParentId={@ViewBag.ParentId}";
+    ViewData["ParentUrl"] = "/Admin/Product";
+
+
+}
+
+@section Script {
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/admin/assets/js/Picture/index.js"></script>
+}
+<div class="row">
+    <div class="col-6 mb-3">
+        <a  asp-area="Admin"
+           asp-controller="Picture"
+            asp-action="Create"
+           asp-route-ParentId="@ViewBag.ParentId"
+            class="btn btn-primary text-white">
+            <i class="ti-plus mr-2"></i> ایجاد تصویر
+        </a>
+    </div>
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-body">
+              
+                <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">تصویر</th>
+                               
+                                <th class="text-right" scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="item_@item.Id">
+
+
+                                        <th>
+                                            <figure class="avatar avatar-sm">
+                                                @if (item.Path == "default.jpg")
+                                                {
+                                                    <img src="~/gallery/default.jpg" class="rounded-circle" alt="image">
+
+                                                }
+                                                else
+                                                {
+
+                                                    <img src="~/gallery/Product/@item.Path" class="rounded-circle" alt="image">
+                                                }
+                                            </figure>
+                                        </th>
+                                  
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-light btn-floating btn-icon btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                  
+                                                  
+                                                    <a onclick="Delete('@item.Id')" class="dropdown-item">حذف</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>

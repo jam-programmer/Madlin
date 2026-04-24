@@ -5,12 +5,14 @@ using Application.Services.Product;
 using Application.Services.ProductCategory;
 using EndPoint_Ui.Areas.Admin.Models.Common;
 using EndPoint_Ui.Areas.Admin.Models.Product;
+using EndPoint_Ui.Attributes;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoint_Ui.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[AdminAuthorize("Product")]
 public class ProductController (IProductService productService,
     IProductCategoryService productCategoryService): Controller
 {
@@ -48,6 +50,7 @@ public class ProductController (IProductService productService,
         {
             ProductDto product = new()
             {
+                IsShowSlider = model.IsShowSlider,
                 Price = model.Price,
                 CategoryId = model.CategoryId,
                 HoverImageFile = model.HoverImageFile,
@@ -98,6 +101,7 @@ public class ProductController (IProductService productService,
         {
             ProductDto product = new()
             {
+                IsShowSlider = model.IsShowSlider,
                 HoverImagePath =model.HoverImagePath,
                 MainImagePath = model.MainImagePath,
                 Id = model.Id,

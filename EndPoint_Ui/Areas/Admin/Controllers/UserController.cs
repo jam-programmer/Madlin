@@ -1,16 +1,17 @@
 ﻿using Application.Common;
-using Application.Common.CustomException;
 using Application.DataTransferObject;
 using Application.Services.Identity.Role;
 using Application.Services.Identity.User;
 using EndPoint_Ui.Areas.Admin.Models.Common;
 using EndPoint_Ui.Areas.Admin.Models.User;
+using EndPoint_Ui.Attributes;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoint_Ui.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[AdminAuthorize("User")]
 public class UserController(IUserService userService, IRoleService roleService) : Controller
 {
     readonly IRoleService _roleService = roleService;
@@ -21,7 +22,7 @@ public class UserController(IUserService userService, IRoleService roleService) 
         PaginatedList<UserDto> model =
             await _userService.GetUsersAsync(pagination);
         PaginatedList<UserViewModel> pageModel = new();
-       pageModel=model.Adapt<PaginatedList<UserViewModel>>(); ViewBag.Keyword = pageModel.Keyword;
+        pageModel = model.Adapt<PaginatedList<UserViewModel>>(); ViewBag.Keyword = pageModel.Keyword;
 
         return View(pageModel);
     }
@@ -59,13 +60,13 @@ public class UserController(IUserService userService, IRoleService roleService) 
     [HttpGet]
     public async Task<IActionResult> Edit(Guid Id)
     {
-        UserDto userDto=await _userService.GetUserByIdAsync(Id);
+        UserDto userDto = await _userService.GetUserByIdAsync(Id);
         ViewBag.Alert = null;
         await Roles();
         return View(userDto.Adapt<EditUserModel>());
     }
     [HttpPost]
-    public async Task<IActionResult> Edit (EditUserModel userModel)
+    public async Task<IActionResult> Edit(EditUserModel userModel)
     {
         if (ModelState.IsValid is false)
         {

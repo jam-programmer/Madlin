@@ -1,4 +1,6 @@
-﻿<header class="header-default" id="header">
+﻿@using static EndPoint_Ui.Components.ItemPageComponent
+@inject IViewLocalizer Localizer
+<header class="header-default" id="header">
     <div class="container">
         <div class="row wrapper-header align-items-center">
             <div class="col-md-4 col-3 d-xl-none">
@@ -9,802 +11,122 @@
                     <i class="icon icon-categories"></i>
                 </a>
             </div>
-            <div class="col-xl-3 col-md-4 col-6">
-                <a class="logo-header" href="index.html">
-                    <img alt="logo" class="logo" src="~/images/logo/logo.png" />
-                </a>
-            </div>
+            @await Component.InvokeAsync("HeaderLogoComponent")
             <div class="col-xl-6 d-none d-xl-block">
                 <nav class="box-navigation text-center">
                     <ul class="box-nav-ul d-flex align-items-center justify-content-center">
-                        <li class="menu-item active">
-                            <a class="item-link" href="home-jewelry-02.html#">
-                                خانه<i class="icon icon-arrow-down"></i>
+                        <li class="menu-item ">
+                            <a class="item-link" href="/">
+                                @Localizer["home"]
                             </a>
-                            <div class="sub-menu mega-menu">
-                                <div class="container">
-                                    <div class="row-demo">
-                                        <div class="demo-item">
-                                            <a href="index.html">
-                                                <div class="demo-image position-relative">
-                                                    <img alt="home-fashion-womenswear"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-womenswear.jpg"
-                                                         src="~/images/demo/home-fashion-womenswear.jpg" />
-                                                    <div class="demo-label">
-                                                        <span class="demo-new">جدید</span>
-                                                        <span>روند</span>
-                                                    </div>
-                                                </div>
-                                                <span class="demo-name">لباس زنانه مد</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-eleganceNest.html">
-                                                <div class="demo-image position-relative">
-                                                    <img alt="home-fashion-eleganceNest"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-eleganceNest.jpg"
-                                                         src="~/images/demo/home-fashion-eleganceNest.jpg" />
-                                                    <div class="demo-label">
-                                                        <span class="demo-new">جدید</span>
-                                                        <span class="demo-hot">گرم</span>
-                                                    </div>
-                                                </div>
-                                                <span class="demo-name">مد با ظرافت</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-main.html">
-                                                <div class="demo-image position-relative">
-                                                    <img alt="home-fashion-main"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-main.jpg"
-                                                         src="~/images/demo/home-fashion-main.jpg" />
-                                                    <div class="demo-label">
-                                                        <span class="demo-hot">گرم</span>
-                                                    </div>
-                                                </div>
-                                                <span class="demo-name">اصلی ترین مد</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-trendset.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-trendset"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-trendset.jpg"
-                                                         src="~/images/demo/home-fashion-trendset.jpg" />
-                                                </div>
-                                                <span class="demo-name">خانه ترند مد</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-vogueLing.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-vogueLiving"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-vogueLiving.jpg"
-                                                         src="~/images/demo/home-fashion-vogueLiving.jpg" />
-                                                </div>
-                                                <span class="demo-name">مد وگولیوینگ</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-elegantAbode.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-elegantAbode"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-elegantAbode.jpg"
-                                                         src="~/images/demo/home-fashion-elegantAbode.jpg" />
-                                                </div>
-                                                <span class="demo-name">مد زیبا</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-glamDwell.html">
-                                                <div class="demo-image position-relative">
-                                                    <img alt="home-fashion-glamDwell"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-glamDwell.jpg"
-                                                         src="~/images/demo/home-fashion-glamDwell.jpg" />
-                                                    <div class="demo-label">
-                                                        <span class="demo-new">جدید</span>
-                                                    </div>
-                                                </div>
-                                                <span class="demo-name">گلمدول مد</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-classyCove.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-classyCove"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-classycove.jpg"
-                                                         src="~/images/demo/home-fashion-classycove.jpg" />
-                                                </div>
-                                                <span class="demo-name">مد لباس کلاس</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-chicHaven.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-chicHaven1"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-chicHaven.jpg"
-                                                         src="~/images/demo/home-fashion-chicHaven.jpg" />
-                                                </div>
-                                                <span class="demo-name">مد چیچاون 1</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-chicHaven-02.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-chicHaven2"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-chicHaven2.jpg"
-                                                         src="~/images/demo/home-fashion-chicHaven2.jpg" />
-                                                </div>
-                                                <span class="demo-name">مد چیچاون 2</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-tiktok.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-tiktok"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-tiktok.jpg"
-                                                         src="~/images/demo/home-fashion-tiktok.jpg" />
-                                                </div>
-                                                <span class="demo-name">مد تیکتوک</span>
-                                            </a>
-                                        </div>
-                                        <div class="demo-item">
-                                            <a href="home-fashion-luxeLiving.html">
-                                                <div class="demo-image">
-                                                    <img alt="home-fashion-luxeLiving"
-                                                         class="lazyload"
-                                                         data-src="~/images/demo/home-fashion-luxeLiving.jpg"
-                                                         src="~/images/demo/home-fashion-luxeLiving.jpg" />
-                                                </div>
-                                                <span class="demo-name">مجلل</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="text-center view-all-demo">
-                                        <a class="tf-btn"
-                                           data-bs-toggle="modal"
-                                           href="home-jewelry-02.html#modalDemo">
-                                            <span class="text">مشاهده همه نسخه های نمایشی</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
-                        <li class="menu-item">
-                            <a class="item-link" href="home-jewelry-02.html#">
-                                فروشگاه<i class="icon icon-arrow-down"></i>
+                        <li class="menu-item ">
+                            <a class="item-link" asp-controller="Product" asp-action="Products">
+                                @Localizer["products"]
                             </a>
-                            <div class="sub-menu mega-menu">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">چیدمان فروشگاه</div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-default-grid.html">شبکه پیش فرض</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-default-list.html">لیست پیش فرض</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-fullwidth-list.html">لیست عرض کامل</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-fullwidth-grid.html">شبکه کامل عرض</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-left-sidebar.html">نوار کناری چپ</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-right-sidebar.html">نوار کناری راست</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-filter-dropdown.html">کشویی فیلتر</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-filter-canvas.html">بوم فیلتر</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">ویژگی های فروشگاه</div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-categories-top.html">رده های برتر 1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-categories-top-02.html">رده های برتر 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-collection.html">مجموعه فروشگاه</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-breadcrumb-img.html">بردکرامپ با بکگراند</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-breadcrumb-left.html">بردکرامپ سمت راست</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-breadcrumb-background.html">بکگراند بردکرامب</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-load-button.html">دکمه بار</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-pagination.html">صفحه بندی</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shop-infinite-scrolling.html">پیمایش نامتناهی</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">محصولات شناور</div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-01.html">سبک محصول 1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-02.html">سبک محصول 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-03.html">سبک محصول 3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-04.html">سبک محصول 4</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-05.html">سبک محصول 5</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-06.html">سبک محصول 6</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-style-07.html">سبک محصول 7</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">صفحات من</div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="wish-list.html">علاقه مندی ها ها</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="search-result.html">نتیجه جستجو</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="shopping-cart.html">سبد خرید</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text" href="login.html">ورود به سیستم/ثبت نام</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="forget-password.html">رمز عبور را فراموش کنید</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="order-tracking.html">ردیابی سفارش</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="my-account.html">حساب من</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="wrapper-sub-shop">
-                                                <div class="menu-heading">محصولات اخیر</div>
-                                                <div class="swiper tf-product-header" dir="ltr">
-                                                    <div class="swiper-wrapper">
-                                                        <div class="swiper-slide">
-                                                            <div class="card-product">
-                                                                <div class="card-product-wrapper">
-                                                                    <a class="product-img"
-                                                                       href="product-detail.html">
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-product"
-                                                                             data-src="~/images/products/womens/women-19.jpg"
-                                                                             src="~/images/products/womens/women-19.jpg" />
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-hover"
-                                                                             data-src="~/images/products/womens/women-20.jpg"
-                                                                             src="~/images/products/womens/women-20.jpg" />
-                                                                    </a>
-                                                                    <div class="list-product-btn">
-                                                                        <a class="box-icon wishlist btn-icon-action"
-                                                                           href="javascript:void(0);">
-                                                                            <span class="icon icon-heart"></span>
-                                                                            <span class="tooltip">علاقه مندی ها</span>
-                                                                        </a>
-                                                                        <a aria-controls="compare"
-                                                                           class="box-icon compare btn-icon-action"
-                                                                           data-bs-toggle="offcanvas"
-                                                                           href="home-jewelry-02.html#compare">
-                                                                            <span class="icon icon-gitDiff"></span>
-                                                                            <span class="tooltip">مقایسه کردن</span>
-                                                                        </a>
-                                                                        <a class="box-icon quickview tf-btn-loading"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#quickView">
-                                                                            <span class="icon icon-eye"></span>
-                                                                            <span class="tooltip">نمایش سریع</span>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="list-btn-main">
-                                                                        <a class="btn-main-product"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#shoppingCart">سبد خرید</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-product-info">
-                                                                    <a class="title link"
-                                                                       href="product-detail.html">تی شرت پنبه ای یقه V</a>
-                                                                    <span class="price">59.99 تومان </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <div class="card-product">
-                                                                <div class="card-product-wrapper">
-                                                                    <a class="product-img"
-                                                                       href="product-detail.html">
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-product"
-                                                                             data-src="~/images/products/womens/women-37.jpg"
-                                                                             src="~/images/products/womens/women-37.jpg" />
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-hover"
-                                                                             data-src="~/images/products/womens/women-38.jpg"
-                                                                             src="~/images/products/womens/women-38.jpg" />
-                                                                    </a>
-                                                                    <div class="list-product-btn">
-                                                                        <a class="box-icon wishlist btn-icon-action"
-                                                                           href="javascript:void(0);">
-                                                                            <span class="icon icon-heart"></span>
-                                                                            <span class="tooltip">علاقه مندی ها</span>
-                                                                        </a>
-                                                                        <a aria-controls="compare"
-                                                                           class="box-icon compare btn-icon-action"
-                                                                           data-bs-toggle="offcanvas"
-                                                                           href="home-jewelry-02.html#compare">
-                                                                            <span class="icon icon-gitDiff"></span>
-                                                                            <span class="tooltip">مقایسه کردن</span>
-                                                                        </a>
-                                                                        <a class="box-icon quickview tf-btn-loading"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#quickView">
-                                                                            <span class="icon icon-eye"></span>
-                                                                            <span class="tooltip">نمایش سریع</span>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="list-btn-main">
-                                                                        <a class="btn-main-product"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#shoppingCart">سبد خرید</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-product-info">
-                                                                    <a class="title link"
-                                                                       href="product-detail.html">عینک آفتابی پلاریزه</a>
-                                                                    <span class="price">59.99 تومان </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <div class="card-product">
-                                                                <div class="card-product-wrapper">
-                                                                    <a class="product-img"
-                                                                       href="product-detail.html">
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-product"
-                                                                             data-src="~/images/products/womens/women-8.jpg"
-                                                                             src="~/images/products/womens/women-8.jpg" />
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-hover"
-                                                                             data-src="~/images/products/womens/women-9.jpg"
-                                                                             src="~/images/products/womens/women-9.jpg" />
-                                                                    </a>
-                                                                    <div class="list-product-btn">
-                                                                        <a class="box-icon wishlist btn-icon-action"
-                                                                           href="javascript:void(0);">
-                                                                            <span class="icon icon-heart"></span>
-                                                                            <span class="tooltip">علاقه مندی ها</span>
-                                                                        </a>
-                                                                        <a aria-controls="compare"
-                                                                           class="box-icon compare btn-icon-action"
-                                                                           data-bs-toggle="offcanvas"
-                                                                           href="home-jewelry-02.html#compare">
-                                                                            <span class="icon icon-gitDiff"></span>
-                                                                            <span class="tooltip">مقایسه کردن</span>
-                                                                        </a>
-                                                                        <a class="box-icon quickview tf-btn-loading"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#quickView">
-                                                                            <span class="icon icon-eye"></span>
-                                                                            <span class="tooltip">نمایش سریع</span>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="list-btn-main">
-                                                                        <a class="btn-main-product"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#shoppingCart">سبد خرید</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-product-info">
-                                                                    <a class="title link"
-                                                                       href="product-detail.html">تاپ پنبه ای روبان</a>
-                                                                    <span class="price">59.99 تومان </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <div class="card-product">
-                                                                <div class="card-product-wrapper">
-                                                                    <a class="product-img"
-                                                                       href="product-detail.html">
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-product"
-                                                                             data-src="~/images/products/womens/women-171.jpg"
-                                                                             src="~/images/products/womens/women-172.jpg" />
-                                                                        <img alt="image-product"
-                                                                             class="lazyload img-hover"
-                                                                             data-src="~/images/products/womens/women-171.jpg"
-                                                                             src="~/images/products/womens/women-172.jpg" />
-                                                                    </a>
-                                                                    <div class="list-product-btn">
-                                                                        <a class="box-icon wishlist btn-icon-action"
-                                                                           href="javascript:void(0);">
-                                                                            <span class="icon icon-heart"></span>
-                                                                            <span class="tooltip">علاقه مندی ها</span>
-                                                                        </a>
-                                                                        <a aria-controls="compare"
-                                                                           class="box-icon compare btn-icon-action"
-                                                                           data-bs-toggle="offcanvas"
-                                                                           href="home-jewelry-02.html#compare">
-                                                                            <span class="icon icon-gitDiff"></span>
-                                                                            <span class="tooltip">مقایسه کردن</span>
-                                                                        </a>
-                                                                        <a class="box-icon quickview tf-btn-loading"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#quickView">
-                                                                            <span class="icon icon-eye"></span>
-                                                                            <span class="tooltip">نمایش سریع</span>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="list-btn-main">
-                                                                        <a class="btn-main-product"
-                                                                           data-bs-toggle="modal"
-                                                                           href="home-jewelry-02.html#shoppingCart">سبد خرید</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-product-info">
-                                                                    <a class="title link"
-                                                                       href="product-detail.html">شلوار</a>
-                                                                    <span class="price">79.99 تومان </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
-                        <li class="menu-item">
-                            <a class="item-link" href="home-jewelry-02.html#">
-                                محصولات<i class="icon icon-arrow-down"></i>
+
+                        <li class="menu-item ">
+                            <a class="item-link" asp-controller="Blog" asp-action="Blogs">
+                                @Localizer["blogs"]
                             </a>
-                            <div class="sub-menu mega-menu">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">چیدمان محصولات</div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-detail.html">پیش فرض محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-grid-1.html">شبکه محصولات 1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-grid-2.html">گرید محصول 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-stacked.html">محصول انباشته شده است</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-right-thumbnails.html">تصاویر کوچک سمت راست محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-bottom-thumbnails.html">تصاویر کوچک پایین محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-description-accordion.html">توضیحات محصول آکاردئون</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-description-list.html">لیست توضیحات محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-description-menutab.html">توضیحات محصول MenuTab</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-description-fullwidth.html">توضیحات محصول Fullwidth</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-fixed-price.html">قیمت ثابت محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-fixed-scroll.html">کتیبه های ثابت محصول</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">
-                                                    رنگ ها مورد بررسی قرار گرفت
-                                                </div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-color.html">رنگ سواچ محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-rounded.html">نمونه محصول گرد شده</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-rounded-color.html">نمونه محصول رنگ های گرد</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-image.html">تصویر نمونه محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-rounded-image.html">نمونه محصول تصویر گرد</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-dropdown.html">کشویی نمونه محصول</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-swatch-dropdown-color.html">رنگ‌های کشویی نمونه محصول</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="mega-menu-item">
-                                                <div class="menu-heading">ویژگی های محصولات</div>
-                                                <ul class="menu-list">
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-frequently-bought-together.html">فروش با هم 1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-frequently-bought-together-02.html">فروش با هم 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-up-sell.html">فروش بالا</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-pre-order.html">پیش سفارش</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-grouped.html">گروه بندی شده است</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-customer-note.html">یادداشت مشتری</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-out-of-stock.html">خارج از انبار</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-pickup-available.html">وانت موجود است</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-variable.html">متغیر</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-deals.html">معاملات</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-with-discount.html">با تخفیف</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-external.html">خارجی</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-link-text"
-                                                           href="product-subscribe-save.html">اشتراک ذخیره</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="menu-heading">پرفروش ترین</div>
-                                            <div class="sec-cls-header">
-                                                <div class="collection-position hover-img">
-                                                    <a class="img-style"
-                                                       href="shop-collection.html">
-                                                        <img alt="banner-cls"
-                                                             class="lazyload"
-                                                             data-src="~/images/collections/cls-header.jpg"
-                                                             src="~/images/collections/cls-header.jpg" />
-                                                    </a>
-                                                    <div class="content">
-                                                        <div class="title-top">
-                                                            <h4 class="title">
-                                                                <a class="link text-white wow fadeInUp"
-                                                                   href="shop-collection.html">انتخاب های برتر ما را خریداری کنید</a>
-                                                            </h4>
-                                                            <p class="desc text-white wow fadeInUp">
-                                                                برای مناسبت های خاص رزرو شده است
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <a class="tf-btn btn-md btn-white"
-                                                               href="shop-collection.html">
-                                                                <span class="text">اکنون خرید کنید</span><i class="icon icon-arrowUpRight"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
-                        <li class="menu-item position-relative">
-                            <a class="item-link" href="home-jewelry-02.html#">
-                                وبلاگ<i class="icon icon-arrow-down"></i>
+
+                        <li class="menu-item ">
+                            <a class="item-link" asp-controller="Home" asp-action="About">
+                                @Localizer["about"]
                             </a>
-                            <div class="sub-menu submenu-default">
-                                <ul class="menu-list">
-                                    <li>
-                                        <a class="menu-link-text" href="blog-default.html">پیش فرض وبلاگ</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="blog-list.html">لیست وبلاگ</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="blog-grid.html">وبلاگ گرید</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="blog-detail.html">جزئیات وبلاگ 1</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="blog-detail-02.html">جزئیات وبلاگ 2</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-                        <li class="menu-item position-relative">
-                            <a class="item-link" href="home-jewelry-02.html#">
-                                صفحات<i class="icon icon-arrow-down"></i>
+
+                        <li class="menu-item ">
+                            <a class="item-link" asp-controller="Home" asp-action="Contact">
+                                @Localizer["contact"]
                             </a>
-                            <div class="sub-menu submenu-default">
-                                <ul class="menu-list">
-                                    <li>
-                                        <a class="menu-link-text" href="about-us.html">درباره ما</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="store-list.html">لیست فروشگاه 1</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="store-list-02.html">لیست فروشگاه 2</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="~/contact.html">با ما تماس بگیرید 1</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="~/contact-02.html">تماس با ما 2</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="404.html">404</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="FAQs.html">متداول</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="term-of-use.html">شرایط استفاده</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="coming-soon.html">به زودی</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text"
-                                           href="customer-feedback.html">بازخورد مشتری</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link-text" href="my-account.html">حساب من</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
+                        @await Component.InvokeAsync("ItemPageComponent", new PositionModel(2, false))
+
+
+
+
+
                     </ul>
                 </nav>
             </div>
             <div class="col-xl-3 col-md-4 col-3">
                 <ul class="nav-icon d-flex justify-content-end align-items-center">
+                    <li class="nav-account">
+                        <a class="nav-icon-item">
+                            <svg class="icon"
+                                 fill="none"
+                                 height="24"
+                                 viewbox="0 0 24 24"
+                                 width="24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                                      stroke="#181818"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"></path>
+                                <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+                                      stroke="#181818"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-account dropdown-login">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="list-group list-group-flush">
+                                    <a href="/Userpanel"
+                                       class="list-group-item list-group-item-action">
+                                        @Localizer["userpanel"]
+                                    </a>
+                                    @if (User.Claims.Any(a => a.Type == "RoleAccess" && a.Value == "False"))
+                                    {
+                                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
+                                           class="list-group-item list-group-item-action">
+                                            @Localizer["adminpanel"]
+                                        </a>
+                                    
+                                    }
+                                    <a href="/Signout"
+                                       class="list-group-item list-group-item-action">
+                                        @Localizer["signout"]
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="sub-top">
+                                    <a class="btn-login" asp-controller="Identity"
+                                       asp-action="SignIn">
+                                        @Localizer["signin"]
+                                    </a>
+
+                                </div>
+                                <p class="text-center text-secondary-2 mt-2">
+                                    @if (CultureInfo.CurrentUICulture.Name == "en-US")
+                                    {
+
+
+                                        <a asp-controller="Identity" asp-action="SignUp">@Localizer["signup"]</a>
+                                        <span dir="ltr"> @Localizer["accountquestion"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span dir="rtl"> @Localizer["accountquestion"]</span>
+
+                                        <a asp-controller="Identity"
+                                           asp-action="SignUp">@Localizer["signup"]</a>
+                                    }
+
+                                </p>
+                            }
+                        </div>
+                    </li>
+
+
                     <li class="nav-search">
                         <a class="nav-icon-item"
                            data-bs-toggle="modal"
@@ -828,73 +150,7 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-account">
-                        <a class="nav-icon-item" href="home-jewelry-02.html#">
-                            <svg class="icon"
-                                 fill="none"
-                                 height="24"
-                                 viewbox="0 0 24 24"
-                                 width="24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-                                      stroke="#181818"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                                <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-                                      stroke="#181818"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                            </svg>
-                        </a>
-                        <div class="dropdown-account dropdown-login">
-                            <div class="sub-top">
-                                <a class="tf-btn btn-reset" href="login.html">ورود</a>
-                                <p class="text-center text-secondary-2">
-                                    حساب کاربری ندارید؟<a href="register.html">ثبت نام کنید</a>
-                                </p>
-                            </div>
-                            <div class="sub-bot">
-                                <span class="body-text-">حمایت</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-wishlist">
-                        <a class="nav-icon-item" href="wish-list.html">
-                            <svg class="icon"
-                                 fill="none"
-                                 height="24"
-                                 viewbox="0 0 24 24"
-                                 width="24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20.8401 4.60987C20.3294 4.09888 19.7229 3.69352 19.0555 3.41696C18.388 3.14039 17.6726 2.99805 16.9501 2.99805C16.2276 2.99805 15.5122 3.14039 14.8448 3.41696C14.1773 3.69352 13.5709 4.09888 13.0601 4.60987L12.0001 5.66987L10.9401 4.60987C9.90843 3.57818 8.50915 2.99858 7.05012 2.99858C5.59109 2.99858 4.19181 3.57818 3.16012 4.60987C2.12843 5.64156 1.54883 7.04084 1.54883 8.49987C1.54883 9.95891 2.12843 11.3582 3.16012 12.3899L4.22012 13.4499L12.0001 21.2299L19.7801 13.4499L20.8401 12.3899C21.3511 11.8791 21.7565 11.2727 22.033 10.6052C22.3096 9.93777 22.4519 9.22236 22.4519 8.49987C22.4519 7.77738 22.3096 7.06198 22.033 6.39452C21.7565 5.72706 21.3511 5.12063 20.8401 4.60987V4.60987Z"
-                                      stroke="#181818"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="nav-cart">
-                        <a class="nav-icon-item"
-                           data-bs-toggle="modal"
-                           href="home-jewelry-02.html#shoppingCart">
-                            <svg class="icon"
-                                 fill="none"
-                                 height="24"
-                                 viewbox="0 0 24 24"
-                                 width="24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.5078 10.8734V6.36686C16.5078 5.17166 16.033 4.02541 15.1879 3.18028C14.3428 2.33514 13.1965 1.86035 12.0013 1.86035C10.8061 1.86035 9.65985 2.33514 8.81472 3.18028C7.96958 4.02541 7.49479 5.17166 7.49479 6.36686V10.8734M4.11491 8.62012H19.8877L21.0143 22.1396H2.98828L4.11491 8.62012Z"
-                                      stroke="#181818"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                            </svg>
-                            <span class="count-box">1</span>
-                        </a>
-                    </li>
+                   
                 </ul>
             </div>
         </div>

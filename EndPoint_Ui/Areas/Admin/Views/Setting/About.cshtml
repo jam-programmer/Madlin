@@ -1,0 +1,95 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Setting
+@model AboutModel
+@{
+    string title = "درباره ما";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "تنظیمات ";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Setting";
+
+
+}
+
+@section Script {
+    <script src="~/admin/vendors/ckeditor/ckeditor.js"></script>
+    <script src="~/admin/assets/js/Setting/general.js"></script>
+
+    <script src="~/js/upload.js"></script>
+
+}
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+
+                <form asp-area="admin" asp-controller="Setting" asp-action="About"
+                      enctype="multipart/form-data" method="post">
+
+
+
+                   <div class="row">
+                        <div class="col-md-6 m-b-15">
+                            @if (Model.ImagePath == "default.jpg")
+                            {
+                                <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                            }
+                            else
+                            {
+                                <img id="imagePath_1" src="~/gallery/Setting/@Model.ImagePath" width="150" height="90">
+
+                            }
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">تصویر</label>
+                                <input asp-for="ImageFile" onchange="ChangeImage(this,1)"
+                                       type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+                        <div class="col-12 m-b-15">
+                        <div class="form-group">
+                            <label>متن فارسی</label>
+                            <textarea class="form-control" id="editor-fa" asp-for="TextFa" rows="3"></textarea>
+
+                        </div>
+                        </div>
+                        <div class="col-12 m-b-15">
+                        <div class="form-group">
+                            <label>متن انگلیسی</label>
+                            <textarea class="form-control" id="editor-en" asp-for="TextEn" rows="3"></textarea>
+
+                        </div>
+                        </div>
+                        <input type="hidden"asp-for="ImagePath"/>
+                   </div>
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

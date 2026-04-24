@@ -1,0 +1,25 @@
+﻿@using EndPoint_Ui.Models
+@model IReadOnlyList<BlogCategoryViewModel>
+
+@if(Model!=null && Model.Any())
+{
+    <div class="sidebar-item sidebar-categories">
+        <h5 class="sidebar-heading">
+            @(CultureInfo.CurrentUICulture.Name == "en-US" ? "Categories" : "دسته بندی ها")
+        </h5>
+        <hr/>
+        <ul>
+            @foreach(var item in Model)
+            {
+                <li>
+                    <a class="text-button mt-3 link" 
+                    
+                    asp-controller="Blog" asp-action="Category" asp-route-UrlName="@item.UrlName"> 
+                        @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.TitleEn : item.TitleFa)</a>
+                </li>
+            }
+           
+         
+        </ul>
+    </div>
+}

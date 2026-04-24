@@ -83,4 +83,5 @@ public record CreateProductModel
     /// </summary>
     [Required(ErrorMessage = "دسته بندی الزامی است")]
     public Guid CategoryId { get; set; }
+    public bool IsShowSlider { get; set; }
 }

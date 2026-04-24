@@ -1,0 +1,40 @@
+﻿@inject IViewLocalizer Localizer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "User Panel" : "پنل کاربری";
+    ViewData["Title"] = Localizer["PageTitle"];
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+<partial name="Partial/_PageHeader" model="@header" />
+
+
+
+
+<div class="container mt-4" dir="@dir">
+    <div class="my-account-wrap">
+        
+        @await Component.InvokeAsync("UserSidebarComponent", Guid.Parse(User.Claims.FirstOrDefault(f => f.Type == "Id")!.Value))
+        <div class="my-account-content">
+            <div class="account-details">
+              <div class="alert alert-success">
+                    @if (CultureInfo.CurrentUICulture.Name == "en-US")
+                    {
+                        <span> Welcome to the user panel</span>
+
+
+
+                    }
+                    else
+                    {
+                        <span>
+                            به پنل کاربری خوش آمدید
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

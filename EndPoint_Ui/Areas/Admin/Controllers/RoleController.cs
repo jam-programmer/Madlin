@@ -2,18 +2,21 @@
 using Application.Common.CustomException;
 using Application.DataTransferObject;
 using Application.Services.Identity.Role;
+using Application.Services.Identity.Route;
 using EndPoint_Ui.Areas.Admin.Models.Common;
 using EndPoint_Ui.Areas.Admin.Models.Role;
+using EndPoint_Ui.Attributes;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoint_Ui.Areas.Admin.Controllers;
 
 [Area("Admin")]
-public class RoleController(IRoleService roleService) : Controller
+[AdminAuthorize("Role")]
+public class RoleController(IRoleService roleService, IRouteService routeService) : Controller
 {
     private readonly IRoleService _roleService = roleService;
-
+    private readonly IRouteService _routeService=routeService;
 
     [HttpGet]
     public async Task<IActionResult> Index([FromQuery] Pagination pagination)
@@ -102,4 +105,22 @@ public class RoleController(IRoleService roleService) : Controller
         }
     }
 
+
+
+    [HttpGet]
+    public async Task<IActionResult> Access(Guid Id)
+    {
+        ViewBag.RoleId=Id;
+        List<RouteDto> routes = await _routeService.GetRoutesAsync();
+        ViewBag.Routes = routes.Adapt<List<RouteViewModel>>();
+        ViewBag.RoleRoutes=await _routeService.GetRoutesByRoleIdAsync(Id);
+        return View();
+    } 
+    
+    [HttpPost]
+    public async Task<IActionResult> Access(CreateRoleRouteModel model)
+    {
+        await _routeService.InsertRoleRouteAsync(model.Adapt<RoleRouteDto>());  
+        return RedirectToAction(nameof(Index));
+    }
 }

@@ -9,8 +9,7 @@
 
     ViewData["ControllerName"] = "سوالات متداول";
 
-    ViewData["Title"] = "سوالات متداول";
-
+    ViewData["Title"] = "لیست";
     ViewData["Url"] = "/Admin/Question";
 
 
@@ -98,7 +97,7 @@
                     <div id="pagination-body"
                          data-page-index="@Model.CurrentPage"
                          data-total-pages="@Model.TotalPage"
-                         data-search="@ViewBag.Search"
+                         data-search="@ViewBag.Keyword"
                          data-path="/Admin/Question/Index">
                     </div>
                 }

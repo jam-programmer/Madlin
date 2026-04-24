@@ -1,13 +1,9 @@
-using Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
 using Application;
+using Domain.Contract;
 using Infrastructure;
 using Microsoft.AspNetCore.Localization;
-using System.Globalization;
-using Application.Contract;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.
     LanguageViewLocationExpanderFormat.Suffix);
@@ -16,26 +12,28 @@ builder.Services.AddLocalization(option =>
     option.ResourcesPath = "Resources";
 });
 
+
+
 builder.Services.Application(builder.Configuration);
 builder.Services.Infrastructure(builder.Configuration);
 builder.Services.Scan(scan => scan
-	.FromAssemblies(typeof(Infrastructure.Configuration).Assembly)
+    .FromAssemblies(typeof(Infrastructure.Configuration).Assembly)
 
-	.AddClasses(classes => classes.AssignableTo(typeof(IRepository<>))
-		.Where(t => t.IsGenericTypeDefinition))
-	.AsImplementedInterfaces()
-	.WithScopedLifetime());
+    .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>))
+        .Where(t => t.IsGenericTypeDefinition))
+    .AsImplementedInterfaces()
+    .WithScopedLifetime());
 builder.Services.Scan(scan => scan
-	.FromAssemblies(typeof(Infrastructure.Configuration).Assembly)
-	.AddClasses(classes => classes.Where(t => t.Name.EndsWith("Repository")))
-	.AsImplementedInterfaces()
-	.WithScopedLifetime());
+    .FromAssemblies(typeof(Infrastructure.Configuration).Assembly)
+    .AddClasses(classes => classes.Where(t => t.Name.EndsWith("Repository")))
+    .AsImplementedInterfaces()
+    .WithScopedLifetime());
 
 builder.Services.Scan(scan => scan
-	.FromAssemblies(typeof(Application.Configuration).Assembly)
-	.AddClasses(classes => classes.Where(t => t.Name.EndsWith("Service")))
-	.AsImplementedInterfaces()
-	.WithScopedLifetime());
+    .FromAssemblies(typeof(Application.Configuration).Assembly)
+    .AddClasses(classes => classes.Where(t => t.Name.EndsWith("Service")))
+    .AsImplementedInterfaces()
+    .WithScopedLifetime());
 var app = builder.Build();
 
 var supportedCultures = new List<CultureInfo>()

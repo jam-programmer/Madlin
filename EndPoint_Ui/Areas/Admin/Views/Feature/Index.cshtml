@@ -1,0 +1,119 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Feature
+@model PaginatedList<FeatureViewModel>
+@{
+    string title = "ویژگی های محصول";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = title;
+    ViewData["ParentControllerName"] = "محصولات";
+
+    ViewData["Title"] = "لیست";
+
+    ViewData["Url"] = $"/Admin/Feature?ParentId={@ViewBag.ParentId}";
+    ViewData["ParentUrl"] = "/Admin/Product";
+
+
+}
+
+@section Script {
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/pagination.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/admin/assets/js/Feature/index.js"></script>
+}
+<div class="row">
+    <div class="col-6 mb-3">
+        <a  asp-area="Admin"
+           asp-controller="Feature"
+            asp-action="Create"
+           asp-route-ParentId="@ViewBag.ParentId"
+            class="btn btn-primary text-white">
+            <i class="ti-plus mr-2"></i> ایجاد ویژگی
+        </a>
+    </div>
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-body">
+                <div class="mb-4 mt-1 row">
+
+                    <div class="col-10">
+                        <label>جستجو</label>
+                        <form asp-area="Admin" asp-controller="Feature" asp-action="Index" method="get" class="form-group d-flex flex-row">
+                            <input type="text" value="@ViewBag.Keyword" 
+                            name="keyword" class="reounded-17 form-control w-25 mx-sm-3 text-left" />
+                            <input type="hidden" value="@ViewBag.ParentId"
+                            name="ParentId" class="reounded-17 form-control w-25 mx-sm-3 text-left" />
+                            <button type="submit" class="btn btn-sm btn-success text-white mx-1 reounded-17"><i class="ti-search"></i></button>
+                            <a asp-area="Admin" asp-controller="Feature" asp-action="Index"
+                               asp-route-ParentId="@ViewBag.ParentId"
+                            class="btn btn-sm btn-warning text-white mx-1 reounded-17"><i class="ti-reload"></i></a>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">عنوان ویژگی</th>
+                                <th scope="col">مقدار ویژگی</th>
+                                <th class="text-right" scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.List != null && Model.List.Any())
+                            {
+                                @foreach (var item in Model.List)
+                                {
+                                    <tr id="item_@item.Id">
+                                       
+                                        
+                                        <td>@item.TitleFa</td>
+                                        <td>@item.ValueFa</td>
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-light btn-floating btn-icon btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                  
+                                                    <a asp-area="Admin"
+                                                       asp-controller="Feature"
+                                                    asp-action="Edit"
+                                                    asp-route-Id="@item.Id"
+                                                    class="dropdown-item">ویرایش</a>
+                                                    <a onclick="Delete('@item.Id')" class="dropdown-item">حذف</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+                @if (Model!.TotalPage > 1)
+                {
+                    <div id="pagination-body"
+                         data-page-index="@Model.CurrentPage"
+                         data-total-pages="@Model.TotalPage"
+                         data-search="@ViewBag.Keyword"
+                         data-query-params='@Html.Raw(Json.Serialize(new { ParentId = ViewBag.ParentId }))'
+                         data-path="/Admin/Feature/Index">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

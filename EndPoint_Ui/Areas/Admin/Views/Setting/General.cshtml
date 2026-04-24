@@ -1,0 +1,591 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Setting
+@model GeneralModel
+@{
+    string title = "عمومی ";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "تنظیمات ";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Setting";
+
+
+}
+
+@section Script {
+    <script src="~/admin/vendors/ckeditor/ckeditor.js"></script>
+    <script src="~/admin/assets/js/Setting/general.js"></script>
+
+    <script src="~/js/upload.js"></script>
+
+}
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+
+                <form asp-area="admin" asp-controller="Setting" asp-action="General"
+                      enctype="multipart/form-data" method="post">
+
+
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item ">
+                            <a class="nav-link show active" id="basic-tab" data-toggle="tab"
+                               href="#basic" role="tab" aria-controls="basic" aria-selected="false">تنظیمات عمومی</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link show" id="rules-tab" data-toggle="tab"
+                               href="#rules" role="tab" aria-controls="rules" aria-selected="false">قوانین ثبت نام</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link show" id="seo-tab" data-toggle="tab"
+                               href="#seo" role="tab" aria-controls="seo" aria-selected="false">سئو و بهینه سازی </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link show" id="seofa-tab" data-toggle="tab"
+                               href="#seofa" role="tab" aria-controls="seofa" aria-selected="false">سئو و بهینه سازی فارسی</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link show" id="seoen-tab" data-toggle="tab"
+                               href="#seoen" role="tab" aria-controls="seoen" aria-selected="false">سئو و بهینه سازی انگلیسی</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                        <div class="tab-pane fade active show" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+
+                            <div class="row">
+                                <div class="col-md-6 m-b-15">
+                                    @if (Model.LogoPath == "default.jpg")
+                                    {
+                                        <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePath_1" src="~/gallery/Setting/@Model.LogoPath" width="150" height="90">
+
+                                    }
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">لوگو</label>
+                                        <input asp-for="LogoFile" onchange="ChangeImage(this,1)"
+                                               type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 m-b-15">
+                                    @if (Model.FaviconPath == "default.jpg")
+                                    {
+                                        <img id="imagePath_2" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePath_2" src="~/gallery/Setting/@Model.FaviconPath" width="150" height="90">
+
+                                    }
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">آیکون</label>
+                                        <input asp-for="FaviconFile" onchange="ChangeImage(this,2)"
+                                               type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>عنوان فارسی سایت</label>
+                                        <input type="text"
+                                               asp-for="TitleFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>عنوان انگلیسی سایت</label>
+                                        <input type="text"
+                                               asp-for="TitleEn" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>ایمیل</label>
+                                        <input type="text"
+                                               asp-for="Email" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>شماره تماس</label>
+                                        <input type="text"
+                                               asp-for="PhoneNumber" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>نشانی فارسی</label>
+                                        <textarea class="form-control" asp-for="AddressFa" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>نشانی انگلیسی</label>
+                                        <textarea class="form-control" asp-for="AddressEn" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>توضیحات فارسی</label>
+                                        <textarea class="form-control" asp-for="DescriptionFa" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>توضیحات انگلیسی</label>
+                                        <textarea class="form-control" asp-for="DescriptionEn" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>تلگرام</label>
+                                        <input type="text"
+                                               asp-for="Telegram" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>اینستاگرام</label>
+                                        <input type="text"
+                                               asp-for="Instagram" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>لینکدین</label>
+                                        <input type="text"
+                                               asp-for="Linkedin" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                        <label>واتساپ</label>
+                                        <input type="text"
+                                               asp-for="WhatsApp" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>سربرگ</label>
+                                        <textarea class="form-control" asp-for="Header" rows="4"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>پابرگ</label>
+                                        <textarea class="form-control" asp-for="Footer" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="LogoPath" />
+                        <input type="hidden" asp-for="FaviconPath" />
+                        <input type="hidden" asp-for="OgImage" />
+                        <input type="hidden" asp-for="TwitterImage" />
+
+                        <div class="tab-pane fade  " id="rules" role="tabpanel" aria-labelledby="rules-tab">
+
+                            <div class="form-group">
+                                <label>قوانین فارسی</label>
+                                <textarea class="form-control" id="editor-fa" asp-for="RegistrationRulesFa" rows="3"></textarea>
+
+                            </div>
+                            <div class="form-group">
+                                <label>قوانین انگلیسی</label>
+                                <textarea class="form-control" id="editor-en" asp-for="RegistrationRulesEn" rows="3"></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">
+
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>متاتگ Robots</label>
+                                        <select class="form-control"
+                                                asp-for="Robots"
+                                                asp-items="Html.GetEnumSelectList<Robots>()"></select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>تم رنگ</label>
+                                        <input class="form-control"
+                                               asp-for="ThemeColor" type="color" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>متاتگ Canonical</label>
+                                        <input class="form-control"
+                                               asp-for="Canonical" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>متاتگ OgType</label>
+                                        <input class="form-control"
+                                               asp-for="OgType" type="text" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>متاتگ OgUrl</label>
+                                        <input class="form-control"
+                                               asp-for="OgUrl" type="text" />
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-6 m-b-15">
+                                    @if (Model.OgImage == "default.jpg")
+                                    {
+                                        <img id="imagePath_4" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePath_4" src="~/gallery/Seo/@Model.OgImage" width="150" height="90">
+
+                                    }
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">Og Image</label>
+                                        <input asp-for="OgImageFile" onchange="ChangeImage(this,4)"
+                                               type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 m-b-15">
+                                    @if (Model.TwitterImage == "default.jpg")
+                                    {
+                                        <img id="imagePath_5" src="~/gallery/default.jpg" width="150" height="90">
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePath_5" src="~/gallery/Seo/@Model.TwitterImage" width="150" height="90">
+
+                                    }
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">Twitter Image</label>
+                                        <input asp-for="TwitterImageFile" onchange="ChangeImage(this,5)"
+                                               type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="tab-pane fade" id="seofa" role="tabpanel" aria-labelledby="seofa-tab">
+
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label>متاتگ Title</label>
+                                    <input class="form-control"
+                                           asp-for="SeoTitleFa" type="text" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label>متاتگ Description</label>
+                                    <textarea class="form-control"
+                                              asp-for="SeoDescriptionFa" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label>متاتگ Keywords</label>
+                                    <input class="form-control"
+                                           asp-for="KeywordsFa" type="text" />
+                                </div>
+                            </div>
+
+                            <div class="accordion " id="accordionExample">
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <button class="btn btn-link primary-font collapsed" 
+                                        type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Og Tags
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+                                        <div class="card-body row">
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ OgTitle</label>
+                                                    <input class="form-control"
+                                                           asp-for="OgTitleFa" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ OgDescription</label>
+                                                    <textarea class="form-control"
+                                                              asp-for="OgDescriptionFa" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                          
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <button class="btn btn-link primary-font collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Twitter Tags
+                                        </button>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="card-body row">
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ TwitterTitle</label>
+                                                    <input class="form-control"
+                                                           asp-for="TwitterTitleFa" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ TwitterDescription</label>
+                                                    <textarea class="form-control"
+                                                              asp-for="TwitterDescriptionFa" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="tab-pane fade" id="seoen" role="tabpanel" aria-labelledby="seoen-tab">
+
+
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label>متاتگ Title</label>
+                                    <input class="form-control"
+                                           asp-for="SeoTitleEn" type="text" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label>متاتگ Description</label>
+                                    <textarea class="form-control"
+                                              asp-for="SeoDescriptionEn" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label>متاتگ Keywords</label>
+                                    <input class="form-control"
+                                           asp-for="KeywordsEn" type="text" />
+                                </div>
+                            </div>
+
+                            <div class="accordion accordion-primary custom-accordion" id="accordionExample">
+
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <button class="btn btn-link primary-font collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Og Tags
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="">
+                                        <div class="card-body row">
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ OgTitle</label>
+                                                    <input class="form-control"
+                                                           asp-for="OgTitleEn" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ OgDescription</label>
+                                                    <textarea class="form-control"
+                                                              asp-for="OgDescriptionEn" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                           
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <button class="btn btn-link primary-font collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Twitter Tags
+                                        </button>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                        <div class="card-body row">
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ TwitterTitle</label>
+                                                    <input class="form-control"
+                                                           asp-for="TwitterTitleEn" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+
+                                                <div class="form-group">
+                                                    <label>متاتگ TwitterDescription</label>
+                                                    <textarea class="form-control"
+                                                              asp-for="TwitterDescriptionEn" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

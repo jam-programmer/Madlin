@@ -12,4 +12,5 @@ public class RoleEntity : IdentityRole<Guid>,IDelete
 	public string? PersianName { get; set; }
 	public bool IsCustomer { get; set; }
 	public bool IsDeleted {  get; set; }	=false;
+	public ICollection<RoleRouteEntity> RoleRoutes { get; set; }
 }

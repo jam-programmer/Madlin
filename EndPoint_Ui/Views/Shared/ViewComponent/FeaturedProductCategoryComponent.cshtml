@@ -1,0 +1,56 @@
+﻿@model IReadOnlyList<FeaturedProductCategoryViewModel>
+
+<section class="">
+    <div class="container">
+        <div class="swiper tf-sw-mobile"
+             data-preview="1"
+             data-screen="767"
+             data-space="15"
+             dir="ltr">
+            <div class="swiper-wrapper grid-cls-v2">
+                @if(Model!=null && Model.Any())
+                {
+                    @for(int i=0;i < Model.Count();i++)
+                    {
+                        <div class="swiper-slide item@(i)">
+                            <div class="banner-cls hover-img">
+                                <div class="img-style">
+                                    <img alt="banner-cls"
+                                         data-src="~/gallery/ProductCategory/@Model[i].MainImagePath"
+                                         src="~/gallery/ProductCategory/@Model[i].MainImagePath" />
+                                </div>
+                                <div class="cls-content " style="text-align:@(CultureInfo.CurrentUICulture.Name == "en-US" ?"left":"right")">
+                                    <div class="box-title-cls wow fadeInUp">
+                                        <h3>
+                                            <a class="text-white link" asp-controller="Product"
+                                               asp-action="Category" asp-route-UrlName="@Model[i].UrlName">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model[i].TitleEn : Model[i].TitleFa)
+                                            </a>
+                                        </h3>
+                                        <p class="text-white">
+                                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model[i].DescriptionEn : Model[i].DescriptionFa)
+
+                                        </p>
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                                        <a class="tf-btn btn-fill btn-white radius-4"
+                                           asp-controller="Product"
+                                           asp-action="Category" asp-route-UrlName="@Model[i].UrlName">
+                                            <span class="text">
+                                                @(CultureInfo.CurrentUICulture.Name == "en-US" ? "View Products" : "مشاهده محصولات")
+
+                                            </span><i class="icon icon-arrowUpRight"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+
+            </div>
+            <div class="sw-pagination-mb sw-dots type-circle justify-content-center d-md-none d-flex"></div>
+        </div>
+    </div>
+</section>

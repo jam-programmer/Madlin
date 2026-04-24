@@ -1,0 +1,12 @@
+﻿@model IReadOnlyList<PageItemViewModel>
+@if(Model!=null && Model.Any())
+{
+    @foreach(var item in Model)
+    {
+        <li class="menu-item ">
+            <a class="item-link" href="/Page/@item.Url">
+                @(CultureInfo.CurrentUICulture.Name=="en-US"?item.TitleEn:item.TitleFa)
+            </a>
+        </li>
+    }
+}

@@ -9,7 +9,7 @@
 
     ViewData["ControllerName"] = "نقش های کاربری";
 
-    ViewData["Title"] = "لیست نقش کاربران";
+    ViewData["Title"] = "لیست";
 
     ViewData["Url"] = "/Admin/Role";
 
@@ -80,13 +80,21 @@
                                                     @if (item.IsCustomer is false)
                                                     {
 
-                                                        <a class="dropdown-item">تعیین سطح دسترسی</a>
+                                                        <a asp-area="Admin"
+                                                           asp-controller="Role"
+                                                           asp-action="Access"
+                                                           asp-route-Id="@item.Id"
+                                                           class="dropdown-item">اعطای دسترسی</a>
                                                     }
+
+                                                   
+
                                                     <a asp-area="Admin" 
                                                     asp-controller="Role"
                                                     asp-action="Edit"
                                                     asp-route-Id="@item.Id"
                                                     class="dropdown-item">ویرایش</a>
+
                                                     <a onclick="Delete('@item.Id')" class="dropdown-item">حذف</a>
                                                 </div>
                                             </div>
@@ -106,7 +114,7 @@
                     <div id="pagination-body"
                          data-page-index="@Model.CurrentPage"
                          data-total-pages="@Model.TotalPage"
-                         data-search="@ViewBag.Search"
+                         data-search="@ViewBag.Keyword"
                          data-path="/Admin/Role/Index">
                     </div>
                 }

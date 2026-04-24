@@ -1,0 +1,289 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Setting
+@model HeaderModel
+@{
+    string title = "عناوین ";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "تنظیمات ";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Setting/Header";
+
+
+}
+
+
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+
+                <form asp-area="admin" asp-controller="Setting" asp-action="Header" method="post">
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">عناوین</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">اسلایدر های فارسی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link show" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">اسلایدرهای انگلیسی</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                        <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان فارسی دسته بندی</label>
+                                        <input type="text"
+                                               asp-for="CategoryTitleFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان انگلیسی دسته بندی</label>
+                                        <input type="text"
+                                               asp-for="CategoryTitleEn" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان فارسی محصولات</label>
+                                        <input type="text"
+                                               asp-for="ProductTitleFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان انگلیسی محصولات</label>
+                                        <input type="text"
+                                               asp-for="ProductTitleEn" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان فارسی مقالات</label>
+                                        <input type="text"
+                                               asp-for="BlogTitleFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان انگلیسی مقالات</label>
+                                        <input type="text"
+                                               asp-for="BlogTitleEn" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان فارسی گالری</label>
+                                        <input type="text"
+                                               asp-for="GalleryTitleFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان انگلیسی گالری</label>
+                                        <input type="text"
+                                               asp-for="GalleryTitleEn" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان فارسی اسلایدر</label>
+                                        <input type="text"
+                                               asp-for="SliderTitleFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>عنوان انگلیسی اسلایدر</label>
+                                        <input type="text"
+                                               asp-for="SliderTitleEn" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>متن فارسی اسلایدر</label>
+                                        <textarea class="form-control" asp-for="SliderTextFa" rows="4"></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>متن انگلیسی اسلایدر</label>
+                                        <textarea class="form-control" asp-for="SliderTextEn" rows="4"></textarea>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن اول اسلایدر بالا</label>
+                                        <input type="text"
+                                               asp-for="TextOneSliderTopFa" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن دوم اسلایدر بالا</label>
+                                        <input type="text"
+                                               asp-for="TextTwoSliderTopFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن سوم اسلایدر بالا</label>
+                                        <input type="text"
+                                               asp-for="TextThreeSliderTopFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن اول اسلایدر پایین</label>
+                                        <input type="text"
+                                               asp-for="TextOneSliderDownFa" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن دوم اسلایدر پایین</label>
+                                        <input type="text"
+                                               asp-for="TextTwoSliderDownFa" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن سوم اسلایدر پایین</label>
+                                        <input type="text"
+                                               asp-for="TextThreeSliderDownFa" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن اول اسلایدر بالا</label>
+                                        <input type="text"
+                                               asp-for="TextOneSliderTopEn" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن دوم اسلایدر بالا</label>
+                                        <input type="text"
+                                               asp-for="TextTwoSliderTopEn" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن سوم اسلایدر بالا</label>
+                                        <input type="text"
+                                               asp-for="TextThreeSliderTopEn" class="form-control" />
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن اول اسلایدر پایین</label>
+                                        <input type="text"
+                                               asp-for="TextOneSliderDownEn" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن دوم اسلایدر پایین</label>
+                                        <input type="text"
+                                               asp-for="TextTwoSliderDownEn" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label> متن سوم اسلایدر پایین</label>
+                                        <input type="text"
+                                               asp-for="TextThreeSliderDownEn" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                </form>
+
+            </div>
+
+          
+        </div>
+    </div>
+
+</div>
+</div>
