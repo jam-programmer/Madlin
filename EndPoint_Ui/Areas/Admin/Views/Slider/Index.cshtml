@@ -52,9 +52,9 @@
                         <thead>
                             <tr>
 
-                                <th scope="col">عنوان </th>
+                                <th scope="col">تصویر </th>
                              
-                                <th scope="col">موقعیت نمایش</th>
+                                <th scope="col">عنوان</th>
                                 <th scope="col">لینک</th>
                                 <th class="text-right" scope="col">عملیات</th>
                             </tr>
@@ -65,12 +65,26 @@
                                 @foreach (var item in Model.List)
                                 {
                                     <tr id="item_@item.Id">
-                                     
-                                       @*  <td>@item.TitleFa</td>
 
-                                        <td>@item.Show.GetEnumName()</td>
-                                        <td>@item.Url</td>
- *@
+                                        <td>
+                                            <figure class="avatar mr-3">
+                                                @if (item.Path == "default.jpg")
+                                                {
+                                                    <img src="~/gallery/default.jpg" class="rounded-circle" alt="image">
+
+                                                }
+                                                else
+                                                {
+
+                                                    <img src="~/gallery/Slider/@item.Path" class="rounded-circle" alt="image">
+
+                                                }
+                                            </figure> 
+                                        </td>
+
+                                        <td>@item.Title</td>
+                                        <td>@item.Link</td>
+
 
 
 

@@ -68,6 +68,12 @@ public class SliderImageService : ISliderImageService
 
     }
 
+    public async Task<IReadOnlyList<SliderImageDto>> GetSliderImagesAsync()
+    {
+        IList<SliderImageEntity> sliderImages=await _repository.GetImagesAsync();
+        return sliderImages.Adapt<IReadOnlyList<SliderImageDto>>();
+    }
+
     public async Task InsertSliderImageAsync(SliderImageDto SliderImage, CancellationToken cancellation = default)
     {
         SliderImageEntity entity = SliderImage.Adapt<SliderImageEntity>();
@@ -91,6 +97,6 @@ public class SliderImageService : ISliderImageService
             entity.Path = SliderImage.File.UploadImage("Slider");
             SliderImage.Path!.RemoveImage("Slider");
         }
-        await UpdateSliderImageAsync(SliderImage,   cancellation);
+        await _repository.UpdateAsync(entity,cancellation);
     }
 }

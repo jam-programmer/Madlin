@@ -1,0 +1,32 @@
+﻿@model IReadOnlyList<SliderImageViewModel>
+
+@if (Model != null && Model.Any())
+{
+    <div class="swiper madlin-swiper mb-5">
+        <div class="swiper-wrapper">
+            @foreach (var image in Model)
+            {
+
+                <div class="swiper-slide">
+                    @if (image.Path == "default.jpg")
+                    {
+                        <img src="~/gallery/default.jpg" 
+                        alt="image">
+
+                    }
+                    else
+                    {
+                        <img src="~/gallery/Slider/@image.Path" />
+                    }
+                </div>
+
+
+
+            }
+        </div>
+        @*   <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> *@
+        <div class="swiper-pagination"></div>
+    </div>
+
+}

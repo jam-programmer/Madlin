@@ -38,5 +38,11 @@ public interface ISliderImageService
     /// <returns></returns>
     Task<PaginatedList<SliderImageDto>> GetSliderImagesAsync(Pagination pagination,
         CancellationToken cancellation = default);
-    
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    Task<IReadOnlyList<SliderImageDto>> GetSliderImagesAsync();
 }

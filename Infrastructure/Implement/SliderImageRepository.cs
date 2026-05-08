@@ -1,11 +1,7 @@
 ﻿using Domain.Contract;
 using Domain.Entities.System;
 using Infrastructure.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Implement;
 
@@ -15,5 +11,10 @@ public class SliderImageRepository : Repository<SliderImageEntity>, ISliderImage
     public SliderImageRepository(SqlServerContext context) : base(context)
     {
         _context = context;
+    }
+    public async Task<IList<SliderImageEntity>> GetImagesAsync()
+    {
+        return await _context.Set<SliderImageEntity>().Where(w => w.Start <= DateTime.Now &&
+        w.End >= DateTime.Now).OrderByDescending(b => b.CreatedAt).ToListAsync();
     }
 }

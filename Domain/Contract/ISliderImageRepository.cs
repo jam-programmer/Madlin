@@ -9,4 +9,5 @@ namespace Domain.Contract;
 
 public interface ISliderImageRepository:IRepository<SliderImageEntity>
 {
+    Task<IList<SliderImageEntity>> GetImagesAsync();
 }

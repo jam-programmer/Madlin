@@ -1,4 +1,5 @@
 ﻿using Application.Common;
+using Application.Common.Extension;
 using Application.DataTransferObject;
 using Application.Services.SliderImage;
 using EndPoint_Ui.Areas.Admin.Models.Common;
@@ -41,9 +42,28 @@ public class SliderController : Controller
         {
             return View(model);
         }
+        DateTime Start = model.Start!.ConvertToGregorian();
+        DateTime End = model.End!.ConvertToGregorian();
+        if (Start > End)
+        {
+            ViewBag.Alert = "تاریخ شروع نمیتواند بزرگتر از تاریخ پایان باشد";
+            return View(model);
+        }
         try
         {
-            await _SliderImageService.InsertSliderImageAsync(model.Adapt<SliderImageDto>());
+
+          
+
+
+            await _SliderImageService.InsertSliderImageAsync(new SliderImageDto()
+            {
+                File= model.File,   
+                Link= model.Link,
+                Start= Start,
+                End= End,
+                Title=model.Title
+            
+            });
             return RedirectToAction(nameof(Index));
         }
         catch (Exception ex)
@@ -59,7 +79,14 @@ public class SliderController : Controller
     {
         ViewBag.Alert = null;
         SliderImageDto SliderImage = await _SliderImageService.GetSliderImageByIdAsync(Id);
-        return View(SliderImage.Adapt<EditSliderImageModel>());
+        EditSliderImageModel model =new();
+        model.Id=Id;
+        model.Title=SliderImage.Title;
+        model.Link=SliderImage.Link;
+        model.Path=SliderImage.Path;
+        model.Start = SliderImage.Start!.Value.PersianDateWithOutTime();
+        model.End = SliderImage.End!.Value.PersianDateWithOutTime();
+        return View(model);
     }
     [HttpPost]
     public async Task<IActionResult> Edit(EditSliderImageModel model)
@@ -68,9 +95,26 @@ public class SliderController : Controller
         {
             return View(model);
         }
+        DateTime Start = model.Start!.ConvertToGregorian();
+        DateTime End = model.End!.ConvertToGregorian();
+        if (Start > End)
+        {
+            ViewBag.Alert = "تاریخ شروع نمیتواند بزرگتر از تاریخ پایان باشد";
+            return View(model);
+        }
         try
         {
-            await _SliderImageService.UpdateSliderImageAsync(model.Adapt<SliderImageDto>());
+
+            await _SliderImageService.UpdateSliderImageAsync(new SliderImageDto()
+            {
+                File = model.File,
+                Link = model.Link,
+                Start = Start,
+                End = End,
+                Title = model.Title,
+                Path=model.Path,
+                Id=model.Id
+            });
             return RedirectToAction(nameof(Index));
         }
         catch (Exception ex)

@@ -5,7 +5,7 @@
     }
 
     Swal.fire({
-        title: "آیا محصول حذف شود؟",
+        title: "آیا تصویر حذف شود؟",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -14,12 +14,12 @@
         confirmButtonText: "بله حذف شود"
     }).then((result) => {
         if (result.isConfirmed) {
-            rest.postAsync("/Admin/Project/Delete", null, body, function (isSuccess, response) {
+            rest.postAsync("/Admin/Slider/Delete", null, body, function (isSuccess, response) {
                 let role = document.getElementById("item_" + id);
                 if (response.isSuccess) {
 
                     Swal.fire({
-                        title: "محصول با موفقیت حذف شد",
+                        title: "تصویر با موفقیت حذف شد",
                         icon: "success",
                         confirmButtonText: "متوجه شدم"
                     });

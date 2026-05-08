@@ -1,28 +1,36 @@
 ﻿@using Application.Common
-@using EndPoint_Ui.Areas.Admin.Models.Page
-@model EditPageModel
+@using EndPoint_Ui.Areas.Admin.Models.Slider
+@model EditSliderImageModel
 @{
-    string title = "ویرایش صفحه";
+    string title = "ویرایش تصویر";
     ViewData["Title"] = title;
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
     ViewData["PageName"] = title;
 
-    ViewData["ControllerName"] = "صفحات";
+    ViewData["ControllerName"] = "اسلایدر";
 
     ViewData["Title"] = title;
 
-    ViewData["Url"] = "/Admin/Page";
+    ViewData["Url"] = "/Admin/Slider";
 
 
 }
 
+@section Style {
+    <link rel="stylesheet" href="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/admin/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/admin/vendors/select2/css/select2.min.css" type="text/css">
+}
 @section Script {
-    <script src="~/admin/vendors/ckeditor/ckeditor.js"></script>
-
-    <script src="~/admin/assets/js/Page/edit.js"></script>
+    <script src="~/js/upload.js"></script>
+    <script src="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.min.js"></script>
+    <script src="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.fa.min.js"></script>
+    <script src="~/admin/vendors/datepicker/daterangepicker.js"></script>
+    <script src="~/admin/assets/js/SliderImage/create.js"></script>
     <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
 }
+
 
 <div class="row">
     <div class="col-md-10 offset-1">
@@ -39,74 +47,78 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">@title</h6>
-                <form asp-area="admin" asp-controller="Page" asp-action="Edit"
-                      method="post">
+                <form asp-area="admin" asp-controller="Slider" asp-action="Edit"
+                      enctype="multipart/form-data" method="post">
                     <div class="validation text-danger" asp-validation-summary="All"></div>
-                    <input type="hidden"asp-for="Id"/>
-                    <input type="hidden"asp-for="Url"/>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item ">
-                            <a class="nav-link show active" id="basic-tab" data-toggle="tab"
-                               href="#basic" role="tab" aria-controls="basic" aria-selected="false">اطلاعات پایه</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link show" id="profile-tab" data-toggle="tab"
-                               href="#profile" role="tab" aria-controls="profile" aria-selected="false">فارسی</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link show" id="contact-tab" data-toggle="tab"
-                               href="#contact" role="tab" aria-controls="contact" aria-selected="false">انگلیسی</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content mt-3" id="myTabContent">
-                        <div class="tab-pane fade active show" id="basic" role="tabpanel" aria-labelledby="basic-tab">
-                            <div class="row">
+
+                    <input type="hidden" asp-for="Path"/>
+                    <input type="hidden" asp-for="Id"/>
+                    <div class="col-md-6 m-b-15">
+                        @if (Model.Path == "default.jpg")
+                        {
+                            <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                        }
+                        else
+                        {
+                            <img id="imagePath_1" src="~/gallery/Slider/@Model.Path" width="150" height="90">
+
+                        }
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">تصویر </label>
+                            <input asp-for="File" onchange="ChangeImage(this,1)"
+                                   type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>تاریخ شروع نمایش</label>
+                                <input type="text"
+                                       asp-for="Start" id="datepicker1" class="form-control " />
+                                <span asp-validation-for="Start" class="text-danger"></span>
+
+                            </div>
+                        </div>
 
 
-                                <div class="col-md-4 m-b-15">
-                                    <div class="custom-control custom-switch mb-2">
-                                        <select class="form-control"
-                                                asp-for="Show"
-                                                asp-items="Html.GetEnumSelectList<ShowType>()"></select>
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>تاریخ پایان نمایش</label>
+                                <input type="text"
+                                       asp-for="End" id="datepicker2" class="form-control " />
+                                <span asp-validation-for="End" class="text-danger"></span>
 
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>عنوان</label>
+                                <input type="text" placeholder="عنوان بنر"
+                                       asp-for="Title" class="form-control " />
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>لینک</label>
+                                <input type="text" placeholder="https://"
+                                       asp-for="Link" class="form-control " />
+
                             </div>
                         </div>
 
 
 
 
-                        <div class="tab-pane fade  " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="form-group">
-                                <label>عنوان فارسی</label>
-                                <input asp-for="TitleFa" type="text" class="form-control text-left" />
-                                <span class="text-danger" asp-validation-for="TitleFa"></span>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>متن فارسی</label>
-                                <textarea class="form-control" id="editor-fa" asp-for="TextFa" rows="3"></textarea>
-
-                            </div>
-
-                        </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <div class="form-group">
-                                <label>عنوان انگلیسی</label>
-                                <input asp-for="TitleEn" type="text" class="form-control text-left" />
-                                <span class="text-danger" asp-validation-for="TitleEn"></span>
-                            </div>
 
 
 
-                            <div class="form-group">
-                                <label>متن انگلیسی</label>
-                                <textarea class="form-control" id="editor-en" asp-for="TextEn" rows="3"></textarea>
-
-                            </div>
-                        </div>
                     </div>
 
 
@@ -114,9 +126,8 @@
 
 
 
-
                     <button type="submit" class="btn btn-primary">ثبت</button>
-                    <a asp-area="admin" asp-controller="Page" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                    <a asp-area="admin" asp-controller="Slider" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
                 </form>
             </div>
         </div>

@@ -16,10 +16,16 @@
 
 
 }
-
+@section Style {
+    <link rel="stylesheet" href="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/admin/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/admin/vendors/select2/css/select2.min.css" type="text/css">
+}
 @section Script {
     <script src="~/js/upload.js"></script>
-
+    <script src="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.min.js"></script>
+    <script src="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.fa.min.js"></script>
+    <script src="~/admin/vendors/datepicker/daterangepicker.js"></script>
     <script src="~/admin/assets/js/SliderImage/create.js"></script>
     <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
 }
@@ -53,7 +59,55 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>تاریخ شروع نمایش</label>
+                                <input type="text"
+                                       asp-for="Start" id="datepicker1" class="form-control " />
+                                <span asp-validation-for="Start" class="text-danger"></span>
 
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>تاریخ پایان نمایش</label>
+                                <input type="text"
+                                       asp-for="End" id="datepicker2" class="form-control " />
+                                <span asp-validation-for="End" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>عنوان</label>
+                                <input type="text" placeholder="عنوان بنر"
+                                       asp-for="Title" class="form-control " />
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 m-b-15">
+                            <div class="form-group">
+                                <label>لینک</label>
+                                <input type="text" placeholder="https://"
+                                       asp-for="Link" class="form-control " />
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
 
 
                     <button type="submit" class="btn btn-primary">ثبت</button>

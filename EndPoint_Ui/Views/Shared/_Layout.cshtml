@@ -8,6 +8,11 @@
     <partial name="Partial/_HeadTags.cshtml"/>
     @await Component.InvokeAsync("MetaHeaderComponent")
     @await RenderSectionAsync("Style", false)
+
+
+    <script type="text/javascript">
+        !function(){var i="QQevbf",d=document,g=d.createElement("script"),s="https://www.goftino.com/widget/"+i,l=localStorage.getItem("goftino_"+i);g.type="text/javascript",g.async=!0,g.src=l?s+"?o="+l:s;d.getElementsByTagName("head")[0].appendChild(g);}();
+    </script>
 </head>
 <body class="preload-wrapper">
     <!-- RTL -->
@@ -40,7 +45,9 @@
     <!-- preload -->
     <div class="preload preload-container">
         <div class="preload-logo">
-            <div class="spinner"></div>
+           
+            <img class="spinner" 
+                src="/gallery/Setting/1f782ee8-6cdd-48d3-a410-b2ab24fd4c08.png" />
         </div>
     </div>
     <!-- /preload -->
