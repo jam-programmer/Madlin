@@ -238,6 +238,17 @@ internal sealed class RouteMap : IEntityTypeConfiguration<RouteEntity>
               ControllerName = "Page",
               ParentId = Guid.Parse("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d")
           }
+           , new RouteEntity()
+           {
+               Id = Guid.Parse("c2c7a9f1-a5d5-424b-2c2d-6c2c0c2e2a3e"),
+               Order = 19,
+               Name = "اسلایدر",
+               Icon = string.Empty,
+               UniqueId = string.Empty,
+               Url = "/Admin/Slider/Index",
+               ControllerName = "Slider",
+               ParentId = Guid.Parse("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d")
+           }
         );
 
 

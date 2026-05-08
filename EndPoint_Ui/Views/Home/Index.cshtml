@@ -6,10 +6,58 @@
 @section Script{
     <script src="~/js/rest.js"></script>
     <script src="~/js/sweetalert.js"></script>
+
+  
 }
 @section Style{
-    @await Component.InvokeAsync("MetaTagsComponent")
+
+   @await Component.InvokeAsync("MetaTagsComponent")
+    <link rel="stylesheet" href="~/lib/swiper/swiper-bundle.min.css" />
+    <script src="~/lib/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const swiper = new Swiper('.madlin-swiper', {
+                // تنظیمات دلخواه شما
+                loop: true, // حلقه بی‌نهایت
+                autoplay: { // پخش خودکار
+                    delay: 3000,
+                },
+                pagination: { // فعال‌سازی نقاط ناوبری
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: { // فعال‌سازی دکمه‌های قبلی/بعدی
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
 }
+
+<div class="swiper madlin-swiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="https://dkstatics-public.digikala.com/digikala-adservice-banners/f7ec7cf5ac52a4135563a415c5fd000a0a44b675_1777632308.gif?x-oss-process=image?x-oss-process=image/format,webp" />
+        </div>
+          <div class="swiper-slide">
+            <img src="https://dkstatics-public.digikala.com/digikala-adservice-banners/869bf1c8b32cf5864784d899cf30a5bb5ab19322_1778076923.jpg?x-oss-process=image/quality,q_95/format,webp" />
+        </div>
+          <div class="swiper-slide">
+            <img src="https://dkstatics-public.digikala.com/digikala-adservice-banners/70e17e616cae1e63763aa139ed6fef5fdb6cdaa7_1778074297.webp?x-oss-process=image/quality,q_95/format,webp" />
+        </div>
+        
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+
+
+
+
+
 <!-- Slider -->
 @await Component.InvokeAsync("FeaturedProductCategoryComponent")
 <!-- Slider -->

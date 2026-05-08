@@ -843,7 +843,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 17, 3, 42, 27, 908, DateTimeKind.Local).AddTicks(8162));
+                        .HasDefaultValue(new DateTime(2026, 5, 8, 1, 38, 3, 708, DateTimeKind.Local).AddTicks(9953));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -1186,6 +1186,17 @@ namespace Infrastructure.Migrations
                             ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
                             UniqueId = "",
                             Url = "/Admin/Page/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c2c7a9f1-a5d5-424b-2c2d-6c2c0c2e2a3e"),
+                            ControllerName = "Slider",
+                            Icon = "",
+                            Name = "اسلایدر",
+                            Order = 19,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Slider/Index"
                         });
                 });
 
@@ -1267,6 +1278,38 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("c41ad831-7a86-4559-cd29-08de6c72b976")
                         });
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.SliderImageEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SliderImage", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

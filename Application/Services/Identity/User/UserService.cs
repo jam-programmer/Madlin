@@ -282,6 +282,8 @@ public class UserService : IUserService
         {
             StringBuilder textError = new StringBuilder();
             UserEntity userEntity = user.Adapt<UserEntity>();
+            userEntity.PhoneNumberConfirmed = true;
+            userEntity.EmailConfirmed = true;
             using (var transaction = await _contextProvider.BeginTransactionAsync())
             {
                 try
@@ -364,6 +366,38 @@ public class UserService : IUserService
             }
 
         }
+
+
+
+
+ 
+        if (userEntity.PhoneNumberConfirmed is false || userEntity.EmailConfirmed is false)
+        {
+            if (CultureInfo.CurrentUICulture.Name == "en-US")
+            {
+
+                throw new InternalException("Your account has been disabled");
+            }
+            else
+            {
+                throw new InternalException("حساب کاربری شما غیرفعال شده است");
+
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         bool checkPassword = await _userManager.CheckPasswordAsync(userEntity!, user.Password!);
         if (checkPassword is false)
         {

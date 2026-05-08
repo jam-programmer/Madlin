@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     string UserPanelTitle = CultureInfo.CurrentUICulture.Name == "en-US" ? "User Panel" : "پنل کاربری";
     string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "My Profile" : "پروفایل من";
-    ViewData["Title"] = Localizer["PageTitle"];
+    ViewData["Title"] = Title;
     string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
     Dictionary<string, string> route = new();
     route.Add("/UserPanel", UserPanelTitle!);
