@@ -53,7 +53,7 @@ public class SliderImageService : ISliderImageService
         if (!string.IsNullOrEmpty(pagination!.keyword))
         {
             query = query.Where(w =>
-                 w.Title!.Contains(pagination!.keyword) ||
+             
 
                  w.Title!.Contains(pagination!.keyword));
         }

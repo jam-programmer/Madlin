@@ -91,7 +91,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("BlogTagMap");
+                    b.ToTable("BlogTagMap", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Blog.CategoryEntity", b =>
@@ -542,6 +542,26 @@ namespace Infrastructure.Migrations
                     b.ToTable("Wish", "Product");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Sms.BankEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bank", "sms");
+                });
+
             modelBuilder.Entity("Domain.Entities.System.AboutEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -652,6 +672,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ExclusiveNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FaviconPath")
                         .HasColumnType("nvarchar(max)");
 
@@ -679,6 +702,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("RegistrationRulesFa")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SmsToken")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Telegram")
                         .HasColumnType("nvarchar(max)");
 
@@ -704,11 +730,13 @@ namespace Infrastructure.Migrations
                             DescriptionEn = "",
                             DescriptionFa = "",
                             Email = "",
+                            ExclusiveNumber = "",
                             FaviconPath = "",
                             Instagram = "",
                             Linkedin = "",
                             LogoPath = "",
                             PhoneNumber = "",
+                            SmsToken = "",
                             Telegram = "",
                             TitleEn = "",
                             TitleFa = "",
@@ -843,7 +871,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 8, 1, 38, 3, 708, DateTimeKind.Local).AddTicks(9953));
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 47, 39, 640, DateTimeKind.Local).AddTicks(6231));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -875,6 +903,50 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Newsletter", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.NotificationEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notification", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.System.PageEntity", b =>
@@ -998,6 +1070,17 @@ namespace Infrastructure.Migrations
                             Order = 30,
                             ParentId = new Guid("00000000-0000-0000-0000-000000000000"),
                             UniqueId = "navigationUser",
+                            Url = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("9cb8b710-9dad-12c4-60b4-00c05fd430c8"),
+                            ControllerName = "",
+                            Icon = "<i class=\"icon ti-comment\"></i>",
+                            Name = "سامانه پیامک",
+                            Order = 40,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UniqueId = "navigationSms",
                             Url = ""
                         },
                         new
@@ -1197,6 +1280,28 @@ namespace Infrastructure.Migrations
                             ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
                             UniqueId = "",
                             Url = "/Admin/Slider/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("a4a9a9f1-a5d5-123b-4c4d-6c2c0c3a3a3e"),
+                            ControllerName = "Notification",
+                            Icon = "",
+                            Name = "اطلاعیه",
+                            Order = 19,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Notification/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("b4b8a8b1-a5d5-123b-5c5d-6c2c0c8a8a3e"),
+                            ControllerName = "Bank",
+                            Icon = "",
+                            Name = "بانک شماره موبایل",
+                            Order = 41,
+                            ParentId = new Guid("9cb8b710-9dad-12c4-60b4-00c05fd430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Bank/Index"
                         });
                 });
 

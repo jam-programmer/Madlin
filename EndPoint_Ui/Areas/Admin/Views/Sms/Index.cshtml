@@ -1,0 +1,84 @@
+﻿@using Application.Common
+@using Application.Common.Extension
+@using EndPoint_Ui.Areas.Admin.Models.Notification
+
+@model PaginatedList<NotificationViewModel>
+@{
+    string title = "پیامک";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = title;
+
+    ViewData["Title"] = "پنل پیامکی";
+
+    ViewData["Url"] = "/Admin/Sms";
+
+
+}
+
+@section Script {
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/pagination.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/admin/assets/js/Notification/index.js"></script>
+}
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active show"
+						id="home-tab" data-toggle="tab"
+						href="#home" role="tab" 
+						aria-controls="home" aria-selected="true">تاریخچه ارسال</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link show" 
+						id="profile-tab" data-toggle="tab"
+						href="#profile" role="tab" 
+						aria-controls="profile" aria-selected="false">ارسال از خط اختصاصی</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link show" id="contact-tab"
+						data-toggle="tab" href="#contact" role="tab"
+						aria-controls="contact" aria-selected="false">ارسال از خط خدماتی</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link show" id="contact-tab"
+						   data-toggle="tab" href="#contact" role="tab"
+						   aria-controls="contact" aria-selected="false">تعریف الگو</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link show" id="contact-tab"
+						   data-toggle="tab" href="#contact" role="tab"
+						   aria-controls="contact" aria-selected="false">بانک شماره </a>
+					</li>
+
+
+
+
+
+
+				</ul>
+				<div class="tab-content mt-3" id="myTabContent">
+					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
+					</div>
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
+					</div>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+						لورم ایپسوم متن ساختگی با تولید سادگی
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

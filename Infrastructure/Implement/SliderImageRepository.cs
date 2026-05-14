@@ -14,7 +14,9 @@ public class SliderImageRepository : Repository<SliderImageEntity>, ISliderImage
     }
     public async Task<IList<SliderImageEntity>> GetImagesAsync()
     {
-        return await _context.Set<SliderImageEntity>().Where(w => w.Start <= DateTime.Now &&
-        w.End >= DateTime.Now).OrderByDescending(b => b.CreatedAt).ToListAsync();
+        return await _context.Set<SliderImageEntity>().
+            Where(w => w.Start <= DateTime.Now &&
+        w.End >= DateTime.Now)
+            .OrderByDescending(b => b.CreatedAt).ToListAsync();
     }
 }

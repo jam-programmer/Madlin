@@ -43,8 +43,27 @@ internal sealed class RouteMap : IEntityTypeConfiguration<RouteEntity>
             Url = string.Empty,
             ControllerName = string.Empty,
             ParentId = Guid.Empty
-        } 
-        , new RouteEntity()
+        }
+		
+		, new RouteEntity()
+		{
+			Id = Guid.Parse("9cb8b710-9dad-12c4-60b4-00c05fd430c8"),
+			Order = 40,
+			Name = "سامانه پیامک",
+			Icon = "<i class=\"icon ti-comment\"></i>",
+			UniqueId = "navigationSms",
+			Url = string.Empty,
+			ControllerName = string.Empty,
+			ParentId = Guid.Empty
+		}
+
+
+
+
+
+
+
+		, new RouteEntity()
         {
             Id=Guid.Parse("7d444840-9dc0-11d1-b245-5ffdce74fad2"),
             Order = 11,
@@ -249,6 +268,30 @@ internal sealed class RouteMap : IEntityTypeConfiguration<RouteEntity>
                ControllerName = "Slider",
                ParentId = Guid.Parse("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d")
            }
+
+            , new RouteEntity()
+            {
+                Id = Guid.Parse("a4a9a9f1-a5d5-123b-4c4d-6c2c0c3a3a3e"),
+                Order = 19,
+                Name = "اطلاعیه",
+                Icon = string.Empty,
+                UniqueId = string.Empty,
+                Url = "/Admin/Notification/Index",
+                ControllerName = "Notification",
+                ParentId = Guid.Parse("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d")
+            }
+             , new RouteEntity()
+             {
+                 Id = Guid.Parse("b4b8a8b1-a5d5-123b-5c5d-6c2c0c8a8a3e"),
+                 Order = 41,
+                 Name = "بانک شماره موبایل",
+                 Icon = string.Empty,
+                 UniqueId = string.Empty,
+                 Url = "/Admin/Bank/Index",
+                 ControllerName = "Bank",
+                 ParentId = Guid.Parse("9cb8b710-9dad-12c4-60b4-00c05fd430c8")
+             } 
+            
         );
 
 

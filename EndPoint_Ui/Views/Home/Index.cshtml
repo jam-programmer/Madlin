@@ -32,8 +32,64 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+         
+            const modalElements = document.querySelectorAll('.modal[id*="notification" i], .modal[class*="notification" i]');
+
+            if (modalElements.length === 0) {
+                console.log('هیچ مودال اطلاعیه‌ای یافت نشد');
+                return;
+            }
+
+            let currentIndex = 0;
+
+            function showNextModal() {
+                if (currentIndex >= modalElements.length) {
+                    console.log('تمام اطلاعیه‌ها نمایش داده شدند');
+                    return;
+                }
+
+                const modalElement = modalElements[currentIndex];
+              
+                if (!modalElement.classList.contains('modal')) {
+                    console.warn('المان یافت شده مودال نیست:', modalElement);
+                    currentIndex++;
+                    showNextModal();
+                    return;
+                }
+
+                const modal = new bootstrap.Modal(modalElement, {
+                    backdrop: 'static',   
+                    keyboard: true
+                });
+
+                modalElement.addEventListener('hidden.bs.modal', function onHidden() {
+                    modalElement.removeEventListener('hidden.bs.modal', onHidden);
+                    currentIndex++;
+                    showNextModal();
+                });
+
+                modal.show();
+            }
+
+            showNextModal();
+        });
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     var myModal = new bootstrap.Modal(document.getElementById('autoOpenModal'), {
+        //         backdrop: 'static', 
+        //         keyboard: true,     
+        //         focus: true
+        //     });
+        //     myModal.show();
+        // });
+    </script>
+
 }
 
+
+
+@await Component.InvokeAsync("NotificationComponent")
 
 
 

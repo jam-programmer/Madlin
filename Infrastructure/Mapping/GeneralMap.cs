@@ -17,6 +17,8 @@ internal sealed class GeneralMap : IEntityTypeConfiguration<GeneralEntity>
         builder.HasData(new GeneralEntity()
         {
             Id=Guid.Parse("c11cc931-7a86-4239-bd29-08de6c72b976"),
+            ExclusiveNumber=string.Empty,
+            SmsToken=string.Empty,
             AddressEn=string.Empty,
             AddressFa=string.Empty,
             Email=string.Empty,

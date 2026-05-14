@@ -1,0 +1,63 @@
+﻿@model IReadOnlyList<NotificationViewModel>
+
+
+@if(Model!=null && Model.Any())
+{
+    @foreach(var item in Model)
+    {
+        string size = string.Empty;
+        switch (item.Size)
+        {
+            case 0:
+                size = "modal-sm";
+                break;
+                
+            case 1:
+                size = "modal-md";
+                break;
+                
+            case 2:
+                size = "modal-lg";
+                break;
+                
+            case 3:
+                size = "modal-xl";
+                break;
+
+
+
+
+        }
+
+        <div class="modal fade notification @size" id="autoOpenModal" tabindex="-1" 
+        aria-labelledby="autoOpenModalLabel" aria-hidden="true" dir="rtl">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="autoOpenModalLabel">
+                            @(CultureInfo.CurrentUICulture.Name=="en-US"?item.TitleEn:item.TitleFa)
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if (item.Path != "default.jpg")
+                        {
+                            <img src="~/gallery/Notification/@item.Path" >
+
+                        }
+                        <p>
+                            @(CultureInfo.CurrentUICulture.Name == "en-US" ? item.DescriptionEn : item.DescriptionFa)
+                        </p>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            @(CultureInfo.CurrentUICulture.Name == "en-US" ?"Close" : "بستن")
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

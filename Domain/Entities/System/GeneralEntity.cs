@@ -2,6 +2,8 @@
 
 public class GeneralEntity : BaseEntity
 {
+    public string? ExclusiveNumber { get; set; }
+    public string? SmsToken { get; set; }
     public string? TitleEn { get; set; }
     public string? TitleFa { get; set; }
     public string? FaviconPath { get; set; }

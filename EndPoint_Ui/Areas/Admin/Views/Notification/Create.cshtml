@@ -1,0 +1,152 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Notification
+@model CreateNotificationModel
+@{
+    string title = "ایجاد اطلاعیه";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["NotificationName"] = title;
+
+    ViewData["ControllerName"] = "اطلاعیه ها";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Notification";
+
+
+}
+@section Style {
+    <link rel="stylesheet" href="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/admin/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/admin/vendors/select2/css/select2.min.css" type="text/css">
+}
+@section Script {
+    <script src="~/js/upload.js"></script>
+    <script src="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.min.js"></script>
+    <script src="~/admin/vendors/datepicker-jalali/bootstrap-datepicker.fa.min.js"></script>
+    <script src="~/admin/vendors/datepicker/daterangepicker.js"></script>
+    <script src="~/admin/assets/js/Notification/create.js"></script>
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="Notification" asp-action="Create"
+                      enctype="multipart/form-data" method="post">
+                    <div class="validation text-danger" asp-validation-summary="All"></div>
+
+                    <div class="col-md-6 m-b-15">
+                        <img id="imagePath_1" src="~/gallery/default.jpg" width="150" height="90">
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">تصویر </label>
+                            <input asp-for="File" onchange="ChangeImage(this,1)"
+                                   type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <span asp-validation-for="File" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 m-b-15">
+                            <div class="form-group">
+                                <label>تاریخ شروع نمایش</label>
+                                <input type="text"
+                                       asp-for="Start" id="datepicker1" class="form-control " />
+                                <span asp-validation-for="Start" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 m-b-15">
+                            <div class="form-group">
+                                <label>تاریخ پایان نمایش</label>
+                                <input type="text"
+                                       asp-for="End" id="datepicker2" class="form-control " />
+                                <span asp-validation-for="End" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 m-b-15">
+                            <div class="form-group">
+                                <label>اندازه مودال</label>
+                                <select class="form-control" asp-for="Size">
+                                    <option value="0">کوچک</option>
+                                    <option value="1">متوسط</option>
+                                    <option value="2">بزرگ</option>
+                                    <option value="3">خیلی بزرگ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 m-b-15">
+                            <div class="form-group">
+                                <label>عنوان فارسی</label>
+                                <input type="text" placeholder="عنوان فارسی"
+                                       asp-for="TitleFa" class="form-control " />
+                                <span asp-validation-for="TitleFa" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 m-b-15">
+                            <div class="form-group">
+                                <label>عنوان انگلیسی</label>
+                                <input type="text" placeholder="عنوان انگلیسی"
+                                       asp-for="TitleEn" class="form-control " />
+                                <span asp-validation-for="TitleEn" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>توضیحات فارسی</label>
+                                <textarea class="form-control" asp-for="DescriptionFa" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>توضیحات انگلیسی</label>
+                                <textarea class="form-control" asp-for="DescriptionEn" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mx-3 custom-control custom-switch mb-2">
+                            <input asp-for="IsActive" type="checkbox" class="custom-control-input"
+                                   id="customSwitch" />
+                            <label class="custom-control-label" for="customSwitch">وضعیت (فعال / غیرفعال)</label>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="Notification" asp-action="Index"
+                       class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
