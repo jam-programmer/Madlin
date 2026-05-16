@@ -12,6 +12,7 @@ builder.Services.AddLocalization(option =>
     option.ResourcesPath = "Resources";
 });
 
+builder.Services.AddHttpClient();
 
 
 builder.Services.Application(builder.Configuration);

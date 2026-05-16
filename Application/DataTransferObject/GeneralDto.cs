@@ -4,6 +4,8 @@ namespace Application.DataTransferObject;
 
 public sealed record GeneralDto
 {
+    public string? ExclusiveNumber { get; set; }
+    public string? SmsToken { get; set; }
     public string? RegistrationRulesFa { get; set; }
     public string? RegistrationRulesEn { get; set; }
     public string? DescriptionFa { get; set; }

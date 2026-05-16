@@ -44,4 +44,7 @@ public interface IBankService
 	/// <returns></returns>
 	Task<PaginatedList<BankDto>> GetBanksAsync(Pagination pagination,
 		CancellationToken cancellationToken = default);
+
+	Task<IReadOnlyList<ItemGeneric<string, string>>>
+		GetNumbersForDropDownAsync(string search);
 }

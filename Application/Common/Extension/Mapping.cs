@@ -14,6 +14,7 @@ public static class Mapping
     {
         PaginatedList<Model> model = new();
         int skip = (curentPage - 1) * pageSize;
+
         var list = await queryable.Skip(skip).Take(pageSize).ToListAsync();
 
         IReadOnlyList<Model> Convertedlist;

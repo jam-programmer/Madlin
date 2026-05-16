@@ -32,6 +32,13 @@ public class GeneralRepository
            FirstOrDefaultAsync(cancellationToken);
     }
 
+    public async Task<(string toke, string number)> GetSmsInfoAsync()
+    {
+       GeneralEntity? general=
+            await _context.Set<GeneralEntity>() .FirstOrDefaultAsync();
+        return (general!.SmsToken!, general.ExclusiveNumber!);
+    }
+
     public async Task UpdateSeoAsync(SeoEntity seo)
     {
          _context.Update(seo);

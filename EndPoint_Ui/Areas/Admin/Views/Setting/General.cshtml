@@ -67,7 +67,10 @@
                             <a class="nav-link show" id="seoen-tab" data-toggle="tab"
                                href="#seoen" role="tab" aria-controls="seoen" aria-selected="false">سئو و بهینه سازی انگلیسی</a>
                         </li>
-
+                        <li class="nav-item ">
+                            <a class="nav-link show" id="sms-tab" data-toggle="tab"
+                               href="#sms" role="tab" aria-controls="sms" aria-selected="false">سامانه پیامکی</a>
+                        </li>
                     </ul>
                     <div class="tab-content mt-3" id="myTabContent">
                         <div class="tab-pane fade active show" id="basic" role="tabpanel" aria-labelledby="basic-tab">
@@ -570,6 +573,21 @@
                         </div>
 
 
+                        <div class="tab-pane fade  " id="sms" role="tabpanel" aria-labelledby="sms-tab">
+
+                            <div class="form-group">
+                                <label>کلید API</label>
+                                <input type="text"
+                                       asp-for="SmsToken" class="form-control" />
+                               
+                            </div>
+                            <div class="form-group">
+                                <label>شماره اختصاصی</label>
+                                <input type="text"
+                                       asp-for="ExclusiveNumber" class="form-control" />
+                            </div>
+
+                        </div>
 
 
 

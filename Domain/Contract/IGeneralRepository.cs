@@ -15,5 +15,6 @@ public interface IGeneralRepository:IRepository<GeneralEntity>
         (CancellationToken cancellationToken=default);
 
     Task UpdateSeoAsync(SeoEntity seo);
+    Task<(string toke, string number)> GetSmsInfoAsync();
 
 }

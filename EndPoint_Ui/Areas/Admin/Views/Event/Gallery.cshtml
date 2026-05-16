@@ -1,0 +1,71 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Event
+@model IReadOnlyList<EventImageViewModel>
+@{
+    string title = "رویدادها";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = title;
+
+	ViewData["Title"] = "گالری تصاویر";
+
+    ViewData["Url"] = "/Admin/Event";
+
+
+}
+
+@section Script {
+    <script src="~/js/rest.js"></script>
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/admin/assets/js/event/gallery.js"></script>
+}
+<div class="row">
+    <div class="col-6 mb-3">
+        <a asp-area="Admin" asp-controller="Event" asp-action="CreateImage"
+		   asp-route-EventId="@ViewBag.EventId"
+		class="btn btn-primary text-white">
+            <i class="ti-plus mr-2"></i> ایجاد تصویر
+        </a>
+    </div>
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-body">
+				<div class="card-columns">
+					@if(Model!=null && Model.Any())
+					{
+						@foreach(var item in Model)
+						{
+							<div class="card hide-show-toggler" id="item_@item.Id">
+								<div class="position-absolute d-flex justify-content-between right-0 left-0 top-0 p-3">
+									
+									<div class="dropdown hide-show-toggler-item">
+										<a href="#" data-toggle="dropdown" aria-expanded="false">
+											<i class="ti-settings"></i>
+										</a>
+										<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 5px, 0px);" x-out-of-boundaries="">
+
+											<a onclick="Delete('@item.Id')" class="dropdown-item">حذف</a>
+										</div>
+									</div>
+								</div>
+								<a href="~/gallery/Event/@item.Path" class="image-popup-gallery-item">
+									<img src="~/gallery/Event/@item.Path" class="card-img-top" alt="image">
+								</a>
+							</div>
+						}
+					}
+					
+
+					
+				
+
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

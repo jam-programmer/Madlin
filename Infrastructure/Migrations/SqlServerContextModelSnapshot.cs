@@ -91,7 +91,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("BlogTagMap", (string)null);
+                    b.ToTable("BlogTagMap");
                 });
 
             modelBuilder.Entity("Domain.Entities.Blog.CategoryEntity", b =>
@@ -651,6 +651,64 @@ namespace Infrastructure.Migrations
                     b.ToTable("CustomerFeedback", "dbo");
                 });
 
+            modelBuilder.Entity("Domain.Entities.System.EventEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoUrls")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Event", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.EventImageEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventImage", "dbo");
+                });
+
             modelBuilder.Entity("Domain.Entities.System.GeneralEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -871,7 +929,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 47, 39, 640, DateTimeKind.Local).AddTicks(6231));
+                        .HasDefaultValue(new DateTime(2026, 5, 16, 9, 1, 26, 211, DateTimeKind.Local).AddTicks(7192));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -1085,36 +1143,14 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7d444840-9dc0-11d1-b245-5ffdce74fad2"),
-                            ControllerName = "Question",
-                            Icon = "",
-                            Name = "سوالات متداول",
-                            Order = 11,
-                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
-                            UniqueId = "",
-                            Url = "/Admin/Question/Index"
-                        },
-                        new
-                        {
-                            Id = new Guid("8c5e3f1a-9d5f-4b6a-8c7d-0e1f2a3b4c5d"),
-                            ControllerName = "BlogCategory",
-                            Icon = "",
-                            Name = "دسته بندی مقالات",
-                            Order = 12,
-                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
-                            UniqueId = "",
-                            Url = "/Admin/BlogCategory/Index"
-                        },
-                        new
-                        {
-                            Id = new Guid("9f8e7d6c-5b4a-3c2d-1e0f-123456789abc"),
-                            ControllerName = "Tag",
-                            Icon = "",
-                            Name = "برچسب ها",
-                            Order = 13,
-                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
-                            UniqueId = "",
-                            Url = "/Admin/Tag/Index"
+                            Id = new Guid("1cb1b110-9bab-12c1-10c4-00c05fc430c8"),
+                            ControllerName = "",
+                            Icon = "<i class=\"icon ti-gallery\"></i>",
+                            Name = "رسانه",
+                            Order = 50,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UniqueId = "navigationMedia",
+                            Url = ""
                         },
                         new
                         {
@@ -1173,6 +1209,39 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
+                            Id = new Guid("7d444840-9dc0-11d1-b245-5ffdce74fad2"),
+                            ControllerName = "Question",
+                            Icon = "",
+                            Name = "سوالات متداول",
+                            Order = 11,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Question/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("8c5e3f1a-9d5f-4b6a-8c7d-0e1f2a3b4c5d"),
+                            ControllerName = "BlogCategory",
+                            Icon = "",
+                            Name = "دسته بندی مقالات",
+                            Order = 12,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/BlogCategory/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("9f8e7d6c-5b4a-3c2d-1e0f-123456789abc"),
+                            ControllerName = "Tag",
+                            Icon = "",
+                            Name = "برچسب ها",
+                            Order = 13,
+                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
+                            UniqueId = "",
+                            Url = "/Admin/Tag/Index"
+                        },
+                        new
+                        {
                             Id = new Guid("b6c7f8d9-e0a1-4b2c-8d3e-0f1a2b3c4d5e"),
                             ControllerName = "Blog",
                             Icon = "",
@@ -1192,28 +1261,6 @@ namespace Infrastructure.Migrations
                             ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
                             UniqueId = "",
                             Url = "/Admin/Setting/General"
-                        },
-                        new
-                        {
-                            Id = new Guid("c3d6e0f1-a0b3-4c5d-6e5f-8a1b0c4d2e3f"),
-                            ControllerName = "Setting",
-                            Icon = "",
-                            Name = "بنر های تبلیغاتی",
-                            Order = 16,
-                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
-                            UniqueId = "",
-                            Url = "/Admin/Setting/AdvertisingBanner"
-                        },
-                        new
-                        {
-                            Id = new Guid("c3d4a0f1-a2b3-4b3d-6e5f-6a4b0c4b2e3f"),
-                            ControllerName = "Image",
-                            Icon = "",
-                            Name = "گالری تصاویر",
-                            Order = 17,
-                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
-                            UniqueId = "",
-                            Url = "/Admin/Image/Index"
                         },
                         new
                         {
@@ -1272,17 +1319,6 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c2c7a9f1-a5d5-424b-2c2d-6c2c0c2e2a3e"),
-                            ControllerName = "Slider",
-                            Icon = "",
-                            Name = "اسلایدر",
-                            Order = 19,
-                            ParentId = new Guid("a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"),
-                            UniqueId = "",
-                            Url = "/Admin/Slider/Index"
-                        },
-                        new
-                        {
                             Id = new Guid("a4a9a9f1-a5d5-123b-4c4d-6c2c0c3a3a3e"),
                             ControllerName = "Notification",
                             Icon = "",
@@ -1302,6 +1338,61 @@ namespace Infrastructure.Migrations
                             ParentId = new Guid("9cb8b710-9dad-12c4-60b4-00c05fd430c8"),
                             UniqueId = "",
                             Url = "/Admin/Bank/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("b5b5a5b7-a5d5-123b-5c5d-6c2c4c8a8a4a"),
+                            ControllerName = "Sms",
+                            Icon = "",
+                            Name = "ارسال پیامک",
+                            Order = 42,
+                            ParentId = new Guid("9cb8b710-9dad-12c4-60b4-00c05fd430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Sms/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3d6e0f1-a0b3-4c5d-6e5f-8a1b0c4d2e3f"),
+                            ControllerName = "Setting",
+                            Icon = "",
+                            Name = "بنر های تبلیغاتی",
+                            Order = 51,
+                            ParentId = new Guid("1cb1b110-9bab-12c1-10c4-00c05fc430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Setting/AdvertisingBanner"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3d4a0f1-a2b3-4b3d-6e5f-6a4b0c4b2e3f"),
+                            ControllerName = "Image",
+                            Icon = "",
+                            Name = "گالری تصاویر",
+                            Order = 52,
+                            ParentId = new Guid("1cb1b110-9bab-12c1-10c4-00c05fc430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Image/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c2c7a9f1-a5d5-424b-2c2d-6c2c0c2e2a3e"),
+                            ControllerName = "Slider",
+                            Icon = "",
+                            Name = "اسلایدر",
+                            Order = 53,
+                            ParentId = new Guid("1cb1b110-9bab-12c1-10c4-00c05fc430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Slider/Index"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3c3a3f3-a5d5-424a-5c5d-7c7c0c9e2a9c"),
+                            ControllerName = "Event",
+                            Icon = "",
+                            Name = "رویداد ها",
+                            Order = 54,
+                            ParentId = new Guid("1cb1b110-9bab-12c1-10c4-00c05fc430c8"),
+                            UniqueId = "",
+                            Url = "/Admin/Event/Index"
                         });
                 });
 
@@ -1651,6 +1742,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.System.EventImageEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.System.EventEntity", "Event")
+                        .WithMany("EventImages")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Domain.Entities.Identity.RoleEntity", null)
@@ -1749,6 +1851,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("Pictures");
 
                     b.Navigation("Wishes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.System.EventEntity", b =>
+                {
+                    b.Navigation("EventImages");
                 });
 
             modelBuilder.Entity("Domain.Entities.System.RouteEntity", b =>

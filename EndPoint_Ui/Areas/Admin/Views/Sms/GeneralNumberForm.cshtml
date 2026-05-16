@@ -1,0 +1,74 @@
+﻿@using Application.Common
+@using EndPoint_Ui.Areas.Admin.Models.Sms
+@model GeneralNumberModel
+@{
+    string title = "ارسال از خط خدماتی";
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    ViewData["PageName"] = title;
+
+    ViewData["ControllerName"] = "مدیریت پیامک";
+
+    ViewData["Title"] = title;
+
+    ViewData["Url"] = "/Admin/Sms";
+
+
+}
+@section Style {
+    <link rel="stylesheet" href="~/admin/vendors/select2/css/select2.min.css" type="text/css">
+}
+@section Script {
+
+    <script src="~/admin/vendors/select2/js/select2.min.js"></script>
+    <script src="~/admin/assets/js/examples/select2.js"></script>
+    <script src="~/admin/assets/js/sms/GeneralNumberForm.js"></script>
+    <partial name="/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml" />
+}
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (ViewBag.Alert != null)
+        {
+            <div class="alert alert-warning alert-with-border alert-dismissible" role="alert">
+                <i class="ti-help-alt m-r-10"></i> @ViewBag.Alert
+                <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">@title</h6>
+                <form asp-area="admin" asp-controller="Sms" asp-action="GeneralNumberForm"
+                     method="post">
+                    <div class="validation text-danger" asp-validation-summary="All"></div>
+
+                    <div class="form-group">
+                        <label>شناسه قالب</label>
+                        <input asp-for="TemplateCode" type="text" class="form-control text-left" />
+                        <span class="text-danger" asp-validation-for="TemplateCode"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">انتخاب شماره موبایل</label>
+
+                        <select asp-for="PhoneNumber" class="form-control" 
+                        id="dropDownNumber">
+                        </select>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <a onclick="AppendParameters()" class="btn btn-info text-white">افزودن پارامتر</a>
+                    <div class="row mb-4" id="parameters">
+
+                       
+                    </div>
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    <a asp-area="admin" asp-controller="Sms" asp-action="Index" class="btn btn-warning text-white">بازگشت</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

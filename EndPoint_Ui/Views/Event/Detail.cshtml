@@ -1,0 +1,60 @@
+﻿@using Application.Common
+@model EventDetailViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    string? Title = CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TitleEn : Model.TitleFa;
+    ViewData["Title"] = Title;
+    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    Dictionary<string, string> route = new();
+    route.Add("", Title!);
+    var header = ValueTuple.Create(route, Title);
+}
+
+<partial name="Partial/_PageHeader" model="@header" />
+<section class="main-content-page">
+    <div class="container">
+        <div class="row" dir="rtl">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 offset-xl-4 offset-lg-4 text-center">
+                @if (Model.Path == "default.jpg")
+                {
+                    <img src="~/gallery/default.jpg" class="img-fluid img-thumbnail" alt="image">
+                }
+                else
+                {
+                    <img src="~/gallery/Event/@Model.Path" class="img-fluid img-thumbnail" alt="image">
+                }
+                <h5 class="mt-3">
+                    @(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.TitleEn : Model.TitleFa)
+                </h5>
+                <hr />
+            </div>
+                @Html.Raw(CultureInfo.CurrentUICulture.Name == "en-US" ? Model.DescriptionEn : Model.DescriptionFa)
+           
+        </div>
+        <div class="row mt-4 mb-4">
+            @if (Model.VideoUrls != null && Model.VideoUrls.Any())
+            {
+                @foreach (var item in Model.VideoUrls!)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+
+                        @Html.Raw(item)
+
+                    </div>
+                }
+               
+            }
+
+        </div>
+        <div class="row">
+            @await Component.InvokeAsync("EventImagesComponent",Model.Id)
+        </div>
+    </div>
+</section>
+
+@section Script {
+    <script src="~/js/nouislider.min.js" type="text/javascript"></script>
+    <script src="~/js/shop.js" type="text/javascript"></script>
+    <script src="~/js/paginationUi.js"></script>
+}

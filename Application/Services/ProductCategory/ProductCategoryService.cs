@@ -25,7 +25,8 @@ public class ProductCategoryService : IProductCategoryService
         await _productCategoryRepository.UpdateAsync(categoryEntity, cancellation);
     }
 
-    public async Task<IReadOnlyList<ItemGeneric<Guid, string>>> GetCategoriesForDropDownAsync(string search)
+    public async Task<IReadOnlyList<ItemGeneric<Guid, string>>> 
+        GetCategoriesForDropDownAsync(string search)
     {
         IQueryable<CategoryEntity> query = _productCategoryRepository.GetByQuery();
 

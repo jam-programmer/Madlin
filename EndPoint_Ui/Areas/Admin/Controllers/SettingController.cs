@@ -78,6 +78,8 @@ public class SettingController : Controller
         });
         await _settingService.UpdateGeneralAsync(new GeneralDto()
         {
+            ExclusiveNumber = model.ExclusiveNumber,
+            SmsToken=model.SmsToken,
             FaviconPath = model.FaviconPath,
             FaviconFile = model.FaviconFile,
             AddressEn = model.AddressEn,
@@ -98,6 +100,7 @@ public class SettingController : Controller
             RegistrationRulesFa = model.RegistrationRulesFa,
             Footer= model.Footer,
             Header= model.Header,
+            
         });
         return RedirectToAction(nameof(General));
     }

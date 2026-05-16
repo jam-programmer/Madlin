@@ -1,6 +1,8 @@
 ﻿using Application.Common.Extension;
+using Domain.Contract;
 using Domain.Entities.Sms;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Bank;
 
@@ -53,7 +55,24 @@ public class BankService : IBankService
 		return model;
 	}
 
-	public async Task InsertBankAsync(BankDto Bank, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<ItemGeneric<string, string>>> GetNumbersForDropDownAsync(string search)
+    {
+        IQueryable<BankEntity> query = _bankRepository.GetByQuery();
+
+        if (string.IsNullOrEmpty(search) is false)
+        {
+            query = query.Where(w => w.PhoneNumber!.Contains(search) ||
+            w.Title!.Contains(search));
+        }
+        return await query
+            .Take(10).Select(s => new ItemGeneric<string, string>()
+            {
+                Id = s.PhoneNumber,
+                Title = $"{s.Title} - {s.PhoneNumber}" 
+            }).ToListAsync();
+    }
+
+    public async Task InsertBankAsync(BankDto Bank, CancellationToken cancellationToken = default)
 	{
 		BankEntity entity = Bank.Adapt<BankEntity>();
 		await _bankRepository.InsertAsync(entity, cancellationToken);
