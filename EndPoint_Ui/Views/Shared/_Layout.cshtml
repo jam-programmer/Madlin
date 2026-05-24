@@ -5,19 +5,293 @@
 <html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <!--<![endif]-->
 <head>
+
     <partial name="Partial/_HeadTags.cshtml"/>
     @await Component.InvokeAsync("MetaHeaderComponent")
     @await RenderSectionAsync("Style", false)
+        <style>
+      
 
+        /* ========== صفحه لودینگ (اسپلش اسکرین) ========== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            background: radial-gradient(circle at 30% 10%, #754ea3, #ffffff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            backdrop-filter: blur(2px);
+            transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.5s;
+            will-change: opacity;
+        }
+
+        /* محتوای اصلی سایت (در ابتدا مخفی) */
+        .main-site {
+            opacity: 0;
+            visibility: hidden;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background: linear-gradient(145deg, #0080ff 0%, #eef2ff 100%);
+            transition: opacity 1s ease 0.2s, visibility 0.3s;
+        }
+
+        /* وقتی لودینگ ناپدید می‌شه، سایت نمایش داده بشه */
+        .main-site.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ---- کارت لوگو و المان لودینگ ---- */
+        .loader-card {
+            text-align: center;
+            max-width: 90vw;
+            width: 500px;
+            padding: 2rem;
+            background: rgba(221, 231, 253, 0.45);
+            backdrop-filter: blur(12px);
+            border-radius: 68px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 50px -12px #fffffff8, inset 0 1px 1px #ffffff;
+            transition: transform 0.4s ease;
+            animation: cardGlow 3s infinite alternate;
+        }
+
+        @@keyframes cardGlow {
+            0% {
+                box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            100% {
+                box-shadow: 0 35px 65px -15px rgba(99, 102, 241, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+                border-color: rgba(165, 180, 252, 0.5);
+            }
+        }
+
+        /* لوگو بزرگ */
+        .logo-wrapper {
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            animation: logoFloat 2.8s infinite ease-in-out;
+        }
+
+        @@keyframes logoFloat {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-12px) scale(1.02); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        .logo-img {
+            max-width: 260px;
+            width: 100%;
+            height: auto;
+            min-width: 140px;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* حلقه‌ی نورانی دور لوگو (افکت گرافیکی) */
+        .glow-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 110%;
+            height: 110%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(59, 130, 246, 0) 80%);
+            z-index: -1;
+            animation: pulseRing 2.2s infinite;
+        }
+
+        @@keyframes pulseRing {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+        }
+
+      
+
+        .progress-container {
+            width: 80%;
+            margin: 1rem auto 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 100px;
+            padding: 3px;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+     .progress-bar {
+    width: 0%;
+    height: 8px;
+    background: linear-gradient(90deg, #e0e0e0, #b0b0b0, #d4d4d4, #9e9e9e);
+    border-radius: 100px;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 8px #a78bfa;
+}
+
+        /* انیمیشن برای نوار پیشرفت و هماهنگی با تایمر */
+        .progress-animate {
+            transition: width 10s linear !important;
+        }
+
+        /* متن راهنما برای تعویض لوگو */
+        .change-logo-hint {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            color: #cbd5e1;
+            backdrop-filter: blur(4px);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* اسپینر نقطه‌ای زیر لوگو */
+        .dot-spinner {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 1.3rem;
+        }
+
+        .dot-spinner span {
+            width: 10px;
+            height: 10px;
+            background: #a5b4fc;
+            border-radius: 50%;
+            display: inline-block;
+            animation: dotBlink 1.4s infinite both;
+        }
+
+        .dot-spinner span:nth-child(1) { animation-delay: -0.32s; background: #7c018f; }
+        .dot-spinner span:nth-child(2) { animation-delay: -0.16s; background: #b187df; }
+        .dot-spinner span:nth-child(3) { animation-delay: 0s; background: #754ea3; }
+
+        @@keyframes dotBlink {
+            0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* طراحی محتوای اصلی بعد از لودینگ — دموی زیبا */
+        .main-site {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(125deg, #f1f5f9, #e2e8f0);
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 56px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 30px 45px -20px rgba(0, 0, 0, 0.3);
+            max-width: 550px;
+            width: 90%;
+            border: 1px solid rgba(255,255,240,0.6);
+            transform: scale(0.98);
+            transition: 0.4s;
+        }
+
+        .welcome-card h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-card p {
+            color: #334155;
+            line-height: 1.7;
+            margin-bottom: 1.8rem;
+            font-size: 1.1rem;
+        }
+
+        .demo-btn {
+            background: #1e293b;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .demo-btn:hover {
+            background: #0f172a;
+            transform: scale(0.96);
+        }
+
+        /* سازگاری با موبایل: لوگو کمی کوچکتر ولی همچنان بزرگ */
+        @@media (max-width: 550px) {
+            .logo-img {
+                max-width: 180px;
+            }
+            .timer-digits {
+                font-size: 2.3rem;
+            }
+            .loader-card {
+                padding: 1.5rem;
+                width: 92vw;
+            }
+            .welcome-card h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* جلوگیری از اسکرول در زمان لودینگ */
+        body.no-scroll {
+            overflow: hidden;
+        }
+    </style>
 
     <script type="text/javascript">
         !function(){var i="QQevbf",d=document,g=d.createElement("script"),s="https://www.goftino.com/widget/"+i,l=localStorage.getItem("goftino_"+i);g.type="text/javascript",g.async=!0,g.src=l?s+"?o="+l:s;d.getElementsByTagName("head")[0].appendChild(g);}();
     </script>
 </head>
 <body class="preload-wrapper">
-    <!-- RTL -->
-    <!-- <a class="btn-style-2 radius-3" href="javascript:void(0);" id="toggle-rtl"><span>RTL</span></a> -->
-    <!-- /RTL  -->
+    <!-- صفحه لودینگ با لوگوی بزرگ (قابل تعویض) -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-card">
+            <div class="logo-wrapper">
+                <!--
+                    لوگوی اپل فعلی (سفید، شفاف) — کاربر می‌تواند به راحتی src عکس را با لوگوی خودش جایگزین کند.
+                    برای تعویض لوگو، مسیر src این img را به آدرس لوگوی دلخواه تغییر دهید (png, jpg, svg, webp ...).
+                    لوگو بزرگ است و با کیفیت نمایش داده می‌شود.
+                -->
+                <img class="logo-img" id="mainLogo" src="~/gallery/Setting/1f782ee8-6cdd-48d3-a410-b2ab24fd4c08.png" alt="لوگو اپل - قابل تعویض">
+                <div class="glow-ring"></div>
+            </div>
+
+
+            <!-- نوار پیشرفت زیبا -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressFill"></div>
+            </div>
+
+            <!-- انیمیشن نقطه‌ها برای جذابیت بیشتر -->
+            <div class="dot-spinner">
+                <span></span><span></span><span></span>
+            </div>
+
+        </div>
+    </div>
+
     <!-- Scroll Top -->
     <button id="scroll-top">
         <svg fill="none"
@@ -43,15 +317,15 @@
         </svg>
     </button>
     <!-- preload -->
-    <div class="preload preload-container">
+   @*  <div class="preload preload-container">
         <div class="preload-logo">
            
             <img class="spinner" 
                 src="/gallery/Setting/1f782ee8-6cdd-48d3-a410-b2ab24fd4c08.png" />
         </div>
-    </div>
+    </div> *@
     <!-- /preload -->
-    <div id="wrapper" dir="@dir">
+    <div id="wrapper"  dir="@dir">
         <!-- TopBar-->
         <partial name="Partial/_TopBar.cshtml" />
 
@@ -101,6 +375,106 @@
     <partial name="Partial/_QuickAdd.cshtml" />
 
     <!-- /quickAdd -->
+    <script>
+        (function () {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainSite = document.getElementById('wrapper');
+            const countdownSpan = document.getElementById('countdownNumber');
+            const progressFill = document.getElementById('progressFill');
+
+            let timeLeft = 5;
+            let intervalId = null;
+            let timeoutId = null;
+            let isLoaded = false;
+
+            function finishLoading() {
+                if (isLoaded) return;
+                isLoaded = true;
+
+                if (intervalId) clearInterval(intervalId);
+                if (timeoutId) clearTimeout(timeoutId);
+
+                loadingScreen.style.opacity = '0';
+                loadingScreen.style.visibility = 'hidden';
+                mainSite.classList.add('show');
+                document.body.style.overflow = 'auto';
+            }
+
+            function updateCountdown() {
+                if (countdownSpan) {
+                    countdownSpan.innerText = timeLeft;
+                }
+                if (timeLeft <= 0) {
+                    finishLoading();
+                }
+            }
+
+            function tick() {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateCountdown();
+                }
+                if (timeLeft === 0) {
+                    finishLoading();
+                }
+            }
+
+            function initLoading() {
+                // پاک کردن تایمرهای قبلی
+                if (intervalId) clearInterval(intervalId);
+                if (timeoutId) clearTimeout(timeoutId);
+
+                timeLeft = 5;
+                isLoaded = false;
+
+                // نمایش لودینگ، مخفی کردن محتوای اصلی
+                loadingScreen.style.opacity = '1';
+                loadingScreen.style.visibility = 'visible';
+                mainSite.classList.remove('show');
+                document.body.style.overflow = 'hidden';
+
+                // تنظیم شمارنده
+                if (countdownSpan) countdownSpan.innerText = '5';
+
+                // ریست نوار پیشرفت (بدون transition لحظه‌ای)
+                if (progressFill) {
+                    progressFill.style.transition = 'none';
+                    progressFill.style.width = '0%';
+                    // force reflow
+                    void progressFill.offsetWidth;
+                    // فعال کردن مجدد transition
+                    progressFill.style.transition = 'width 5s linear';
+                    progressFill.style.width = '100%';
+                }
+
+                // شروع شمارش معکوس هر ثانیه
+                intervalId = setInterval(() => {
+                    tick();
+                }, 1000);
+
+                // تایمر نهایی برای اتمام حتمی بعد از ۵ ثانیه
+                timeoutId = setTimeout(() => {
+                    finishLoading();
+                }, 5000);
+            }
+
+            initLoading();
+
+            // دکمه ریست اختیاری
+            const reloadBtn = document.getElementById('reloadHint');
+            if (reloadBtn) {
+                reloadBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    initLoading();
+                });
+            }
+
+            window.addEventListener('beforeunload', function () {
+                if (intervalId) clearInterval(intervalId);
+                if (timeoutId) clearTimeout(timeoutId);
+            });
+        })();
+    </script>
     <!-- Javascript -->
     <partial name="Partial/_Scripts.cshtml" />
     @await RenderSectionAsync("Script",false)
