@@ -11,9 +11,9 @@
 }
 @section Style{
 
-   @await Component.InvokeAsync("MetaTagsComponent")
+    @await Component.InvokeAsync("MetaHeaderComponent")
 
-    <script>
+     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const swiper = new Swiper('.madlin-swiper', {
               
@@ -75,14 +75,7 @@
 
             showNextModal();
         });
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     var myModal = new bootstrap.Modal(document.getElementById('autoOpenModal'), {
-        //         backdrop: 'static', 
-        //         keyboard: true,     
-        //         focus: true
-        //     });
-        //     myModal.show();
-        // });
+       
     </script>
 
 }

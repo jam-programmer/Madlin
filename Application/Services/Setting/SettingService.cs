@@ -259,7 +259,7 @@ public class SettingService : ISettingService
         if (about.ImageFile != null) 
         {
             aboutEntity.ImagePath = about.ImageFile.UploadImage("Setting");
-            about.ImagePath!.RemoveImage("Setting");
+           // about.ImagePath!.RemoveImage("Setting");
         }
         await _aboutRepository.UpdateAboutAsync(aboutEntity);
     }

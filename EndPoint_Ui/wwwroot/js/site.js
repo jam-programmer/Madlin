@@ -151,6 +151,7 @@ function JoinToNewsletter(dir) {
                 confirmButtonText: "متوجه شدم"
             });
         }
+        return;
     }
     
 

@@ -1466,8 +1466,8 @@ a:hover {
 }
 
 .spinner {
-  width: 60px;
-  height: 60px;
+  width: 300px;
+  height: 300px;
   border: 3px solid transparent;
   border-top: 3px solid var(--line);
   border-radius: 100%;
@@ -18862,4 +18862,3 @@ ul.list-text.type-number {
 }
 
 /*# sourceMappingURL=styles.css.map */
-
