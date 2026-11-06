@@ -352,7 +352,7 @@ public class UserService : IUserService
     {
         UserEntity? userEntity = await _userManager.FindByNameAsync(user.UserName!);
 
-        if (user == null)
+        if (userEntity == null)
         {
             if (CultureInfo.CurrentUICulture.Name == "en-US")
             {

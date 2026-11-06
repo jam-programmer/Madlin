@@ -1,45 +1,245 @@
 ﻿@model AboutViewModel
 @inject IViewLocalizer Localizer
 @{
+    bool isEn = CultureInfo.CurrentUICulture.Name == "en-US";
 
-    string Title = CultureInfo.CurrentUICulture.Name == "en-US" ? "About Us" : "درباره ما";
+    string Title = isEn ? "About Us" : "درباره ما";
     ViewData["Title"] = Title;
-    string dir = CultureInfo.CurrentUICulture.Name == "en-US" ? "ltr" : "rtl";
+    string dir = isEn ? "ltr" : "rtl";
+
     Dictionary<string, string> route = new();
     route.Add("", Title!);
     var header = ValueTuple.Create(route, Title);
+
+    // تصویر محصول که داخل دایره‌ها می‌نشیند
+    var heroImage = string.IsNullOrWhiteSpace(Model.ImagePath) || Model.ImagePath == "default.jpg"
+        ? Url.Content("~/gallery/default.jpg")
+        : Url.Content("~/gallery/Setting/" + Model.ImagePath);
+
+    // متن آزاد (اختیاری) از دیتابیس
+    var storyHtml = isEn ? Model.TextEn : Model.TextFa;
+}
+@section Style {
+    <link rel="stylesheet" href="~/css/about.css" />
 }
 <partial name="Partial/_PageHeader" model="@header" />
 
-<section class="flat-spacing" dir="@dir">
-    <div class="container">
-       
-        <div class="terms-of-use-content">
-            @if (Model.ImagePath == "default.jpg")
-            {
-                <img id="imagePath_1" src="~/gallery/default.jpg"
-                     class="mb-3 w-100" />
+<div class="mdl-about" dir="@dir" lang="@(isEn ? "en" : "fa")">
 
-            }
-            else
-            {
-                <img id="imagePath_1"
-                    src="~/gallery/Setting/@Model.ImagePath" class="mb-3 w-100"/>
+    <section class="mdl-hero">
+        <div class="mdl-container">
+            <div>
+                <h1 class="mdl-hero-title">
+                    @(isEn
+                        ? "Skin and hair care, grounded in modern science"
+                        : "مراقبت از پوست و مو، بر پایه دانش روز")
+                </h1>
+                <p class="mdl-hero-text">
+                    @(isEn
+                        ? "Madeline develops specialized skin and hair products for the real needs of Iranian consumers — backed by dermatological science and information you can trust."
+                        : "مادلین محصولات تخصصی پوست و مو را برای نیاز واقعی مصرف‌کنندگان ایرانی می‌سازد؛ با پشتوانه علمی درماتولوژی و اطلاعاتی که می‌توانید به آن اعتماد کنید.")
+                </p>
+                <div class="mdl-actions">
+                    <a class="mdl-btn" href="/products">
+                        <span class="mdl-btn-text">@(isEn ? "View products" : "مشاهده محصولات")</span>
+                    </a>
+                    <a class="mdl-btn mdl-btn-outline" href="#mdl-goals">
+                        <span class="mdl-btn-text">@(isEn ? "Our goals" : "اهداف ما")</span>
+                    </a>
+                </div>
+            </div>
 
-            }
-            @if (CultureInfo.CurrentUICulture.Name == "en-US")
-            {
-               
-                    @Html.Raw(Model.TextEn)
-                
-            }
-            else
-            {
-               
-              
-                    @Html.Raw(Model.TextFa)
-                
-            }
+            <div class="mdl-art" aria-hidden="true">
+                <div class="mdl-ring"></div>
+                <div class="mdl-ring"></div>
+                <div class="mdl-ring"></div>
+                @if (Model.ImagePath == "default.jpg")
+                {
+                    <img id="imagePath_1" src="~/gallery/default.jpg" class="mdl-art-img"
+                         class="mb-3 w-100" />
+
+                }
+                else
+                {
+                    <img id="imagePath_1" class="mdl-art-img"
+                         src="~/gallery/Setting/@Model.ImagePath" class="mb-3 w-100" />
+
+                }
+
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section class="mdl-values" aria-label="@(isEn ? "Brand values" : "ارزش‌های برند")">
+        <div class="mdl-container">
+            <article class="mdl-value">
+                <h2 class="mdl-value-title">@(isEn ? "Science" : "علم")</h2>
+                <p class="mdl-value-text">
+                    @(isEn
+                        ? "Every product is developed on the basis of up-to-date dermatological knowledge and skin and hair care science."
+                        : "هر محصول بر پایه دانش روز درماتولوژی و مراقبت از پوست و مو توسعه پیدا می‌کند.")
+                </p>
+            </article>
+            <article class="mdl-value">
+                <h2 class="mdl-value-title">@(isEn ? "Transparency" : "شفافیت")</h2>
+                <p class="mdl-value-text">
+                    @(isEn
+                        ? "We explain each product's ingredients, how it works and how to use it — clearly and with evidence."
+                        : "ترکیبات، عملکرد و نحوه مصرف هر محصول را روشن و مستند توضیح می‌دهیم.")
+                </p>
+            </article>
+            <article class="mdl-value">
+                <h2 class="mdl-value-title">@(isEn ? "Trust" : "اعتماد")</h2>
+                <p class="mdl-value-text">
+                    @(isEn
+                        ? "We build a long-term relationship with consumers and with health and beauty professionals."
+                        : "با مصرف‌کنندگان و متخصصان سلامت و زیبایی رابطه‌ای بلندمدت می‌سازیم.")
+                </p>
+            </article>
+        </div>
+    </section>
+
+    @* متن آزاد: اگر در پنل چیزی وارد نشده باشد، کل بخش رندر نمی‌شود *@
+    @if (!string.IsNullOrWhiteSpace(storyHtml))
+    {
+        <section class="mdl-story">
+            <div class="mdl-container">
+                <div class="mdl-head">
+                    <h2 class="mdl-head-title">@(isEn ? "Our story" : "داستان مادلین")</h2>
+                </div>
+                <div class="mdl-rich">
+                    @Html.Raw(storyHtml)
+                </div>
+            </div>
+        </section>
+    }
+
+    <section class="mdl-goals" id="mdl-goals">
+        <div class="mdl-container">
+            <div class="mdl-head">
+                <h2 class="mdl-head-title">@(isEn ? "The path we want for Madeline" : "مسیری که برای مادلین می‌خواهیم")</h2>
+                <p class="mdl-head-text">
+                    @(isEn
+                        ? "From product quality to brand position — our goals in three parts."
+                        : "از کیفیت محصول تا جایگاه برند؛ اهداف ما را در سه بخش ببینید.")
+                </p>
+            </div>
+
+            <div class="mdl-group">
+                <h3 class="mdl-group-title">@(isEn ? "For consumers" : "برای مصرف‌کنندگان")</h3>
+                <ul class="mdl-list">
+                    @if (isEn)
+                    {
+                        <li class="mdl-list-item">High-quality, effective products that match the real needs of Iranian consumers.</li>
+                        <li class="mdl-list-item">A consumer experience that brings science and innovation together and sets Madeline apart.</li>
+                        <li class="mdl-list-item">Clear, reliable information about ingredients, how a product works and how to use it.</li>
+                        <li class="mdl-list-item">Loyalty and repeat purchase, as signs of satisfaction and trust.</li>
+                    }
+                    else
+                    {
+                        <li class="mdl-list-item">محصولات باکیفیت و اثربخش، متناسب با نیازهای واقعی مصرف‌کنندگان ایرانی.</li>
+                        <li class="mdl-list-item">تجربه مصرفی که علم و نوآوری را کنار هم می‌گذارد و مادلین را متمایز می‌کند.</li>
+                        <li class="mdl-list-item">اطلاعات شفاف و قابل اتکا درباره ترکیبات، عملکرد و نحوه مصرف.</li>
+                        <li class="mdl-list-item">وفاداری و تکرار خرید، به‌عنوان نشانه رضایت و اعتماد.</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="mdl-group">
+                <h3 class="mdl-group-title">@(isEn ? "For professionals and pharmacies" : "برای متخصصان و داروخانه‌ها")</h3>
+                <ul class="mdl-list">
+                    @if (isEn)
+                    {
+                        <li class="mdl-list-item">Product development based on up-to-date dermatological knowledge.</li>
+                        <li class="mdl-list-item">Scientific marketing and direct communication with physicians.</li>
+                        <li class="mdl-list-item">Expanding the distribution network and making products easier to find in pharmacies.</li>
+                    }
+                    else
+                    {
+                        <li class="mdl-list-item">توسعه محصولات بر پایه دانش روز درماتولوژی.</li>
+                        <li class="mdl-list-item">بازاریابی علمی و ارتباط مستقیم با پزشکان.</li>
+                        <li class="mdl-list-item">گسترش شبکه توزیع و دسترسی آسان‌تر به محصولات در داروخانه‌ها.</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="mdl-group">
+                <h3 class="mdl-group-title">@(isEn ? "For the future of the brand" : "برای آینده برند")</h3>
+                <ul class="mdl-list">
+                    @if (isEn)
+                    {
+                        <li class="mdl-list-item">Becoming one of Iran's reference brands in specialized skin and hair care.</li>
+                        <li class="mdl-list-item">Expanding the portfolio based on market needs and scientific advances.</li>
+                        <li class="mdl-list-item">Presence in regional and international markets.</li>
+                        <li class="mdl-list-item">A sustainable competitive advantage and growing brand equity.</li>
+                        <li class="mdl-list-item">Being the first choice of a share of consumers and professionals in target product groups.</li>
+                    }
+                    else
+                    {
+                        <li class="mdl-list-item">تبدیل شدن به یکی از برندهای مرجع ایرانی در مراقبت تخصصی از پوست و مو.</li>
+                        <li class="mdl-list-item">گسترش سبد محصولات بر اساس نیاز بازار و پیشرفت‌های علمی.</li>
+                        <li class="mdl-list-item">حضور در بازارهای منطقه‌ای و بین‌المللی.</li>
+                        <li class="mdl-list-item">مزیت رقابتی پایدار و افزایش ارزش ویژه برند (Brand Equity).</li>
+                        <li class="mdl-list-item">انتخاب اول بخشی از مصرف‌کنندگان و متخصصان در گروه‌های محصولی هدف.</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="mdl-label-sec">
+        <div class="mdl-container">
+            <div class="mdl-label">
+                <div>
+                    <h2 class="mdl-label-title">@(isEn ? "What do you see on every product?" : "روی هر محصول چه چیزی می‌بینید؟")</h2>
+                    <p class="mdl-label-text">
+                        @(isEn
+                            ? "We believe informed choice starts with clear information."
+                            : "ما معتقدیم انتخاب آگاهانه با اطلاعات روشن شروع می‌شود.")
+                    </p>
+                </div>
+                <dl class="mdl-rows">
+                    <div class="mdl-row">
+                        <dt class="mdl-row-name">@(isEn ? "Ingredients" : "ترکیبات")</dt>
+                        <dd class="mdl-row-desc">
+                            @(isEn
+                                ? "The full list of ingredients and why each one is used."
+                                : "فهرست کامل مواد و دلیل استفاده از آن‌ها.")
+                        </dd>
+                    </div>
+                    <div class="mdl-row">
+                        <dt class="mdl-row-name">@(isEn ? "How it works" : "عملکرد")</dt>
+                        <dd class="mdl-row-desc">
+                            @(isEn
+                                ? "A documented explanation of the effect, with no exaggerated claims."
+                                : "توضیح مستند درباره اثر محصول، بدون ادعای اغراق‌آمیز.")
+                        </dd>
+                    </div>
+                    <div class="mdl-row">
+                        <dt class="mdl-row-name">@(isEn ? "How to use" : "نحوه مصرف")</dt>
+                        <dd class="mdl-row-desc">
+                            @(isEn
+                                ? "A simple guide for correct and safe use."
+                                : "راهنمای ساده برای استفاده درست و ایمن.")
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <section class="mdl-cta">
+        <div class="mdl-container">
+            <h2 class="mdl-cta-title">@(isEn ? "Get to know Madeline up close" : "مادلین را از نزدیک بشناسید")</h2>
+            <p class="mdl-cta-text">
+                @(isEn
+                    ? "See our products or pick them up at a partner pharmacy."
+                    : "محصولات ما را ببینید یا از داروخانه‌های همکار تهیه کنید.")
+            </p>
+            <a class="mdl-btn" href="/products">
+                <span class="mdl-btn-text">@(isEn ? "View products" : "مشاهده محصولات")</span>
+            </a>
+        </div>
+    </section>
+
+</div>

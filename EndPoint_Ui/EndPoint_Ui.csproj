@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>enable</ImplicitUsings><SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -113,6 +114,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\gallery\Blog\e732bfa0-4df0-49e5-80fa-79fc0d80648d.webp" />
+    <None Include="wwwroot\gallery\common\f6b023ce-eb58-4a71-823c-6d49a008516f.webp" />
+    <None Include="wwwroot\gallery\Event\0f5b13c2-6fd8-4dd1-8972-cae29519ee02.webp" />
+    <None Include="wwwroot\gallery\Event\7129d443-f414-4afd-99bf-901ac1c4aaa6.webp" />
+    <None Include="wwwroot\gallery\Event\b8c93d65-5faf-461b-9811-d3baefef196c.webp" />
+    <None Include="wwwroot\gallery\Image\65d6bafd-f843-40b1-8eaa-0ecfa9c4d904.webp" />
+    <None Include="wwwroot\gallery\Notification\20e489f2-53a4-4ff0-8335-c128c04f1deb.webp" />
+    <None Include="wwwroot\gallery\Notification\8a18db54-001b-443d-9748-ba87c3b21185.webp" />
+    <None Include="wwwroot\gallery\Notification\8c14f6d9-0ecd-4dbf-9515-1c0618a7c3f5.webp" />
+    <None Include="wwwroot\gallery\ProductCategory\ec71adf3-f604-4435-936f-c288123f2050.webp" />
+    <None Include="wwwroot\gallery\Seo\441f2836-ee64-49f1-93d2-0016df92dd08.webp" />
+    <None Include="wwwroot\gallery\Seo\7fa4a123-b17d-4c8c-affe-b4b4c5472317.webp" />
+    <None Include="wwwroot\gallery\Setting\26982007-c408-4b5b-b8e9-866e0f0d6374.webp" />
+    <None Include="wwwroot\gallery\Setting\2cde0360-1d31-4eb4-bec3-11d86c8960fc.webp" />
+    <None Include="wwwroot\gallery\Setting\c5458b44-fe0b-4b75-a16b-54edff31278a.webp" />
+    <None Include="wwwroot\gallery\Slider\0852cfb6-aa89-40a1-9a4c-2cb9dd27f1e1.webp" />
+    <None Include="wwwroot\gallery\Slider\2d22996e-91dc-4874-b232-9f6d74828d01.webp" />
+    <None Include="wwwroot\gallery\Slider\7c5342ad-288e-42bc-8560-f0f9720700c9.webp" />
+    <None Include="wwwroot\gallery\Slider\9019c82d-609d-48f5-9402-aa200ef92c8d.webp" />
+    <None Include="wwwroot\gallery\Slider\acbaa68c-2386-47c6-9d41-5a5bfa7eff3b.webp" />
+    <None Include="wwwroot\gallery\Slider\d22ab7ae-453b-4f85-8114-c964fd0029ef.webp" />
+    <None Include="wwwroot\images\collections\banner-collection\banner-cls23.webp" />
+    <None Include="wwwroot\images\collections\banner-collection\ss.webp" />
+    <None Include="wwwroot\images\country\fr.svg" />
+    <None Include="wwwroot\images\country\us.svg" />
+    <None Include="wwwroot\images\country\vn.svg" />
+    <None Include="wwwroot\images\cursor-close.svg" />
+    <None Include="wwwroot\images\logo\logo-white.svg" />
+    <None Include="wwwroot\images\logo\logo.svg" />
     <None Include="wwwroot\js\productDetail.js" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\splide\css\core\foundation\animations.scss" />
